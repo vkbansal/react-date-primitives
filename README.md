@@ -1,8 +1,9 @@
 # React Date Primitives
 
-Primitives for creating Date-Picker and DateRange-Picker compnents in React. And It has zero dependencies!
+Primitives for creating Date-Picker and DateRange-Picker components in React. And It has zero dependencies!
 
-##
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
 
 ## Installation
 
@@ -16,7 +17,7 @@ npm install --save react-date-primitives
 
 ## Usage
 
-```
+```jsx
 import * as React from 'react';
 import { CalendarMonth } from 'react-date-primitives';
 import addMonths from 'date-fns/addMonths'; // This is not required, you can use the package of your choice!
@@ -97,3 +98,12 @@ class SimpleDatePicker extends React.Component {
 ```
 
 More examples and docs are coming soon!
+
+## License
+
+[MIT](./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
+
+[npm-url]: https://npmjs.org/package/react-date-primitives
+[npm-image]: https://img.shields.io/npm/v/react-date-primitives.svg?style=flat-square
+[travis-url]: https://travis-ci.org/vkbansal/react-date-primitives
+[travis-image]: https://img.shields.io/travis/vkbansal/react-date-primitives/master.svg?style=flat-square
