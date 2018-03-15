@@ -38,12 +38,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vkbansal/react-daterange.git"
+    "url": "git+https://github.com/vkbansal/react-date-primitives.git"
   },
   "bugs": {
-    "url": "https://github.com/vkbansal/react-daterange/issues"
+    "url": "https://github.com/vkbansal/react-date-primitives/issues"
   },
-  "homepage": "https://github.com/vkbansal/react-daterange#readme",
+  "homepage": "https://github.com/vkbansal/react-date-primitives#readme",
   "peerDependencies": {
     "react": "16.0.0",
     "react-dom": "16.0.0"
