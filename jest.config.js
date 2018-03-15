@@ -6,6 +6,6 @@ module.exports = {
     transform: {
         '^.+\\.tsx?$': 'ts-jest/preprocessor.js'
     },
-    snapshotSerializers: ['enzyme-to-json/serializer', '<rootDir>/__jest__/date-serializer'],
+    snapshotSerializers: ['enzyme-to-json/serializer', '<rootDir>/__jest__/calendar-serializer', '<rootDir>/__jest__/dropdown-serializer'],
     collectCoverageFrom: ['src/*.{ts,tsx}']
 };
