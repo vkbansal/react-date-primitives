@@ -1,4 +1,6 @@
 // @ts-check
+const { pad } = require('lodash');
+
 const weekSeperator = '-'.repeat(78);
 
 const MONTH_NAMES = [
@@ -45,7 +47,7 @@ module.exports = {
 
         return (
             `${weekSeperator}\n` +
-            `|${getSpace(sl)}${m}${getSpace(76 - sl - m.length)}|\n` +
+            `|${pad(m, 76, ' ')}|\n` +
             `${weekSeperator}\n` +
             val
                 .map((week) => {
@@ -55,7 +57,7 @@ module.exports = {
                             .map((day) => {
                                 if (!day) return getSpace(10);
 
-                                let t = '---';
+                                let t = ['-', '-', '-'];
 
                                 if (day.date) {
                                     if (day.selected) t[0] = 's';
@@ -69,7 +71,7 @@ module.exports = {
                                     .toLocaleDateString('en-US-u-ca-iso8601')
                                     .split('/')[1];
 
-                                return ' ' + `0${date}`.slice(-2) + ` (${t}) `;
+                                return ' ' + `0${date}`.slice(-2) + ` (${t.join('')}) `;
                             })
                             .join('|') +
                         '|'

@@ -10,7 +10,7 @@ module.exports = {
         `${seperator}\n` +
         val
             .map((d) => {
-                let t = '--';
+                let t = ['-','-'];
                 if (d.seleted) {
                     t[0] = 's';
                 }
@@ -19,7 +19,7 @@ module.exports = {
                     t[1] = 'd';
                 }
 
-                return `${d.value} (${t})`;
+                return `${d.value} (${t.join('')})`;
             })
             .join(`\n${seperator}\n`) +
         `\n${seperator}`
