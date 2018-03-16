@@ -32,6 +32,7 @@ describe('<CalenderMonth /> tests', () => {
         );
 
         const args: CalendarMonthRenderProps = render.mock.calls[0][0];
+        // srd in snapshot means selected, inRange, disabled
         expect(args.days).toMatchSnapshot();
     });
 
@@ -49,11 +50,8 @@ describe('<CalenderMonth /> tests', () => {
         );
 
         const args: CalendarMonthRenderProps = render.mock.calls[0][0];
+        // srd in snapshot means selected, inRange, disabled
         expect(args.days).toMatchSnapshot();
-        expect(args.days[1][0]).toMatchObject({
-            selected: false,
-            inRange: false
-        });
     });
 
     test('showDropdowns gives apt props', () => {

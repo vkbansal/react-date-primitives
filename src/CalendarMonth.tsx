@@ -94,6 +94,8 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
         const { month, startDate, endDate, minDate, maxDate } = props;
         const currentMonth = getDatesofMonth(month);
 
+        const startDateDisabled = startDate && minDate && !isDayAfter(startDate, minDate);
+
         return currentMonth.map((week) =>
             week.map((day) => {
                 if (!day) return null;
@@ -105,6 +107,7 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
                 return {
                     date: day,
                     inRange:
+                        !startDateDisabled &&
                         !disabled &&
                         Boolean(
                             startDate &&
