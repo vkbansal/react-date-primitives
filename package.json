@@ -1,6 +1,6 @@
 {
   "name": "react-date-primitives",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Primitives for building flexible date components with react",
   "keywords": [
     "date",
