@@ -81,50 +81,51 @@ export class DateRangeControl extends React.Component<
     }
 
     handleDayClick = (day: Date) => {
-        this.setState<'startDate' | 'endDate' | 'selectionActive'>((state) => {
-            if (
-                state.startDate &&
-                state.selectionActive &&
-                (isSameDay(day, state.startDate) || isDayAfter(day, state.startDate))
-            ) {
-                callIfExists(this.props.onDatesChange, {
-                    startDate: state.startDate,
+        this.setState((state) => {
+            const { startDate, selectionActive } = state;
+
+            let newState: Pick<DateRangeControlProps, 'startDate' | 'endDate'>;
+
+            if (startDate && selectionActive && !isDayBefore(day, startDate)) {
+                newState = {
+                    startDate,
                     endDate: day
-                });
+                };
+
+                callIfExists(this.props.onDatesChange, newState);
 
                 return {
                     selectionActive: false,
-                    endDate: day
+                    ...newState
                 };
             }
 
-            callIfExists(this.props.onDatesChange, {
+            newState = {
                 startDate: day,
                 endDate: undefined
-            });
+            };
+
+            callIfExists(this.props.onDatesChange, newState);
 
             return {
                 selectionActive: true,
-                startDate: day,
-                endDate: undefined
+                ...newState
             };
         });
     };
 
     handleDayHover = (day: Date) => {
-        this.setState<'endDate'>((state) => {
-            if (state.selectionActive && state.startDate && !isDayBefore(day, state.startDate)) {
-                return {
-                    endDate: day
-                };
-            }
+        const { selectionActive, startDate } = this.state;
 
-            return {};
-        });
+        if (selectionActive && startDate && !isDayBefore(day, startDate)) {
+            this.setState(() => ({
+                    endDate: day
+            }));
+            }
     };
 
     handleNavigation = (months: number) => () => {
-        this.setState<'months'>((state) => {
+        this.setState((state) => {
             return {
                 months: state.months.map((month) => addMonths(month, months))
             };
