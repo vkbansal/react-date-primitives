@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { CalendarMonthProps } from './CalendarMonth';
-import { startOfMonth, addMonths, isSameDay, isDayBefore, callIfExists } from './utils';
+import { startOfMonth, addMonths, isDayBefore, callIfExists } from './utils';
 
 export interface DateRange {
     startDate: Date;
@@ -125,9 +125,9 @@ export class DateRangeControl extends React.Component<
 
         if (selectionActive && startDate && !isDayBefore(day, startDate)) {
             this.setState(() => ({
-                    endDate: day
+                endDate: day
             }));
-            }
+        }
     };
 
     handleNavigation = (months: number) => () => {
