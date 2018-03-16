@@ -1,13 +1,16 @@
 import * as React from 'react';
 
 import { CalendarMonthProps } from './CalendarMonth';
-import { startOfMonth, addMonths, isSameDay, isDayAfter, isDayBefore, callIfExists } from './utils';
+import { startOfMonth, addMonths, isSameDay, isDayBefore, callIfExists } from './utils';
 
 export interface DateRange {
     startDate: Date;
     endDate: Date;
 }
 
+/**
+ * @private
+ */
 export type PickedCalendarMonthProps = Pick<
     CalendarMonthProps,
     'showDropdowns' | 'startDate' | 'endDate' | 'minDate' | 'maxDate'
@@ -34,6 +37,9 @@ export interface DateRangeControlProps extends PickedCalendarMonthProps {
     render(props: DateRangeControlRenderProps): React.ReactNode;
 }
 
+/**
+ * @private
+ */
 export interface DateRangeControlState {
     startDate?: Date;
     endDate?: Date;

@@ -2,7 +2,8 @@ import {
     CalendarMonth,
     CalendarDropdownProps,
     CalendarMonthProps,
-    CalendarMonthRenderProps
+    CalendarMonthRenderProps,
+    DayOfMonth
 } from './CalendarMonth';
 import {
     DateRangeControl,
@@ -16,6 +17,7 @@ export {
     CalendarDropdownProps,
     CalendarMonthProps,
     CalendarMonthRenderProps,
+    DayOfMonth,
     DateRangeControl,
     DateRangeControlProps,
     DateRangeControlRenderProps,
