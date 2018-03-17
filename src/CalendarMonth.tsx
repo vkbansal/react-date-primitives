@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import * as React from 'react';
 
 import {
@@ -9,23 +10,77 @@ import {
     getDatesofMonth
 } from './utils';
 
+/**
+ * CalendarMonth `render` prop is called with this object
+ */
 export interface CalendarMonthRenderProps {
+    /**
+     * Days of current month.
+     *
+     * @see DayOfMonth
+     * @nullable
+     */
     days: Array<Array<DayOfMonth | null>>;
+    /**
+     * Current month.
+     */
     month: Date;
-    dropdownMonths?: CalendarDropdownProps[];
-    dropdownYears?: CalendarDropdownProps[];
+    /**
+     * Values for creating month dropdown.
+     * Months start from `0`, similar to [`Date.proptotype.getMonth()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth).
+     * By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`.
+     *
+     * @default undefined
+     * @see CalendarDropdownProps
+     */
+    monthsDropdown?: CalendarDropdownProps[];
+    /**
+     * Values for creating year dropdown
+     * By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`.
+     *
+     * @default undefined
+     * @see CalendarDropdownProps
+     */
+    yearsDropdown?: CalendarDropdownProps[];
 }
 
+/**
+ * Dropdown Value
+ */
 export interface CalendarDropdownProps {
+    /**
+     * Value of the dropdown
+     */
     value: number;
+    /**
+     * Is the value selected?
+     */
     selected: boolean;
+    /**
+     * Is the value disabled?
+     */
     disabled: boolean;
 }
 
+/**
+ * A Day of the month
+ */
 export interface DayOfMonth {
+    /**
+     * The date
+     */
     date: Date;
+    /**
+     * Is the date between `startDate` and `endDate`?
+     */
     inRange: boolean;
+    /**
+     * Is the date selected?
+     */
     selected: boolean;
+    /**
+     * Is the date disabled?
+     */
     disabled: boolean;
 }
 
@@ -51,42 +106,45 @@ export interface CalendarMonthProps {
      */
     maxDate?: Date;
     /**
-     * If set as `true`, shows **month** and **year** dropdowns above the calendar
+     * If set as `true`, shows `monthsDropdown` and `yearsDropdown` are populated in `render` props.
      */
     showDropdowns?: boolean;
     /**
+     * The main function, which be used for rendering.
+     * It is called with an object.
      *
+     * @see CalendarMonthRenderProps
      */
     render(props: CalendarMonthRenderProps): React.ReactNode;
 }
 
 /**
- * A Calendar Month
+ * Primitive react component that can be used show a month of make a datepicker.
  *
- * @see examples/SimpleDatePicker.tsx
+ * @example docs/examples/SimpleDatePicker.js
  */
 export class CalendarMonth extends React.Component<CalendarMonthProps> {
-    private dropdownMonths?: CalendarDropdownProps[];
-    private dropdownYears?: CalendarDropdownProps[];
+    private monthsDropdown?: CalendarDropdownProps[];
+    private yearsDropdown?: CalendarDropdownProps[];
 
     constructor(props: CalendarMonthProps) {
         super(props);
 
         if (props.showDropdowns) {
             const [dropdownMonths, dropdownYears] = this.getDropDowns(props);
-            this.dropdownMonths = dropdownMonths;
-            this.dropdownYears = dropdownYears;
+            this.monthsDropdown = dropdownMonths;
+            this.yearsDropdown = dropdownYears;
         }
     }
 
     componentWillReceiveProps(nextProps: CalendarMonthProps) {
         if (nextProps.showDropdowns) {
             const [dropdownMonths, dropdownYears] = this.getDropDowns(nextProps);
-            this.dropdownMonths = dropdownMonths;
-            this.dropdownYears = dropdownYears;
+            this.monthsDropdown = dropdownMonths;
+            this.yearsDropdown = dropdownYears;
         } else {
-            this.dropdownMonths = undefined;
-            this.dropdownYears = undefined;
+            this.monthsDropdown = undefined;
+            this.yearsDropdown = undefined;
         }
     }
 
@@ -164,8 +222,8 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
         return render({
             days: this.getDaysofMonth(this.props),
             month: startOfMonth(month),
-            dropdownMonths: this.dropdownMonths,
-            dropdownYears: this.dropdownYears
+            monthsDropdown: this.monthsDropdown,
+            yearsDropdown: this.yearsDropdown
         });
     }
 }

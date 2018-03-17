@@ -1,25 +1,14 @@
-import {
+export {
     CalendarMonth,
     CalendarDropdownProps,
     CalendarMonthProps,
     CalendarMonthRenderProps,
     DayOfMonth
 } from './CalendarMonth';
-import {
+
+export {
     DateRangeControl,
     DateRangeControlProps,
     DateRangeControlRenderProps,
     DateRange
 } from './DateRangeControl';
-
-export {
-    CalendarMonth,
-    CalendarDropdownProps,
-    CalendarMonthProps,
-    CalendarMonthRenderProps,
-    DayOfMonth,
-    DateRangeControl,
-    DateRangeControlProps,
-    DateRangeControlRenderProps,
-    DateRange
-};
