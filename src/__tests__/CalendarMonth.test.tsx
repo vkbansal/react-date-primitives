@@ -14,8 +14,8 @@ describe('<CalenderMonth /> tests', () => {
         expect(render).toHaveBeenCalledTimes(1);
         const args: CalendarMonthRenderProps = render.mock.calls[0][0];
         expect(args.days).toMatchSnapshot();
-        expect(args.dropdownMonths).not.toBeDefined();
-        expect(args.dropdownYears).not.toBeDefined();
+        expect(args.monthsDropdown).not.toBeDefined();
+        expect(args.yearsDropdown).not.toBeDefined();
     });
 
     test('render prop has proper days selected when given', () => {
@@ -59,8 +59,8 @@ describe('<CalenderMonth /> tests', () => {
         shallow(<CalendarMonth showDropdowns month={month} render={render} />);
 
         const args: CalendarMonthRenderProps = render.mock.calls[0][0];
-        expect(args.dropdownMonths).toMatchSnapshot();
-        expect(args.dropdownYears).toMatchSnapshot();
+        expect(args.monthsDropdown).toMatchSnapshot();
+        expect(args.yearsDropdown).toMatchSnapshot();
     });
 
     test('dropdowns are updated when minDate, maxDate are given', () => {
@@ -68,8 +68,8 @@ describe('<CalenderMonth /> tests', () => {
         const component = shallow(<CalendarMonth showDropdowns month={month} render={render} />);
 
         let args: CalendarMonthRenderProps = render.mock.calls[0][0];
-        expect(args.dropdownMonths).toMatchSnapshot();
-        expect(args.dropdownYears).toMatchSnapshot();
+        expect(args.monthsDropdown).toMatchSnapshot();
+        expect(args.yearsDropdown).toMatchSnapshot();
 
         component.setProps({
             minDate: addMonths(month, 2),
@@ -77,16 +77,16 @@ describe('<CalenderMonth /> tests', () => {
         });
 
         args = render.mock.calls[1][0];
-        expect(args.dropdownMonths[1]).toMatchObject({
+        expect(args.monthsDropdown[1]).toMatchObject({
             disabled: true
         });
 
-        expect(args.dropdownMonths[11]).toMatchObject({
+        expect(args.monthsDropdown[11]).toMatchObject({
             disabled: true
         });
-        expect(args.dropdownYears.length).toBe(1);
+        expect(args.yearsDropdown.length).toBe(1);
 
-        expect(args.dropdownMonths).toMatchSnapshot();
-        expect(args.dropdownYears).toMatchSnapshot();
+        expect(args.monthsDropdown).toMatchSnapshot();
+        expect(args.yearsDropdown).toMatchSnapshot();
     });
 });
