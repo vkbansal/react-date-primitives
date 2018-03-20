@@ -27,7 +27,8 @@
     "build:esm": "rimraf ./esm && tsc --target es5 --module es6 --outDir ./esm",
     "build:cjs": "rimraf ./lib && tsc --target es5 --module commonjs --outDir ./lib",
     "build:esnext": "rimraf ./esnext && tsc --target es6 --module es6 --outDir ./esnext",
-    "prepublishOnly": "npm test && npm run build"
+    "prepublishOnly": "npm test && npm run build",
+    "preversion": "npm test && npm run build"
   },
   "files": [
     "esm",
