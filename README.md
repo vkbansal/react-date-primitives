@@ -84,7 +84,9 @@ class SimpleDatePicker extends React.Component {
                             {days.map((week, i) => (
                                 <tr key={i}>
                                     {week.map((day, j) => (
-                                        <td key={`${i}-${j}`}>{day ? day.date.getDate() : ''}</td>
+                                        <td key={`${i}-${j}`}>
+                                            {day.inCurrentMonth ? day.date.getDate() : ''}
+                                        </td>
                                     ))}
                                 </tr>
                             ))}
