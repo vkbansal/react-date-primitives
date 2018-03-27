@@ -7,7 +7,8 @@ import {
     isDayBefore,
     isSameDay,
     setMonth,
-    getDatesofMonth
+    getDatesofMonth,
+    DateOfMonth
 } from './utils';
 
 /**
@@ -17,10 +18,10 @@ export interface CalendarMonthRenderProps {
     /**
      * Days of current month.
      *
-     * @see DayOfMonth
+     * @see Day
      * @nullable
      */
-    days: Array<Array<DayOfMonth | null>>;
+    days: Day[][];
     /**
      * Current month.
      */
@@ -64,12 +65,10 @@ export interface CalendarDropdownProps {
 
 /**
  * A Day of the month
+ *
+ * @borrows DateOfMonth
  */
-export interface DayOfMonth {
-    /**
-     * The date
-     */
-    date: Date;
+export interface Day extends DateOfMonth {
     /**
      * Is the date between `startDate` and `endDate`?
      */
@@ -148,38 +147,42 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
         }
     }
 
-    private getDaysofMonth(props: CalendarMonthProps): Array<Array<DayOfMonth | null>> {
+    private getDaysofMonth(props: CalendarMonthProps): Day[][] {
         const { month, startDate, endDate, minDate, maxDate } = props;
         const currentMonth = getDatesofMonth(month);
 
         const startDateDisabled = startDate && minDate && !isDayAfter(startDate, minDate);
 
-        return currentMonth.map((week) =>
-            week.map((day) => {
-                if (!day) return null;
-
-                const disabled = Boolean(
-                    (minDate && isDayBefore(day, minDate)) || (maxDate && isDayAfter(day, maxDate))
-                );
+        return currentMonth.map((week): Day[] =>
+            week.map((day): Day => {
+                const { date, inCurrentMonth } = day;
+                const disabled =
+                    !inCurrentMonth ||
+                    Boolean(
+                        (minDate && isDayBefore(date, minDate)) ||
+                            (maxDate && isDayAfter(date, maxDate))
+                    );
 
                 return {
-                    date: day,
+                    date,
                     inRange:
+                        inCurrentMonth &&
                         !startDateDisabled &&
                         !disabled &&
                         Boolean(
                             startDate &&
-                                isDayAfter(day, startDate) &&
+                                isDayAfter(date, startDate) &&
                                 endDate &&
-                                isDayBefore(day, endDate)
+                                isDayBefore(date, endDate)
                         ),
                     selected:
                         !disabled &&
                         Boolean(
-                            (startDate && isSameDay(day, startDate)) ||
-                                (endDate && isSameDay(day, endDate))
+                            (startDate && isSameDay(date, startDate)) ||
+                                (endDate && isSameDay(date, endDate))
                         ),
-                    disabled
+                    disabled,
+                    inCurrentMonth
                 };
             })
         );

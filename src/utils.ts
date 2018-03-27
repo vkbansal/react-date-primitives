@@ -1,4 +1,14 @@
-const monthsCache: Map<string, Array<Array<Date | null>>> = new Map();
+export interface DateOfMonth {
+    /**
+     * The date
+     */
+    date: Date;
+    /**
+     * Is the date in current month
+     */
+    inCurrentMonth: boolean;
+}
+const monthsCache: Map<string, DateOfMonth[][]> = new Map();
 
 export function setDay(date: Date, day: number): Date {
     const newDate = new Date(date.getTime());
@@ -91,7 +101,7 @@ export function callIfExists(callback?: any, ...args: any[]) {
     }
 }
 
-export function getDatesofMonth(month: Date): Array<Array<Date | null>> {
+export function getDatesofMonth(month: Date): DateOfMonth[][] {
     const firstDate = startOfMonth(month);
     const key = `${firstDate.getFullYear()}-${firstDate.getMonth()}`;
 
@@ -103,11 +113,11 @@ export function getDatesofMonth(month: Date): Array<Array<Date | null>> {
 
     const firstDayInCurrentMonth = firstDate.getDay();
 
-    const newdata: Array<Array<Date | null>> = Array.from({ length: 6 }, (_1, i) => {
-        const week = Array.from({ length: 7 }, (_2, j) => {
+    const newdata: DateOfMonth[][] = Array.from({ length: 6 }, (_1, i): DateOfMonth[] => {
+        const week = Array.from({ length: 7 }, (_2, j): DateOfMonth => {
             const day = addDays(firstDate, i * 7 + j - firstDayInCurrentMonth);
 
-            return isSameMonth(firstDate, day) ? day : null;
+            return { date: day, inCurrentMonth: isSameMonth(firstDate, day) };
         });
 
         return week;

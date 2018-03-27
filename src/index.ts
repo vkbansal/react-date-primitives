@@ -3,8 +3,10 @@ export {
     CalendarDropdownProps,
     CalendarMonthProps,
     CalendarMonthRenderProps,
-    DayOfMonth
+    Day
 } from './CalendarMonth';
+
+export { DateOfMonth } from './utils';
 
 export {
     DateRangeControl,
