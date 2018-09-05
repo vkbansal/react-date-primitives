@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
 
-import { CalendarMonth, CalendarMonthRenderProps } from '../CalendarMonth';
+import { CalendarMonth } from '../CalendarMonth';
+import { CalendarMonthRenderProps } from '../types';
 import { addDays, addMonths } from '../utils';
 
 describe('<CalenderMonth /> tests', () => {

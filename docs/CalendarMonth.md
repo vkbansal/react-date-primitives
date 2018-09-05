@@ -1,0 +1,180 @@
+# `<CalendarMonth/>`
+
+Primitive react component that can be used show a month of make a datepicker.
+
+<details>
+    <summary>Code Example</summary>
+
+```tsx
+import * as React from 'react';
+import { CalendarMonth, Day } from 'react-date-primitives';
+import { addMonths } from 'react-date-primitives/esm/utils';
+
+const MONTH_NAMES = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December'
+];
+
+export interface SimpleDatePickerState {
+    month: Date;
+    day?: Date;
+}
+
+export class SimpleDatePicker extends React.Component<
+    {},
+    SimpleDatePickerState
+> {
+    constructor(props: {}) {
+        super(props);
+
+        this.state = {
+            month: new Date(),
+            day: new Date()
+        };
+    }
+
+    handleMonthIncrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+        this.setState(state => ({
+            month: addMonths(state.month, 1)
+        }));
+    };
+
+    handleMonthDecrement = (e: React.MouseEvent<HTMLButtonElement>) => {
+        this.setState(state => ({
+            month: addMonths(state.month, -1)
+        }));
+    };
+
+    handleDayClick = (day: Day) => () => {
+        console.log(day);
+        this.setState({ day: day.date });
+    };
+
+    render() {
+        const { month, day } = this.state;
+
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            <button onClick={this.handleMonthDecrement}>
+                                &lt;
+                            </button>
+                        </th>
+                        <th colSpan={5}>
+                            {MONTH_NAMES[month.getMonth()]}{' '}
+                            {month.getFullYear()}
+                        </th>
+                        <th>
+                            <button onClick={this.handleMonthIncrement}>
+                                &gt;
+                            </button>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <CalendarMonth
+                    month={month}
+                    startDate={day}
+                    render={({ days }) => (
+                        <tbody>
+                            {days.map((week, i) => (
+                                <tr key={i}>
+                                    {week.map((day, j) => (
+                                        <td
+                                            style={{
+                                                opacity: day.inCurrentMonth
+                                                    ? 1
+                                                    : 0.2,
+                                                background: day.selected
+                                                    ? '#ddd'
+                                                    : 'transparent'
+                                            }}
+                                            key={`${i}-${j}`}
+                                            onClick={this.handleDayClick(day)}
+                                        >
+                                            {day ? day.date.getDate() : ''}
+                                        </td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    )}
+                />
+            </table>
+        );
+    }
+}
+
+```
+
+</details>
+
+## PropTypes
+
+| prop | type | optional | description |
+| ---- | ---- | -------- | ----------- |
+| `month` | `Date` | No | Current month to be shown |
+| `startDate` | `Date` | Yes | The start of the initially selected date range |
+| `endDate` | `Date` | Yes | The end of the initially selected date range |
+| `minDate` | `Date` | Yes | The earliest date a user may select |
+| `maxDate` | `Date` | Yes | The latest date a user may select |
+| `showDropdowns` | `boolean` | Yes | If set as `true`, then `monthsDropdown` and `yearsDropdown` are populated in the argument given to `render` prop. |
+| `render` | `(props: CalendarMonthRenderProps) => ReactNode` | No | The main function, which be used for rendering. See [CalendarMonthRenderProps](#calendarmonthrenderprops) |
+
+### `CalendarMonthRenderProps`
+
+
+| prop | type | optional | description |
+| ---- | ---- | -------- | ----------- |
+| `days` | `DayOfMonth[][]` | No | Days of current month. See [DayOfMonth](#dayofmonth) |
+| `month` | `Date` | No | Current month. |
+| `monthsDropdown` | `CalendarDropdownOption[]` | Yes | Values for creating month dropdown. Months start from `0`, similar to [`Date.proptotype.getMonth()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth). By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`. See [CalendarDropdownOption](#calendardropdownoption) |
+| `yearsDropdown` | `CalendarDropdownOption[]` | Yes | Values for creating year dropdown By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`. See [CalendarDropdownOption](#calendardropdownoption) |
+
+        
+
+
+### `DayOfMonth`
+
+
+| prop | type | optional | description |
+| ---- | ---- | -------- | ----------- |
+| `date` | `Date` | No | The date |
+| `inCurrentMonth` | `boolean` | No | Is the date in current month |
+| `inRange` | `boolean` | No | Is the date between `startDate` and `endDate`? |
+| `selected` | `boolean` | No | Is the date selected? |
+| `disabled` | `boolean` | No | Is the date disabled? |
+
+        
+
+
+### `CalendarDropdownOption`
+
+
+| prop | type | optional | description |
+| ---- | ---- | -------- | ----------- |
+| `value` | `number` | No | Value of the dropdown |
+| `selected` | `boolean` | No | Is the value selected? |
+| `disabled` | `boolean` | No | Is the value disabled? |
+
+        

@@ -1,14 +1,6 @@
-export interface DateOfMonth {
-    /**
-     * The date
-     */
-    date: Date;
-    /**
-     * Is the date in current month
-     */
-    inCurrentMonth: boolean;
-}
-const monthsCache: Map<string, DateOfMonth[][]> = new Map();
+import { DayOfMonthSubset } from './types';
+
+const monthsCache: Map<string, DayOfMonthSubset[][]> = new Map();
 
 export function setDay(date: Date, day: number): Date {
     const newDate = new Date(date.getTime());
@@ -101,7 +93,7 @@ export function callIfExists(callback?: any, ...args: any[]) {
     }
 }
 
-export function getDatesofMonth(month: Date): DateOfMonth[][] {
+export function getDatesofMonth(month: Date): DayOfMonthSubset[][] {
     const firstDate = startOfMonth(month);
     const key = `${firstDate.getFullYear()}-${firstDate.getMonth()}`;
 
@@ -113,15 +105,21 @@ export function getDatesofMonth(month: Date): DateOfMonth[][] {
 
     const firstDayInCurrentMonth = firstDate.getDay();
 
-    const newdata: DateOfMonth[][] = Array.from({ length: 6 }, (_1, i): DateOfMonth[] => {
-        const week = Array.from({ length: 7 }, (_2, j): DateOfMonth => {
-            const day = addDays(firstDate, i * 7 + j - firstDayInCurrentMonth);
+    const newdata: DayOfMonthSubset[][] = Array.from(
+        { length: 6 },
+        (_1, i): DayOfMonthSubset[] => {
+            const week = Array.from(
+                { length: 7 },
+                (_2, j): DayOfMonthSubset => {
+                    const day = addDays(firstDate, i * 7 + j - firstDayInCurrentMonth);
 
-            return { date: day, inCurrentMonth: isSameMonth(firstDate, day) };
-        });
+                    return { date: day, inCurrentMonth: isSameMonth(firstDate, day) };
+                }
+            );
 
-        return week;
-    });
+            return week;
+        }
+    );
 
     monthsCache.set(key, newdata);
 

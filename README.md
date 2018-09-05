@@ -99,7 +99,10 @@ class SimpleDatePicker extends React.Component {
 }
 ```
 
-More examples and docs are coming soon!
+## Live Examples
+
+-   [Simple date-picker](https://codesandbox.io/s/jjm94lyv53?module=%2Fsrc%2FSimpleDatePicker.tsx)
+-   [Simple date-picker with dropdowns for month and year](https://codesandbox.io/s/5k4jv306op?module=%2Fsrc%2FSimpleDatePicker.tsx)
 
 ## License
 

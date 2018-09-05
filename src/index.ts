@@ -1,16 +1,12 @@
+export { CalendarMonth } from './CalendarMonth';
+export { DateRangeControl } from './DateRangeControl';
 export {
-    CalendarMonth,
-    CalendarDropdownProps,
+    CalendarDropdownOption,
     CalendarMonthProps,
     CalendarMonthRenderProps,
-    Day
-} from './CalendarMonth';
-
-export { DateOfMonth } from './utils';
-
-export {
-    DateRangeControl,
+    DayOfMonth,
+    DayOfMonthSubset,
     DateRangeControlProps,
     DateRangeControlRenderProps,
     DateRange
-} from './DateRangeControl';
+} from './types';
