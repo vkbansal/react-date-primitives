@@ -12,7 +12,7 @@ import {
 import { CalendarMonthProps, DayOfMonth, CalendarDropdownOption } from './types';
 
 /**
- * Primitive react component that can be used show a month of make a datepicker.
+ * Primitive react component that can be used to make a datepicker.
  */
 export class CalendarMonth extends React.Component<CalendarMonthProps> {
     private getDaysofMonth(props: CalendarMonthProps): DayOfMonth[][] {

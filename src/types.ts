@@ -8,11 +8,13 @@ export interface DayOfMonth {
      */
     date: Date;
     /**
-     * Is the date in current month
+     * Is the `date` in current month?
      */
     inCurrentMonth: boolean;
     /**
-     * Is the date between `startDate` and `endDate`?
+     * Is the `date` between `startDate` and `endDate`?
+     * By default this value is `false`.
+     * This will be populated correctly only when both `startDate` and `endDate` are defined and are valid.
      */
     inRange: boolean;
     /**
@@ -21,6 +23,8 @@ export interface DayOfMonth {
     selected: boolean;
     /**
      * Is the date disabled?
+     * By default this value is `false`.
+     * It will be `true` for all the dates before `minDate` and after `maxDate`.
      */
     disabled: boolean;
 }
@@ -66,7 +70,7 @@ export interface CalendarMonthRenderProps {
      */
     monthsDropdown?: CalendarDropdownOption[];
     /**
-     * Values for creating year dropdown
+     * Values for creating year dropdown.
      * By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`.
      *
      * @see CalendarDropdownOption
@@ -83,11 +87,12 @@ export interface CalendarMonthProps {
      */
     month: Date;
     /**
-     * The start of the initially selected date range
+     * The initially selected date when using as a single date-picker.
+     * The start of the initially selected date range when used as a daterange-picker.
      */
     startDate?: Date;
     /**
-     * The end of the initially selected date range
+     * The end of the initially selected date range (only required when used as a daterange-picker)
      */
     endDate?: Date;
     /**
