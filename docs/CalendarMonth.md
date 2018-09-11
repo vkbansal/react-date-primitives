@@ -62,6 +62,7 @@ export class SimpleDatePicker extends React.Component<
 
     render() {
         const { month, day } = this.state;
+        const monthName = MONTH_NAMES[month.getMonth()];
 
         return (
             <table>
@@ -73,8 +74,7 @@ export class SimpleDatePicker extends React.Component<
                             </button>
                         </th>
                         <th colSpan={5}>
-                            {MONTH_NAMES[month.getMonth()]}{' '}
-                            {month.getFullYear()}
+                            {monthName} {month.getFullYear()}
                         </th>
                         <th>
                             <button onClick={this.handleMonthIncrement}>
