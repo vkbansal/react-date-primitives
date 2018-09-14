@@ -53,6 +53,10 @@ class SimpleDatePicker extends React.Component {
 -   [simple date-picker with dropdowns for month and year](https://codesandbox.io/s/5k4jv306op?module=%2Fsrc%2FSimpleDatePicker.tsx)
 -   [simple daterange-picker using `CalendarMonth`](https://codesandbox.io/s/x90ozw987o?module=%2Fsrc%2FSimpleDateRangePicker.tsx)
 
+## API
+
+-   [`CalendarMonth`](docs/CalendarMonth.md)
+
 ## License
 
 [MIT](./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
