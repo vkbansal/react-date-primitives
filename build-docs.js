@@ -39,7 +39,9 @@ function getAllSeeTags(props, typesData) {
 }
 
 async function getSourceCode(id, filename) {
-    const response = await fetch(`https://codesandbox.io/api/v1/sandboxes/${id}`, { method: 'GET' });
+    const response = await fetch(`https://codesandbox.io/api/v1/sandboxes/${id}`, {
+        method: 'GET'
+    });
     const data = await response.json();
 
     if (!filename) return data.data.modules;
@@ -51,15 +53,9 @@ async function getSourceCode(id, filename) {
     const cmData = parse('./src/CalendarMonth.tsx')[0];
     const typesData = parse('./src/types.ts').reduce((p, c) => ({ ...p, [c.name]: c }), {});
 
-    const cmSource = await getSourceCode(
-        'jjm94lyv53',
-        'SimpleDatePicker.tsx'
-    );
+    const cmSource = await getSourceCode('jjm94lyv53', 'SimpleDatePicker.tsx');
 
-    const cmrSource = await getSourceCode(
-        'x90ozw987o',
-        'SimpleDateRangePicker.tsx'
-    );
+    const cmrSource = await getSourceCode('x90ozw987o', 'SimpleDateRangePicker.tsx');
 
     let cmDocs = `# \`<CalendarMonth/>\`
 
@@ -91,22 +87,32 @@ ${cmrSource.code}
 
 [![Edit simple date-range-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/x90ozw987o?module=%2Fsrc%2FSimpleDateRangePicker.tsx)
 
-## PropTypes
-`;
+## PropTypes\n\n`;
 
     cmDocs += makePropsTable(cmData.props);
 
-    const seeTags = getAllSeeTags(cmData.props, typesData);
+    const cmSeeTags = getAllSeeTags(cmData.props, typesData);
 
-    cmDocs += seeTags
-        .map((tag) => {
-            return `
-### \`${tag}\`
-
-${makePropsTable(typesData[tag].props)}
-        `;
-        })
+    cmDocs += cmSeeTags
+        .map((tag) => `### \`${tag}\`\n${makePropsTable(typesData[tag].props)}`)
         .join('\n\n');
 
     await writeFile('docs/CalendarMonth.md', cmDocs, 'utf8');
+
+    /**********************************************************************************************************************/
+    const drcData = parse('./src/DateRangeControl.tsx')[0];
+    let drcDocs = `# \`<DateRangeControl/> \`
+
+## PropTypes\n\n`;
+
+    drcDocs += makePropsTable(drcData.props);
+    drcDocs += '\n';
+
+    const drcSeeTags = getAllSeeTags(drcData.props, typesData);
+
+    drcDocs += cmSeeTags
+        .map((tag) => `### \`${tag}\`\n${makePropsTable(typesData[tag].props)}`)
+        .join('\n\n');
+
+    await writeFile('docs/DateRangeControl.md', drcDocs, 'utf8');
 })();

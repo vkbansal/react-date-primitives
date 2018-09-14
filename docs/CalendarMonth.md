@@ -290,6 +290,7 @@ export class SimpleDateRangePicker extends React.Component<
 
 ## PropTypes
 
+
 | prop | type | optional | description |
 | ---- | ---- | -------- | ----------- |
 | `month` | `Date` | No | Current month to be shown |
@@ -299,9 +300,7 @@ export class SimpleDateRangePicker extends React.Component<
 | `maxDate` | `Date` | Yes | The latest date a user may select |
 | `showDropdowns` | `boolean` | Yes | If set as `true`, then `monthsDropdown` and `yearsDropdown` are populated in the argument given to `render` prop. |
 | `render` | `(props: CalendarMonthRenderProps) => ReactNode` | No | The main function, which be used for rendering. See [CalendarMonthRenderProps](#calendarmonthrenderprops) |
-
 ### `CalendarMonthRenderProps`
-
 
 | prop | type | optional | description |
 | ---- | ---- | -------- | ----------- |
@@ -310,11 +309,8 @@ export class SimpleDateRangePicker extends React.Component<
 | `monthsDropdown` | `CalendarDropdownOption[]` | Yes | Values for creating month dropdown. Months start from `0`, similar to [`Date.proptotype.getMonth()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth). By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`. See [CalendarDropdownOption](#calendardropdownoption) |
 | `yearsDropdown` | `CalendarDropdownOption[]` | Yes | Values for creating year dropdown. By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`. See [CalendarDropdownOption](#calendardropdownoption) |
 
-        
-
 
 ### `DayOfMonth`
-
 
 | prop | type | optional | description |
 | ---- | ---- | -------- | ----------- |
@@ -324,16 +320,11 @@ export class SimpleDateRangePicker extends React.Component<
 | `selected` | `boolean` | No | Is the date selected? |
 | `disabled` | `boolean` | No | Is the date disabled? By default this value is `false`. It will be `true` for all the dates before `minDate` and after `maxDate`. |
 
-        
-
 
 ### `CalendarDropdownOption`
-
 
 | prop | type | optional | description |
 | ---- | ---- | -------- | ----------- |
 | `value` | `number` | No | Value of the dropdown |
 | `selected` | `boolean` | No | Is the value selected? |
 | `disabled` | `boolean` | No | Is the value disabled? |
-
-        
