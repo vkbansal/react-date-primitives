@@ -4,7 +4,7 @@ import { startOfMonth, addMonths, isDayBefore, callIfExists } from './utils';
 import { DateRangeControlProps, DateRangeControlState } from './types';
 
 /**
- * Primitive react component for making a date-range picker
+ * Controller component for making a date-range picker in conjunction with [CalendarMonth]()
  */
 export class DateRangeControl extends React.Component<
     DateRangeControlProps,

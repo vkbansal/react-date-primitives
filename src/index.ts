@@ -1,5 +1,5 @@
-export { CalendarMonth } from './CalendarMonth';
-export { DateRangeControl } from './DateRangeControl';
+export { CalendarMonth } from './components/CalendarMonth';
+export { DateRangeControl } from './components/DateRangeControl';
 export {
     CalendarDropdownOption,
     CalendarMonthProps,
@@ -9,4 +9,4 @@ export {
     DateRangeControlProps,
     DateRangeControlRenderProps,
     DateRange
-} from './types';
+} from './components/types';

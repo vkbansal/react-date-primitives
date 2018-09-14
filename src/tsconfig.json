@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "baseUrl": "./",
+        "charset": "utf8",
+        "jsx": "react",
+        "strict": true,
+        "module": "es6",
+        "newLine": "LF",
+        "moduleResolution": "node",
+        "declaration": true,
+        "target": "es6",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noEmitOnError": false,
+        "lib": ["es6", "dom"]
+    },
+    "exclude": ["node_modules", "**/*.test.tsx", "**/*.test.ts"]
+}

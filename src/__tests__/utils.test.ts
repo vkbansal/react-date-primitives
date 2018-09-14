@@ -1,4 +1,4 @@
-import * as utils from '../utils';
+import * as utils from '../components/utils';
 
 describe('utils test', () => {
     const month = new Date(Date.UTC(2017, 0 /* Jan */, 1, 0, 0, 0, 0));
