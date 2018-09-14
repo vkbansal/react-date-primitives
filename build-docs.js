@@ -38,8 +38,8 @@ function getAllSeeTags(props, typesData) {
     return [...new Set(mainTags)];
 }
 
-async function getSourceCode(url, filename) {
-    const response = await fetch(url, { method: 'GET' });
+async function getSourceCode(id, filename) {
+    const response = await fetch(`https://codesandbox.io/api/v1/sandboxes/${id}`, { method: 'GET' });
     const data = await response.json();
 
     if (!filename) return data.data.modules;
@@ -52,8 +52,13 @@ async function getSourceCode(url, filename) {
     const typesData = parse('./src/types.ts').reduce((p, c) => ({ ...p, [c.name]: c }), {});
 
     const cmSource = await getSourceCode(
-        'https://codesandbox.io/api/v1/sandboxes/jjm94lyv53',
+        'jjm94lyv53',
         'SimpleDatePicker.tsx'
+    );
+
+    const cmrSource = await getSourceCode(
+        'x90ozw987o',
+        'SimpleDateRangePicker.tsx'
     );
 
     let cmDocs = `# \`<CalendarMonth/>\`
@@ -72,6 +77,19 @@ ${cmSource.code}
 <br>
 
 [![Edit Simple date-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/jjm94lyv53?module=%2Fsrc%2FSimpleDatePicker.tsx)
+
+<details>
+    <summary><b>Simple Date Range Picker Code Example</b></summary>
+
+\`\`\`tsx
+${cmrSource.code}
+\`\`\`
+
+</details>
+
+<br>
+
+[![Edit simple date-range-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/x90ozw987o?module=%2Fsrc%2FSimpleDateRangePicker.tsx)
 
 ## PropTypes
 `;
