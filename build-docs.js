@@ -70,6 +70,7 @@ ${cmSource.code}
 </details>
 
 <br>
+
 [![Edit Simple date-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/jjm94lyv53?module=%2Fsrc%2FSimpleDatePicker.tsx)
 
 ## PropTypes
