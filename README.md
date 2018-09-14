@@ -56,6 +56,7 @@ class SimpleDatePicker extends React.Component {
 ## API
 
 -   [`CalendarMonth`](docs/CalendarMonth.md)
+-   [`DateRangeControl`](docs/DateRangeControl.md)
 
 ## License
 

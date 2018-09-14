@@ -108,9 +108,11 @@ ${cmrSource.code}
     drcDocs += makePropsTable(drcData.props);
     drcDocs += '\n';
 
+    await writeFile('test.json', JSON.stringify(drcData, null, 4), 'utf8');
+
     const drcSeeTags = getAllSeeTags(drcData.props, typesData);
 
-    drcDocs += cmSeeTags
+    drcDocs += drcSeeTags
         .map((tag) => `### \`${tag}\`\n${makePropsTable(typesData[tag].props)}`)
         .join('\n\n');
 

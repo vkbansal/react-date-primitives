@@ -13,31 +13,20 @@
 | `minDate` | `Date` | Yes |  |
 | `maxDate` | `Date` | Yes |  |
 
-### `CalendarMonthRenderProps`
+### `DateRange`
 
 | prop | type | optional | description |
 | ---- | ---- | -------- | ----------- |
-| `days` | `DayOfMonth[][]` | No | Days of current month. See [DayOfMonth](#dayofmonth) |
-| `month` | `Date` | No | Current month. |
-| `monthsDropdown` | `CalendarDropdownOption[]` | Yes | Values for creating month dropdown. Months start from `0`, similar to [`Date.proptotype.getMonth()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth). By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`. See [CalendarDropdownOption](#calendardropdownoption) |
-| `yearsDropdown` | `CalendarDropdownOption[]` | Yes | Values for creating year dropdown. By default, this value is `undefined`. To populate it, set `showDropdowns` prop as `true`. See [CalendarDropdownOption](#calendardropdownoption) |
+| `startDate` | `Date` | No | Starting date of the range |
+| `endDate` | `Date` | Yes | End date of the range |
 
 
-### `DayOfMonth`
+### `DateRangeControlRenderProps`
 
 | prop | type | optional | description |
 | ---- | ---- | -------- | ----------- |
-| `date` | `Date` | No | The date |
-| `inCurrentMonth` | `boolean` | No | Is the `date` in current month? |
-| `inRange` | `boolean` | No | Is the `date` between `startDate` and `endDate`? By default this value is `false`. This will be populated correctly only when both `startDate` and `endDate` are defined and are valid. |
-| `selected` | `boolean` | No | Is the date selected? |
-| `disabled` | `boolean` | No | Is the date disabled? By default this value is `false`. It will be `true` for all the dates before `minDate` and after `maxDate`. |
-
-
-### `CalendarDropdownOption`
-
-| prop | type | optional | description |
-| ---- | ---- | -------- | ----------- |
-| `value` | `number` | No | Value of the dropdown |
-| `selected` | `boolean` | No | Is the value selected? |
-| `disabled` | `boolean` | No | Is the value disabled? |
+| `onDayClick` | `(date: Date) => void` | No | Callback for handling click on a date |
+| `onDayHover` | `(date: Date) => void` | No | Callback for handling mouse hover on a date |
+| `months` | `Date[]` | No | The months to be shown to the user |
+| `moveForward` | `() => void` | No | Callback for moving to next month |
+| `moveBackward` | `() => void` | No | Callback for moving to prev month |
