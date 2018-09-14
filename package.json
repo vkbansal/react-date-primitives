@@ -1,75 +1,22 @@
 {
-  "name": "react-date-primitives",
-  "version": "0.4.0",
-  "description": "Primitives for building flexible date components with react",
-  "keywords": [
-    "date",
-    "date-range",
-    "date-picker",
-    "react",
-    "react-component"
-  ],
-  "main": "./lib/index.js",
-  "module": "./esm/index.js",
-  "esnext": "./esnext/index.js",
-  "typings": "./esm/index.d.ts",
-  "author": {
-    "name": "Vivek Kumar Bansal",
-    "email": "vkb0310@gmail.com",
-    "url": "https://vkbansal.me"
-  },
-  "license": "MIT",
-  "scripts": {
-    "start": "node webpack.devserver.js",
-    "test": "jest --no-cache",
-    "coverage": "jest --no-cache --coverage",
-    "build": "npm run build:esm && npm run build:cjs && npm run build:esnext",
-    "build:esm": "rimraf ./esm && tsc --target es5 --module es6 --outDir ./esm",
-    "build:cjs": "rimraf ./lib && tsc --target es5 --module commonjs --outDir ./lib",
-    "build:esnext": "rimraf ./esnext && tsc --target es6 --module es6 --outDir ./esnext",
-    "prepublishOnly": "npm test && npm run build",
-    "preversion": "npm test && npm run build"
-  },
-  "files": [
-    "esm",
-    "lib",
-    "esnext"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vkbansal/react-date-primitives.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vkbansal/react-date-primitives/issues"
-  },
-  "homepage": "https://github.com/vkbansal/react-date-primitives#readme",
-  "peerDependencies": {
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
-  },
-  "devDependencies": {
-    "@types/enzyme": "3.1.13",
-    "@types/jest": "23.3.1",
-    "@types/react": "16.4.13",
-    "@types/react-dom": "16.0.7",
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.4.2",
-    "enzyme": "3.6.0",
-    "enzyme-adapter-react-16": "1.4.0",
-    "enzyme-to-json": "3.3.4",
-    "jest": "23.5.0",
-    "node-fetch": "^2.2.0",
-    "prettier": "^1.14.2",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
-    "react-ts-docs-parser": "gist:8a879f96a191ea4e8a1368edb01cb6e8",
-    "rimraf": "2.6.2",
-    "ts-jest": "23.1.4",
-    "ts-loader": "3.5.0",
-    "tslint": "5.11.0",
-    "typescript": "3.0.3",
-    "webpack": "^4.17.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
-  }
+    "private": true,
+    "workspaces": [
+        "src",
+        "examples/simple-datepicker"
+    ],
+    "scripts": {
+        "test": "cd src && yarn test && cd .."
+    },
+    "dependencies": {
+        "@types/react": "~16.4.14",
+        "@types/react-dom": "~16.0.7",
+        "react": "~16.5.1",
+        "react-dom": "~16.5.1",
+        "react-ts-doc-parser": "gist:8a879f96a191ea4e8a1368edb01cb6e8",
+        "react-ts-docs-parser": "gist:8a879f96a191ea4e8a1368edb01cb6e8",
+        "typescript": "~3.0.3",
+        "webpack": "~4.17.2",
+        "webpack-cli": "~3.1.0",
+        "webpack-dev-server": "~3.1.8"
+    }
 }
