@@ -3,7 +3,7 @@
 Primitive react component that can be used to make a datepicker.
 
 <details>
-    <summary>Code Example</summary>
+    <summary>Simple Date Picker Code Example</summary>
 
 ```tsx
 import * as React from 'react';
@@ -128,6 +128,8 @@ export class SimpleDatePicker extends React.Component<
 ```
 
 </details>
+
+[![Edit Simple date-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/jjm94lyv53?module=%2Fsrc%2FSimpleDatePicker.tsx)
 
 ## PropTypes
 

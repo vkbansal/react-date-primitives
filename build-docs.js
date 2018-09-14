@@ -61,13 +61,15 @@ async function getSourceCode(url, filename) {
 ${cmData.description}
 
 <details>
-    <summary>Code Example</summary>
+    <summary>Simple Date Picker Code Example</summary>
 
 \`\`\`tsx
 ${cmSource.code}
 \`\`\`
 
 </details>
+
+[![Edit Simple date-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/jjm94lyv53?module=%2Fsrc%2FSimpleDatePicker.tsx)
 
 ## PropTypes
 `;
