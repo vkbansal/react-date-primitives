@@ -192,35 +192,22 @@ export class SimpleDateRangePicker extends React.Component<
         this.setState(state => {
             const { startDate, selectionActive } = state;
 
-            let newState: Pick<
-                SimpleDateRangePickerState,
-                'startDate' | 'endDate'
-            >;
-
             if (
                 startDate &&
                 selectionActive &&
                 !isDayBefore(day.date, startDate)
             ) {
-                newState = {
-                    startDate,
-                    endDate: day.date
-                };
-
                 return {
+                    startDate,
                     selectionActive: false,
-                    ...newState
+                    endDate: day.date
                 };
             }
 
-            newState = {
-                startDate: day.date,
-                endDate: undefined
-            };
-
             return {
-                selectionActive: true,
-                ...newState
+                startDate: day.date,
+                endDate: undefined,
+                selectionActive: true
             };
         });
     };
