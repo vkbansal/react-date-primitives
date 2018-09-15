@@ -5,14 +5,14 @@
   "private": true,
   "main": "src/index.tsx",
   "dependencies": {
-    "@types/react": "^16.4.14",
-    "@types/react-dom": "^16.0.7",
-    "react": "^16.5.1",
+    "@types/react": "~16.4.14",
+    "@types/react-dom": "~16.0.7",
+    "react": "~16.5.1",
     "react-date-primitives": "0.4.0",
-    "react-dom": "^16.5.1",
-    "react-scripts-ts": "^2.13.0",
+    "react-dom": "~16.5.1",
+    "react-scripts-ts": "~2.13.0",
     "tslint-vkbansal": "gist:c4922663993ada71f43352107f86c4fd",
-    "typescript": "^3.0.3"
+    "typescript": "~3.0.3"
   },
   "scripts": {
     "start": "react-scripts-ts start",

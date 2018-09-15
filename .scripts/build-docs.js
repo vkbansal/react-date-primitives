@@ -3,7 +3,6 @@ const util = require('util');
 
 const writeFile = util.promisify(fs.writeFile);
 
-const fetch = require('node-fetch');
 const parse = require('react-ts-docs-parser').parse;
 
 function makePropsTable(props) {

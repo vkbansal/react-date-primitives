@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { CalendarMonth, Day } from 'react-date-primitives';
-import { addMonths } from 'react-date-primitives/esm/utils';
+import { CalendarMonth, DayOfMonth } from 'react-date-primitives';
+import { addMonths } from 'react-date-primitives/esm/components/utils';
 
 const MONTH_NAMES = [
     'January',
@@ -22,10 +22,7 @@ export interface SimpleDatePickerState {
     day?: Date;
 }
 
-export class SimpleDatePicker extends React.Component<
-    {},
-    SimpleDatePickerState
-> {
+export class SimpleDatePicker extends React.Component<{}, SimpleDatePickerState> {
     constructor(props: {}) {
         super(props);
 
@@ -36,19 +33,18 @@ export class SimpleDatePicker extends React.Component<
     }
 
     handleMonthIncrement = (e: React.MouseEvent<HTMLButtonElement>) => {
-        this.setState(state => ({
+        this.setState((state) => ({
             month: addMonths(state.month, 1)
         }));
     };
 
     handleMonthDecrement = (e: React.MouseEvent<HTMLButtonElement>) => {
-        this.setState(state => ({
+        this.setState((state) => ({
             month: addMonths(state.month, -1)
         }));
     };
 
-    handleDayClick = (day: Day) => () => {
-        console.log(day);
+    handleDayClick = (day: DayOfMonth) => () => {
         this.setState({ day: day.date });
     };
 
@@ -57,21 +53,17 @@ export class SimpleDatePicker extends React.Component<
         const monthName = MONTH_NAMES[month.getMonth()];
 
         return (
-            <table>
+            <table style={{ textAlign: 'center' }}>
                 <thead>
                     <tr>
                         <th>
-                            <button onClick={this.handleMonthDecrement}>
-                                &lt;
-                            </button>
+                            <button onClick={this.handleMonthDecrement}>&lt;</button>
                         </th>
                         <th colSpan={5}>
                             {monthName} {month.getFullYear()}
                         </th>
                         <th>
-                            <button onClick={this.handleMonthIncrement}>
-                                &gt;
-                            </button>
+                            <button onClick={this.handleMonthIncrement}>&gt;</button>
                         </th>
                     </tr>
                     <tr>
@@ -91,20 +83,16 @@ export class SimpleDatePicker extends React.Component<
                         <tbody>
                             {days.map((week, i) => (
                                 <tr key={i}>
-                                    {week.map((day, j) => (
+                                    {week.map((d, j) => (
                                         <td
                                             style={{
-                                                opacity: day.inCurrentMonth
-                                                    ? 1
-                                                    : 0.2,
-                                                background: day.selected
-                                                    ? '#ddd'
-                                                    : 'transparent'
+                                                opacity: d.inCurrentMonth ? 1 : 0.2,
+                                                background: d.selected ? '#ddd' : 'transparent'
                                             }}
                                             key={`${i}-${j}`}
-                                            onClick={this.handleDayClick(day)}
+                                            onClick={this.handleDayClick(d)}
                                         >
-                                            {day ? day.date.getDate() : ''}
+                                            {d ? d.date.getDate() : ''}
                                         </td>
                                     ))}
                                 </tr>

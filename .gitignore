@@ -1,7 +1,4 @@
 node_modules/
 public/
 *.log
-coverage/
-esm/
-esnext/
-lib/
+
