@@ -16,7 +16,7 @@
         "react-ts-doc-parser": "gist:8a879f96a191ea4e8a1368edb01cb6e8",
         "react-ts-docs-parser": "gist:8a879f96a191ea4e8a1368edb01cb6e8",
         "typescript": "~3.0.3",
-        "webpack": "~4.17.2",
+        "webpack": "~4.19.0",
         "webpack-cli": "~3.1.0",
         "webpack-dev-server": "~3.1.8"
     }

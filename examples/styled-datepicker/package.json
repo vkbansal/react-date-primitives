@@ -9,10 +9,10 @@
     "@types/react-dom": "~16.0.7",
     "emotion": "~9.2.9",
     "react": "~16.5.1",
-    "react-date-primitives": "0.4.0",
+    "react-date-primitives": "0.4.1",
     "react-dom": "~16.5.1",
     "react-emotion": "~9.2.9",
-    "react-scripts-ts": "~2.13.0",
+    "react-scripts-ts": "~2.17.0",
     "tslint-vkbansal": "gist:c4922663993ada71f43352107f86c4fd",
     "typescript": "~3.0.3"
   },
