@@ -1,94 +1,10 @@
 import * as React from 'react';
 
-import { CalendarMonthProps } from './CalendarMonth';
 import { startOfMonth, addMonths, isDayBefore, callIfExists } from './utils';
+import { DateRangeControlProps, DateRangeControlState } from './types';
 
 /**
- * Object representing a date range
- */
-export interface DateRange {
-    /**
-     * Starting date of the range
-     */
-    startDate: Date;
-    /**
-     * End date of the range
-     */
-    endDate?: Date;
-}
-
-/**
- * @private
- */
-export type PickedCalendarMonthProps = Pick<
-    CalendarMonthProps,
-    'startDate' | 'endDate' | 'minDate' | 'maxDate'
->;
-
-/**
- * DateRangeControl `render` prop is called with this object
- */
-export interface DateRangeControlRenderProps extends PickedCalendarMonthProps {
-    /**
-     * Callback for handling click on a date
-     */
-    onDayClick(date: Date): void;
-    /**
-     * Callback for handling mouse hover on a date
-     */
-    onDayHover(date: Date): void;
-    /**
-     * The months to be shown to the user
-     */
-    months: Date[];
-    /**
-     * Callback for moving to next month
-     */
-    moveForward(): void;
-    /**
-     * Callback for moving to prev month
-     */
-    moveBackward(): void;
-}
-
-export interface DateRangeControlProps extends PickedCalendarMonthProps {
-    /**
-     * Callback when start and/or end dates are changed
-     *
-     * @param {Object} dates
-     * @param {Date} dates.startDate
-     * @param {Date | undefined} dates.endDate
-     */
-    onDatesChange?(dates: DateRange): void;
-    /**
-     * By default 2 consecutive months will be shown,
-     * but if you want to show 3 months instead, set this to `true`
-     */
-    showThreeMonths?: boolean;
-    /**
-     * The main function, which be used for rendering.
-     * It is called with an object.
-     *
-     * @see DateRangeControlRenderProps
-     */
-    render(props: DateRangeControlRenderProps): React.ReactNode;
-}
-
-/**
- * @private
- */
-export interface DateRangeControlState {
-    startDate?: Date;
-    endDate?: Date;
-    months: Date[];
-    selectionActive: boolean;
-}
-
-/**
- * Primitive react component for making a date-range picker
- *
- * @borrows CalendarMonthProps
- * @example docs/examples/SimpleDateRangePicker.js
+ * Controller component for making a date-range picker in conjunction with [CalendarMonth]()
  */
 export class DateRangeControl extends React.Component<
     DateRangeControlProps,

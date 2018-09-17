@@ -1,12 +1,15 @@
 import * as React from 'react';
 import { shallow } from 'enzyme';
-import { random, times, last } from 'lodash';
 
-import { DateRangeControl, DateRangeControlRenderProps } from '../DateRangeControl';
-import { isSameMonth, addMonths, addDays, isSameDay } from '../utils';
+import { DateRangeControl, DateRangeControlRenderProps } from '../';
+import { isSameMonth, addMonths, addDays, isSameDay } from '../components/utils';
 
 function getRandomInt(): number {
-    return random(1, 30);
+    return Math.floor(Math.random() * 30 + 1);
+}
+
+function getLastArgs(args: any[][]) {
+    return args[args.length - 1][0];
 }
 
 describe('<DateRangeControl /> tests', () => {
@@ -19,7 +22,7 @@ describe('<DateRangeControl /> tests', () => {
 
         expect(render).toHaveBeenCalled();
 
-        const args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+        const args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
         expect(args.months.length).toBe(2);
         expect(isSameMonth(args.months[0], today)).toBe(true);
@@ -31,7 +34,7 @@ describe('<DateRangeControl /> tests', () => {
 
         expect(render).toHaveBeenCalled();
 
-        const args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+        const args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
         expect(args.months.length).toBe(2);
         expect(isSameMonth(args.months[0], month)).toBe(true);
@@ -45,7 +48,7 @@ describe('<DateRangeControl /> tests', () => {
 
         expect(render).toHaveBeenCalled();
 
-        const args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+        const args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
         expect(args.months.length).toBe(3);
     });
@@ -56,25 +59,25 @@ describe('<DateRangeControl /> tests', () => {
 
         expect(render).toHaveBeenCalledTimes(1);
 
-        let args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+        let args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
         const forwardSteps = getRandomInt();
 
-        times(forwardSteps, args.moveForward);
+        Array.from({ length: forwardSteps }, args.moveForward);
 
         expect(render).toHaveBeenCalledTimes(1 + forwardSteps);
 
-        args = last(render.mock.calls)[0];
+        args = getLastArgs(render.mock.calls);
 
         expect(isSameMonth(args.months[0], addMonths(month, forwardSteps))).toBe(true);
 
         const backwardSteps = getRandomInt();
 
-        times(backwardSteps, args.moveBackward);
+        Array.from({ length: backwardSteps }, args.moveBackward);
 
         expect(render).toHaveBeenCalledTimes(1 + forwardSteps + backwardSteps);
 
-        args = last(render.mock.calls)[0];
+        args = getLastArgs(render.mock.calls);
 
         expect(isSameMonth(args.months[0], addMonths(month, forwardSteps - backwardSteps))).toBe(
             true
@@ -89,7 +92,7 @@ describe('<DateRangeControl /> tests', () => {
 
             expect(render).toHaveBeenCalledTimes(1);
 
-            let args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+            let args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
             expect(args.startDate).not.toBeDefined();
             expect(args.endDate).not.toBeDefined();
@@ -102,7 +105,7 @@ describe('<DateRangeControl /> tests', () => {
             expect(render).toHaveBeenCalledTimes(2);
             expect(component.state('selectionActive')).toBe(true);
 
-            args = last(render.mock.calls)[0];
+            args = getLastArgs(render.mock.calls);
 
             expect(isSameDay(startDate, args.startDate)).toBe(true);
             expect(args.endDate).not.toBeDefined();
@@ -115,7 +118,7 @@ describe('<DateRangeControl /> tests', () => {
             expect(render).toHaveBeenCalledTimes(3);
             expect(component.state('selectionActive')).toBe(false);
 
-            args = last(render.mock.calls)[0];
+            args = getLastArgs(render.mock.calls);
 
             expect(isSameDay(startDate, args.startDate)).toBe(true);
             expect(isSameDay(endDate, args.endDate)).toBe(true);
@@ -170,7 +173,7 @@ describe('<DateRangeControl /> tests', () => {
 
             expect(render).toHaveBeenCalledTimes(1);
 
-            let args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+            let args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
             const start = getRandomInt();
             const startDate = addDays(today, start);
@@ -180,7 +183,7 @@ describe('<DateRangeControl /> tests', () => {
             const end = getRandomInt();
             const endDate = addDays(startDate, -1 * end);
 
-            args = last(render.mock.calls)[0];
+            args = getLastArgs(render.mock.calls);
 
             expect(args.endDate).not.toBeDefined();
         });
@@ -194,12 +197,12 @@ describe('<DateRangeControl /> tests', () => {
 
             expect(render).toHaveBeenCalledTimes(1);
 
-            let args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+            let args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
             const n = getRandomInt();
 
-            times(n, () => {
-                args = last(render.mock.calls)[0];
+            Array.from({ length: n }, () => {
+                args = getLastArgs(render.mock.calls);
                 args.onDayHover(addDays(month, getRandomInt()));
             });
 
@@ -216,7 +219,7 @@ describe('<DateRangeControl /> tests', () => {
 
             expect(render).toHaveBeenCalledTimes(1);
 
-            let args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+            let args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
             const start = getRandomInt();
             const startDate = addDays(today, start);
@@ -225,12 +228,12 @@ describe('<DateRangeControl /> tests', () => {
 
             const n = getRandomInt();
 
-            times(n, () => {
-                args = last(render.mock.calls)[0];
+            Array.from({ length: n }, () => {
+                args = getLastArgs(render.mock.calls);
                 const endDate = addDays(startDate, getRandomInt());
                 args.onDayHover(endDate);
 
-                args = last(render.mock.calls)[0];
+                args = getLastArgs(render.mock.calls);
                 expect(isSameDay(endDate, args.endDate)).toBe(true);
             });
         });
@@ -242,7 +245,7 @@ describe('<DateRangeControl /> tests', () => {
 
             expect(render).toHaveBeenCalledTimes(1);
 
-            let args: DateRangeControlRenderProps = last(render.mock.calls)[0];
+            let args: DateRangeControlRenderProps = getLastArgs(render.mock.calls);
 
             const start = getRandomInt();
             const startDate = addDays(today, start);
@@ -252,12 +255,12 @@ describe('<DateRangeControl /> tests', () => {
 
             const n = getRandomInt();
 
-            times(n, () => {
-                args = last(render.mock.calls)[0];
+            Array.from({ length: n }, () => {
+                args = getLastArgs(render.mock.calls);
                 const endDate = addDays(startDate, -1 * getRandomInt());
                 args.onDayHover(endDate);
 
-                args = last(render.mock.calls)[0];
+                args = getLastArgs(render.mock.calls);
                 expect(args.endDate).not.toBeDefined();
             });
 

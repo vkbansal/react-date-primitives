@@ -20,65 +20,13 @@ npm install --save react-date-primitives
 ```jsx
 import * as React from 'react';
 import { CalendarMonth } from 'react-date-primitives';
-import addMonths from 'date-fns/addMonths'; // This is not required, you can use the package of your choice!
-
-const MONTH_NAMES = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
 
 class SimpleDatePicker extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            month: new Date()
-        };
-    }
-
     render() {
-        const { month } = this.state;
-
         return (
             <table>
-                <thead>
-                    <tr>
-                        <th>
-                            <button onClick={() => this.setState({ month: addMonths(month, -1) })}>
-                                &lt;
-                            </button>
-                        </th>
-                        <th colSpan={5}>
-                            {MONTH_NAMES[month.getMonth()]} {month.getFullYear()}
-                        </th>
-                        <th>
-                            <button onClick={() => this.setState({ month: addMonths(month, 1) })}>
-                                &gt;
-                            </button>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
                 <CalendarMonth
-                    month={month}
+                    month={new Date()}
                     render={({ days }) => (
                         <tbody>
                             {days.map((week, i) => (
@@ -99,7 +47,17 @@ class SimpleDatePicker extends React.Component {
 }
 ```
 
-More examples and docs are coming soon!
+## Live Examples
+
+-   [simple date-picker](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-datepicker)
+-   [simple date-picker with dropdowns for month and year](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/datepicker-dropdowns)
+-   [simple daterange-picker using `CalendarMonth`](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-daterangepicker)
+-   [styled date-picker](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/styled-datepicker)
+
+## API
+
+-   [`CalendarMonth`](docs/CalendarMonth.md)
+-   [`DateRangeControl`](docs/DateRangeControl.md)
 
 ## License
 
