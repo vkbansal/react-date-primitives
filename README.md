@@ -50,8 +50,9 @@ class SimpleDatePicker extends React.Component {
 ## Live Examples
 
 -   [simple date-picker](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-datepicker)
--   [simple date-picker with dropdowns for month and year](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-datepicker)
+-   [simple date-picker with dropdowns for month and year](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/datepicker-dropdowns)
 -   [simple daterange-picker using `CalendarMonth`](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-daterangepicker)
+-   [styled date-picker](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/styled-datepicker)
 
 ## API
 

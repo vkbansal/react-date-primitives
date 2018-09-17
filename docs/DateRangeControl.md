@@ -1,5 +1,7 @@
 # `<DateRangeControl/> `
 
+Controller component for making a date-range picker in conjunction with [CalendarMonth]()
+
 ## PropTypes
 
 

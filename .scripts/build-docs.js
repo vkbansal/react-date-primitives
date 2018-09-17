@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const util = require('util');
 
 const writeFile = util.promisify(fs.writeFile);
@@ -37,54 +38,13 @@ function getAllSeeTags(props, typesData) {
     return [...new Set(mainTags)];
 }
 
-async function getSourceCode(id, filename) {
-    const response = await fetch(`https://codesandbox.io/api/v1/sandboxes/${id}`, {
-        method: 'GET'
-    });
-    const data = await response.json();
-
-    if (!filename) return data.data.modules;
-
-    return data.data.modules.find((file) => file.title === filename);
-}
-
 (async function() {
-    const cmData = parse('./src/CalendarMonth.tsx')[0];
-    const typesData = parse('./src/types.ts').reduce((p, c) => ({ ...p, [c.name]: c }), {});
-
-    const cmSource = await getSourceCode('jjm94lyv53', 'SimpleDatePicker.tsx');
-
-    const cmrSource = await getSourceCode('x90ozw987o', 'SimpleDateRangePicker.tsx');
+    const cmData = parse(path.resolve(__dirname, '../src/components/CalendarMonth.tsx'))[0];
+    const typesData = parse(path.resolve(__dirname, '../src/components/types.ts')).reduce((p, c) => ({ ...p, [c.name]: c }), {});
 
     let cmDocs = `# \`<CalendarMonth/>\`
 
 ${cmData.description}
-
-<details>
-    <summary><b>Simple Date Picker Code Example</b></summary>
-
-\`\`\`tsx
-${cmSource.code}
-\`\`\`
-
-</details>
-
-<br>
-
-[![Edit Simple date-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/jjm94lyv53?module=%2Fsrc%2FSimpleDatePicker.tsx)
-
-<details>
-    <summary><b>Simple Date Range Picker Code Example</b></summary>
-
-\`\`\`tsx
-${cmrSource.code}
-\`\`\`
-
-</details>
-
-<br>
-
-[![Edit simple date-range-picker](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/x90ozw987o?module=%2Fsrc%2FSimpleDateRangePicker.tsx)
 
 ## PropTypes\n\n`;
 
@@ -96,18 +56,18 @@ ${cmrSource.code}
         .map((tag) => `### \`${tag}\`\n${makePropsTable(typesData[tag].props)}`)
         .join('\n\n');
 
-    await writeFile('docs/CalendarMonth.md', cmDocs, 'utf8');
+    await writeFile(path.resolve(__dirname, '../docs/CalendarMonth.md'), cmDocs, 'utf8');
 
     /**********************************************************************************************************************/
-    const drcData = parse('./src/DateRangeControl.tsx')[0];
+    const drcData = parse(path.resolve(__dirname, '../src/components/DateRangeControl.tsx'))[0];
     let drcDocs = `# \`<DateRangeControl/> \`
+
+${drcData.description}
 
 ## PropTypes\n\n`;
 
     drcDocs += makePropsTable(drcData.props);
     drcDocs += '\n';
-
-    await writeFile('test.json', JSON.stringify(drcData, null, 4), 'utf8');
 
     const drcSeeTags = getAllSeeTags(drcData.props, typesData);
 
@@ -115,5 +75,5 @@ ${cmrSource.code}
         .map((tag) => `### \`${tag}\`\n${makePropsTable(typesData[tag].props)}`)
         .join('\n\n');
 
-    await writeFile('docs/DateRangeControl.md', drcDocs, 'utf8');
+    await writeFile(path.resolve(__dirname, '../docs/DateRangeControl.md'), drcDocs, 'utf8');
 })();
