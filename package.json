@@ -2,10 +2,11 @@
     "private": true,
     "workspaces": [
         "src",
-        "examples/simple-datepicker"
+        "examples/*"
     ],
     "scripts": {
-        "test": "cd src && yarn test && cd .."
+        "test": "cd src && yarn test && cd ..",
+        "build-docs": "node ./.scripts/build-docs.js"
     },
     "dependencies": {
         "@types/react": "~16.4.14",

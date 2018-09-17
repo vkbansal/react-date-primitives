@@ -7,7 +7,7 @@ import { CalendarMonth, DayOfMonth } from 'react-date-primitives';
  *
  * Use your favourite date library (eg: moment, date-fns, etc.) instead.
  */
-import { addMonths } from 'react-date-primitives/esm/components/utils';
+import { addMonths, isDayBefore } from 'react-date-primitives/esm/components/utils';
 
 const MONTH_NAMES = [
     'January',
@@ -24,18 +24,20 @@ const MONTH_NAMES = [
     'December'
 ];
 
-export interface SimpleDatePickerState {
+export interface SimpleDateRangePickerState {
     month: Date;
-    day?: Date;
+    startDate?: Date;
+    endDate?: Date;
+    selectionActive: boolean;
 }
 
-export class SimpleDatePicker extends React.Component<{}, SimpleDatePickerState> {
+export class SimpleDateRangePicker extends React.Component<{}, SimpleDateRangePickerState> {
     constructor(props: {}) {
         super(props);
 
         this.state = {
             month: new Date(),
-            day: new Date()
+            selectionActive: false
         };
     }
 
@@ -52,15 +54,31 @@ export class SimpleDatePicker extends React.Component<{}, SimpleDatePickerState>
     };
 
     handleDayClick = (day: DayOfMonth) => () => {
-        this.setState({ day: day.date });
+        this.setState((state) => {
+            const { startDate, selectionActive } = state;
+
+            if (startDate && selectionActive && !isDayBefore(day.date, startDate)) {
+                return {
+                    startDate,
+                    selectionActive: false,
+                    endDate: day.date
+                };
+            }
+
+            return {
+                startDate: day.date,
+                endDate: undefined,
+                selectionActive: true
+            };
+        });
     };
 
     render() {
-        const { month, day } = this.state;
+        const { month, startDate, endDate } = this.state;
         const monthName = MONTH_NAMES[month.getMonth()];
 
         return (
-            <table style={{ textAlign: 'center' }}>
+            <table>
                 <thead>
                     <tr>
                         <th>
@@ -85,21 +103,26 @@ export class SimpleDatePicker extends React.Component<{}, SimpleDatePickerState>
                 </thead>
                 <CalendarMonth
                     month={month}
-                    startDate={day}
+                    startDate={startDate}
+                    endDate={endDate}
                     render={({ days }) => (
                         <tbody>
                             {days.map((week, i) => (
                                 <tr key={i}>
-                                    {week.map((d, j) => (
+                                    {week.map((day, j) => (
                                         <td
                                             style={{
-                                                opacity: d.inCurrentMonth ? 1 : 0.2,
-                                                background: d.selected ? '#ddd' : 'transparent'
+                                                opacity: day.inCurrentMonth ? 1 : 0.2,
+                                                background: day.inRange
+                                                    ? '#ddd'
+                                                    : day.selected
+                                                        ? '#999'
+                                                        : 'transparent'
                                             }}
                                             key={`${i}-${j}`}
-                                            onClick={this.handleDayClick(d)}
+                                            onClick={this.handleDayClick(day)}
                                         >
-                                            {d ? d.date.getDate() : ''}
+                                            {day ? day.date.getDate() : ''}
                                         </td>
                                     ))}
                                 </tr>
