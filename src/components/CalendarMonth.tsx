@@ -33,24 +33,26 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
                                     (maxDate && isDayAfter(date, maxDate))
                             );
 
+                        const selected =  !disabled &&
+                        Boolean(
+                            (startDate && isSameDay(date, startDate)) ||
+                                (endDate && isSameDay(date, endDate))
+                        );
+
+                        const inRange = Boolean(
+                            startDate &&
+                                isDayAfter(date, startDate) &&
+                                endDate &&
+                                isDayBefore(date, endDate)
+                        );
+
                         return {
                             date,
                             inRange:
                                 inCurrentMonth &&
                                 !startDateDisabled &&
-                                !disabled &&
-                                Boolean(
-                                    startDate &&
-                                        isDayAfter(date, startDate) &&
-                                        endDate &&
-                                        isDayBefore(date, endDate)
-                                ),
-                            selected:
-                                !disabled &&
-                                Boolean(
-                                    (startDate && isSameDay(date, startDate)) ||
-                                        (endDate && isSameDay(date, endDate))
-                                ),
+                                !disabled && (selected || inRange),
+                            selected,
                             disabled,
                             inCurrentMonth
                         };
