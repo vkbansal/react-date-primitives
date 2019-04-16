@@ -10,3 +10,5 @@ export {
     DateRangeControlRenderProps,
     DateRange
 } from './components/types';
+export { useCalendar } from './hooks/useCalendar';
+export { useDateRange } from './hooks/useDateRange';

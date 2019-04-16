@@ -6,8 +6,8 @@ import {
     isDayBefore,
     isSameDay,
     setMonth,
-    getDatesofMonth
-} from './utils';
+    getDaysOfMonth
+} from '../utils';
 
 import { CalendarMonthProps, DayOfMonth, CalendarDropdownOption } from './types';
 
@@ -17,7 +17,7 @@ import { CalendarMonthProps, DayOfMonth, CalendarDropdownOption } from './types'
 export class CalendarMonth extends React.Component<CalendarMonthProps> {
     private getDaysofMonth(props: CalendarMonthProps): DayOfMonth[][] {
         const { month, startDate, endDate, minDate, maxDate } = props;
-        const currentMonth = getDatesofMonth(month);
+        const currentMonth = getDaysOfMonth(month);
 
         const startDateDisabled = !!startDate && !!minDate && !isDayAfter(startDate, minDate);
 
@@ -33,11 +33,12 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
                                     (maxDate && isDayAfter(date, maxDate))
                             );
 
-                        const selected =  !disabled &&
-                        Boolean(
-                            (startDate && isSameDay(date, startDate)) ||
-                                (endDate && isSameDay(date, endDate))
-                        );
+                        const selected =
+                            !disabled &&
+                            Boolean(
+                                (startDate && isSameDay(date, startDate)) ||
+                                    (endDate && isSameDay(date, endDate))
+                            );
 
                         const inRange = Boolean(
                             startDate &&
@@ -51,7 +52,8 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
                             inRange:
                                 inCurrentMonth &&
                                 !startDateDisabled &&
-                                !disabled && (selected || inRange),
+                                !disabled &&
+                                (selected || inRange),
                             selected,
                             disabled,
                             inCurrentMonth
