@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { startOfMonth, addMonths, isDayBefore, callIfExists } from './utils';
+import { startOfMonth, addMonths, isDayBefore, callIfExists } from '../utils';
 import { DateRangeControlProps, DateRangeControlState } from './types';
 
 /**

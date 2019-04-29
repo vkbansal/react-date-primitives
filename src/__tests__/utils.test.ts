@@ -1,4 +1,4 @@
-import * as utils from '../components/utils';
+import * as utils from '../utils';
 
 describe('utils test', () => {
     const month = new Date(Date.UTC(2017, 0 /* Jan */, 1, 0, 0, 0, 0));
@@ -122,7 +122,7 @@ describe('utils test', () => {
         expect(callback).toHaveBeenCalledWith(...args);
     });
 
-    test('getDatesofMonth', () => {
-        expect(utils.getDatesofMonth(month)).toMatchSnapshot();
+    test('getDaysOfMonth', () => {
+        expect(utils.getDaysOfMonth(month)).toMatchSnapshot();
     });
 });

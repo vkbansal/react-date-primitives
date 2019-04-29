@@ -4,7 +4,7 @@ module.exports = {
     moduleFileExtensions: ['ts', 'tsx', 'js'],
     roots: ['<rootDir>/__tests__/'],
     transform: {
-        '^.+\\.tsx?$': 'ts-jest/preprocessor.js'
+        '^.+\\.tsx?$': 'ts-jest'
     },
     snapshotSerializers: ['enzyme-to-json/serializer', '<rootDir>/.jest/calendar-serializer', '<rootDir>/.jest/dropdown-serializer'],
     collectCoverageFrom: ['src/*.{ts,tsx}']

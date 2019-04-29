@@ -1,6 +1,11 @@
-import { DayOfMonthSubset } from './types';
+export interface DayOfMonth {
+    date: Date;
+    inCurrentMonth: boolean;
+}
 
-const monthsCache: Map<string, DayOfMonthSubset[][]> = new Map();
+export type DaysOfMonth = DayOfMonth[][];
+
+const monthsCache: Map<string, DaysOfMonth> = new Map();
 
 export function setDay(date: Date, day: number): Date {
     const newDate = new Date(date.getTime());
@@ -93,7 +98,7 @@ export function callIfExists(callback?: any, ...args: any[]) {
     }
 }
 
-export function getDatesofMonth(month: Date): DayOfMonthSubset[][] {
+export function getDaysOfMonth(month: Date): DayOfMonth[][] {
     const firstDate = startOfMonth(month);
     const key = `${firstDate.getFullYear()}-${firstDate.getMonth()}`;
 
@@ -105,12 +110,12 @@ export function getDatesofMonth(month: Date): DayOfMonthSubset[][] {
 
     const firstDayInCurrentMonth = firstDate.getDay();
 
-    const newdata: DayOfMonthSubset[][] = Array.from(
+    const newdata: DaysOfMonth = Array.from(
         { length: 6 },
-        (_1, i): DayOfMonthSubset[] => {
+        (_1, i): DayOfMonth[] => {
             const week = Array.from(
                 { length: 7 },
-                (_2, j): DayOfMonthSubset => {
+                (_2, j): DayOfMonth => {
                     const day = addDays(firstDate, i * 7 + j - firstDayInCurrentMonth);
 
                     return { date: day, inCurrentMonth: isSameMonth(firstDate, day) };

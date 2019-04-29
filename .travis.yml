@@ -1,5 +1,5 @@
-anguage: node_js
+language: node_js
 node_js:
-  - 9
+    - v12.0.0
 install: yarn install
 script: yarn test

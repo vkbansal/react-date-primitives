@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { DateRangeControl, DateRangeControlRenderProps } from '../';
-import { isSameMonth, addMonths, addDays, isSameDay } from '../components/utils';
+import { isSameMonth, addMonths, addDays, isSameDay } from '../utils';
 
 function getRandomInt(): number {
     return Math.floor(Math.random() * 30 + 1);
@@ -17,7 +17,7 @@ describe('<DateRangeControl /> tests', () => {
 
     test('Shows current month by default', () => {
         const render = jest.fn();
-        const component = shallow(<DateRangeControl render={render} />);
+        shallow(<DateRangeControl render={render} />);
         const today = new Date();
 
         expect(render).toHaveBeenCalled();
@@ -30,7 +30,7 @@ describe('<DateRangeControl /> tests', () => {
 
     test('Shows given month when `startDate` is specified', () => {
         const render = jest.fn();
-        const component = shallow(<DateRangeControl render={render} startDate={month} />);
+        shallow(<DateRangeControl render={render} startDate={month} />);
 
         expect(render).toHaveBeenCalled();
 
@@ -42,9 +42,7 @@ describe('<DateRangeControl /> tests', () => {
 
     test('Shows 3 months when `showThreeMonths` is true', () => {
         const render = jest.fn();
-        const component = shallow(
-            <DateRangeControl showThreeMonths render={render} startDate={month} />
-        );
+        shallow(<DateRangeControl showThreeMonths render={render} startDate={month} />);
 
         expect(render).toHaveBeenCalled();
 
@@ -55,7 +53,7 @@ describe('<DateRangeControl /> tests', () => {
 
     test('Navigation works', () => {
         const render = jest.fn();
-        const component = shallow(<DateRangeControl render={render} startDate={month} />);
+        shallow(<DateRangeControl render={render} startDate={month} />);
 
         expect(render).toHaveBeenCalledTimes(1);
 
@@ -107,7 +105,7 @@ describe('<DateRangeControl /> tests', () => {
 
             args = getLastArgs(render.mock.calls);
 
-            expect(isSameDay(startDate, args.startDate)).toBe(true);
+            expect(isSameDay(startDate, args.startDate!)).toBe(true);
             expect(args.endDate).not.toBeDefined();
 
             const end = getRandomInt();
@@ -120,8 +118,8 @@ describe('<DateRangeControl /> tests', () => {
 
             args = getLastArgs(render.mock.calls);
 
-            expect(isSameDay(startDate, args.startDate)).toBe(true);
-            expect(isSameDay(endDate, args.endDate)).toBe(true);
+            expect(isSameDay(startDate, args.startDate!)).toBe(true);
+            expect(isSameDay(endDate, args.endDate!)).toBe(true);
         });
 
         test('re-selecting works when a range is already selected', () => {
@@ -152,7 +150,7 @@ describe('<DateRangeControl /> tests', () => {
 
             args = render.mock.calls[1][0];
 
-            expect(isSameDay(startDate2, args.startDate)).toBe(true);
+            expect(isSameDay(startDate2, args.startDate!)).toBe(true);
             expect(args.endDate).not.toBeDefined();
 
             args.onDayClick(endDate2);
@@ -162,14 +160,14 @@ describe('<DateRangeControl /> tests', () => {
 
             args = render.mock.calls[2][0];
 
-            expect(isSameDay(startDate2, args.startDate)).toBe(true);
-            expect(isSameDay(endDate2, args.endDate)).toBe(true);
+            expect(isSameDay(startDate2, args.startDate!)).toBe(true);
+            expect(isSameDay(endDate2, args.endDate!)).toBe(true);
         });
 
         test('allows selection of `endDate` only if the day is same-as/after `startDate`', () => {
             const render = jest.fn();
             const today = new Date();
-            const component = shallow(<DateRangeControl render={render} />);
+            shallow(<DateRangeControl render={render} />);
 
             expect(render).toHaveBeenCalledTimes(1);
 
@@ -179,10 +177,6 @@ describe('<DateRangeControl /> tests', () => {
             const startDate = addDays(today, start);
 
             args.onDayClick(startDate);
-
-            const end = getRandomInt();
-            const endDate = addDays(startDate, -1 * end);
-
             args = getLastArgs(render.mock.calls);
 
             expect(args.endDate).not.toBeDefined();
@@ -192,8 +186,7 @@ describe('<DateRangeControl /> tests', () => {
     describe('Day Hover', () => {
         test('`onDayHover` does not work, if startDate is not selected', () => {
             const render = jest.fn();
-            const today = new Date();
-            const component = shallow(<DateRangeControl render={render} />);
+            shallow(<DateRangeControl render={render} />);
 
             expect(render).toHaveBeenCalledTimes(1);
 
@@ -215,7 +208,7 @@ describe('<DateRangeControl /> tests', () => {
         test('endDate updates with `onDayHover`', () => {
             const render = jest.fn();
             const today = new Date();
-            const component = shallow(<DateRangeControl render={render} />);
+            shallow(<DateRangeControl render={render} />);
 
             expect(render).toHaveBeenCalledTimes(1);
 
@@ -234,14 +227,14 @@ describe('<DateRangeControl /> tests', () => {
                 args.onDayHover(endDate);
 
                 args = getLastArgs(render.mock.calls);
-                expect(isSameDay(endDate, args.endDate)).toBe(true);
+                expect(isSameDay(endDate, args.endDate!)).toBe(true);
             });
         });
 
         test('`onDayHover` works only with days same-as/after startDate', () => {
             const render = jest.fn();
             const today = new Date();
-            const component = shallow(<DateRangeControl render={render} />);
+            shallow(<DateRangeControl render={render} />);
 
             expect(render).toHaveBeenCalledTimes(1);
 
