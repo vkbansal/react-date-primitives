@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils test getDaysOfMonth 1`] = `
+Array [
+  Array [
+    Object {
+      "date": 2016-12-31T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-01T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-02T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-03T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-04T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-05T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-06T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+  ],
+  Array [
+    Object {
+      "date": 2017-01-07T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-08T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-09T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-10T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-11T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-12T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-13T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+  ],
+  Array [
+    Object {
+      "date": 2017-01-14T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-15T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-16T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-17T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-18T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-19T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-20T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+  ],
+  Array [
+    Object {
+      "date": 2017-01-21T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-22T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-23T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-24T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-25T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-26T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-27T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+  ],
+  Array [
+    Object {
+      "date": 2017-01-28T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-29T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-30T18:30:00.000Z,
+      "inCurrentMonth": true,
+    },
+    Object {
+      "date": 2017-01-31T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-01T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-02T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-03T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+  ],
+  Array [
+    Object {
+      "date": 2017-02-04T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-05T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-06T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-07T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-08T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-09T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+    Object {
+      "date": 2017-02-10T18:30:00.000Z,
+      "inCurrentMonth": false,
+    },
+  ],
+]
+`;

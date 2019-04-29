@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
-import { DayOfMonth, isDayBefore, isDayAfter, isSameDay } from '../utils';
+import { DayOfMonth, isDayBefore, isDayAfter, isSameDay } from './utils';
 
 export interface DayOfRangeMonth extends DayOfMonth {
     inRange: boolean;
@@ -12,33 +12,30 @@ export interface DayOfRangeMonth extends DayOfMonth {
 export interface UseDateRange {
     handleDayClick(day: Date): void;
     handleDayHover(day: Date): void;
-    startDate: Date;
+    startDate?: Date;
     endDate?: Date;
     processMonth(month: DayOfMonth[][]): DayOfRangeMonth[][];
 }
 
-export function useDateRange(
-    initialStartDate: Date = new Date(),
-    initialEndDate?: Date
-): UseDateRange {
+export function useDateRange(initialStartDate?: Date, initialEndDate?: Date): UseDateRange {
     const [startDate, setStartDate] = useState(initialStartDate);
     const [endDate, setEndDate] = useState(initialEndDate);
-    const [selectionActive, setSelectionActive] = useState(false);
+    const selection = useRef(false);
 
     function handleDayClick(day: Date) {
-        if (startDate && selectionActive && !isDayBefore(day, startDate)) {
+        if (startDate && selection.current && !isDayBefore(day, startDate)) {
             setStartDate(startDate);
             setEndDate(day);
-            setSelectionActive(false);
+            selection.current = false;
         } else {
             setStartDate(day);
             setEndDate(undefined);
-            setSelectionActive(true);
+            selection.current = true;
         }
     }
 
     function handleDayHover(day: Date) {
-        if (selectionActive && startDate && !isDayBefore(day, startDate)) {
+        if (startDate && selection.current && !isDayBefore(day, startDate)) {
             setEndDate(day);
         }
     }
@@ -46,18 +43,21 @@ export function useDateRange(
     function processMonth(month: DayOfMonth[][]): DayOfRangeMonth[][] {
         return month.map<DayOfRangeMonth[]>((week) =>
             week.map<DayOfRangeMonth>((day) => {
-                const isStart = startDate && isSameDay(day.date, startDate);
+                const isStart = Boolean(startDate && isSameDay(day.date, startDate));
                 const isEnd = Boolean(endDate && isSameDay(day.date, endDate));
 
                 return {
                     ...day,
                     selected: isStart || isEnd,
-                    inRange: Boolean(
-                        startDate &&
-                            isDayAfter(day.date, startDate) &&
-                            endDate &&
-                            isDayBefore(day.date, endDate)
-                    ),
+                    inRange:
+                        isStart ||
+                        isEnd ||
+                        Boolean(
+                            startDate &&
+                                isDayAfter(day.date, startDate) &&
+                                endDate &&
+                                isDayBefore(day.date, endDate)
+                        ),
                     isStart,
                     isEnd
                 };

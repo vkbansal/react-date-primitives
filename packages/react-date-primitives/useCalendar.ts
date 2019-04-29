@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import { startOfMonth, getDaysOfMonth, DayOfMonth } from '../utils';
+import { startOfMonth, getDaysOfMonth, DayOfMonth } from './utils';
+
+export { DayOfMonth };
 
 export interface UseCalendar {
     days: DayOfMonth[][];
