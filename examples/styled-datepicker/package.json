@@ -9,7 +9,7 @@
     "@types/react-dom": "~16.8.4",
     "emotion": "~10.0.7",
     "react": "~16.8.6",
-    "react-date-primitives": "0.5.0",
+    "react-date-primitives": "0.6.0",
     "react-dom": "~16.8.6",
     "react-emotion": "~10.0.0",
     "react-scripts": "~3.0.0",
