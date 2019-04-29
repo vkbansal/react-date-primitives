@@ -1,73 +1,69 @@
 import { useState } from 'react';
 
-import { DaysOfMonth, startOfMonth, addMonths, getDaysOfMonth } from '../utils';
+import { DayOfMonth, isDayBefore, isDayAfter, isSameDay } from '../utils';
 
-export interface Month {
-    month: Date;
-    days: DaysOfMonth;
+export interface DayOfRangeMonth extends DayOfMonth {
+    inRange: boolean;
+    selected: boolean;
+    isStart: boolean;
+    isEnd: boolean;
 }
 
-export interface DateRange {
-    months: Month[];
-    setDateRange(startDate: Date, endDate?: Date): void;
+export interface UseDateRange {
+    handleDayClick(day: Date): void;
+    handleDayHover(day: Date): void;
+    startDate: Date;
+    endDate?: Date;
+    processMonth(month: DayOfMonth[][]): DayOfRangeMonth[][];
 }
 
-// export function processDates(month: DaysOfMonth) {}
+export function useDateRange(
+    initialStartDate: Date = new Date(),
+    initialEndDate?: Date
+): UseDateRange {
+    const [startDate, setStartDate] = useState(initialStartDate);
+    const [endDate, setEndDate] = useState(initialEndDate);
+    const [selectionActive, setSelectionActive] = useState(false);
 
-export function useDateRange(initialStartDate: Date = new Date(), initialEndDate?: Date) {
-    const [startDate] = useState(initialStartDate);
-    const [] = useState(initialEndDate);
-    const month = startOfMonth(startDate);
+    function handleDayClick(day: Date) {
+        if (startDate && selectionActive && !isDayBefore(day, startDate)) {
+            setStartDate(startDate);
+            setEndDate(day);
+            setSelectionActive(false);
+        } else {
+            setStartDate(day);
+            setEndDate(undefined);
+            setSelectionActive(true);
+        }
+    }
 
-    const months: Month[] = Array.from({ length: 2 }, (_1, i) => {
-        const m = addMonths(month, i);
-        return {
-            month: m,
-            days: getDaysOfMonth(m)
-        };
-    });
-    // const [selectionActive] = useState(false);
-    // function handleDayClick(day: Date) {
-    //     this.setState((state) => {
-    //         const { startDate, selectionActive } = state;
-    //         let newState: Pick<DateRangeControlProps, 'startDate' | 'endDate'>;
-    //         if (startDate && selectionActive && !isDayBefore(day, startDate)) {
-    //             newState = {
-    //                 startDate,
-    //                 endDate: day
-    //             };
-    //             callIfExists(this.props.onDatesChange, newState);
-    //             return {
-    //                 selectionActive: false,
-    //                 ...newState
-    //             };
-    //         }
-    //         newState = {
-    //             startDate: day,
-    //             endDate: undefined
-    //         };
-    //         callIfExists(this.props.onDatesChange, newState);
-    //         return {
-    //             selectionActive: true,
-    //             ...newState
-    //         };
-    //     });
-    // }
-    // handleDayHover = (day: Date) => {
-    //     const { selectionActive, startDate } = this.state;
-    //     if (selectionActive && startDate && !isDayBefore(day, startDate)) {
-    //         this.setState(() => ({
-    //             endDate: day
-    //         }));
-    //     }
-    // };
-    // handleNavigation = (months: number) => () => {
-    //     this.setState((state) => {
-    //         return {
-    //             months: state.months.map((month) => addMonths(month, months))
-    //         };
-    //     });
-    // };
+    function handleDayHover(day: Date) {
+        if (selectionActive && startDate && !isDayBefore(day, startDate)) {
+            setEndDate(day);
+        }
+    }
 
-    return { months };
+    function processMonth(month: DayOfMonth[][]): DayOfRangeMonth[][] {
+        return month.map<DayOfRangeMonth[]>((week) =>
+            week.map<DayOfRangeMonth>((day) => {
+                const isStart = startDate && isSameDay(day.date, startDate);
+                const isEnd = Boolean(endDate && isSameDay(day.date, endDate));
+
+                return {
+                    ...day,
+                    selected: isStart || isEnd,
+                    inRange: Boolean(
+                        startDate &&
+                            isDayAfter(day.date, startDate) &&
+                            endDate &&
+                            isDayBefore(day.date, endDate)
+                    ),
+                    isStart,
+                    isEnd
+                };
+            })
+        );
+    }
+
+    return { handleDayClick, handleDayHover, startDate, endDate, processMonth };
 }

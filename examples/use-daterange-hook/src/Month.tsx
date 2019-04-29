@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useCalendar } from 'react-date-primitives';
+import { useCalendar, UseDateRange } from 'react-date-primitives';
 
-/**
- * These are internal modules to `react-date-primitives` and are used only for demo purposes only.
- * Please do not use in production. This might break in future without any notice.
- *
- * Use your favourite date library (eg: moment, date-fns, etc.) instead.
- */
-import { addMonths, isSameDay } from 'react-date-primitives/esm/utils';
+export interface MonthProps extends Pick<UseDateRange, 'processMonth'> {
+    month: Date;
+    onPrevClick?(): void;
+    onNextClick?(): void;
+    onDayClick(day: Date): void;
+    onDayHover(day: Date): void;
+}
 
 const MONTH_NAMES = [
     'January',
@@ -24,41 +24,23 @@ const MONTH_NAMES = [
     'December'
 ];
 
-export interface SimpleDatePickerState {
-    month: Date;
-    day?: Date;
-}
-
-export function UseCalendarHooks() {
-    const { days, setMonth, month } = useCalendar();
-    const [selected, setSelected] = React.useState(new Date());
-
-    function handleMonthIncrement() {
-        setMonth(addMonths(month, 1));
-    }
-
-    function handleMonthDecrement() {
-        setMonth(addMonths(month, -1));
-    }
-
-    // handleDayClick = (day: DayOfMonth) => () => {
-    //     this.setState({ day: day.date });
-    // };
-
+export function Month(props: MonthProps) {
+    const { days, month } = useCalendar(props.month);
     const monthName = MONTH_NAMES[month.getMonth()];
+    const rangedays = props.processMonth(days);
 
     return (
         <table style={{ textAlign: 'center' }}>
             <thead>
                 <tr>
                     <th>
-                        <button onClick={handleMonthDecrement}>&lt;</button>
+                        <button onClick={props.onPrevClick}>&lt;</button>
                     </th>
                     <th colSpan={5}>
                         {monthName} {month.getFullYear()}
                     </th>
                     <th>
-                        <button onClick={handleMonthIncrement}>&gt;</button>
+                        <button onClick={props.onNextClick}>&gt;</button>
                     </th>
                 </tr>
                 <tr>
@@ -72,17 +54,25 @@ export function UseCalendarHooks() {
                 </tr>
             </thead>
             <tbody>
-                {days.map((week, i) => (
+                {rangedays.map((week, i) => (
                     <tr key={i}>
                         {week.map((d, j) => (
                             <td
                                 style={{
                                     opacity: d.inCurrentMonth ? 1 : 0.2,
-                                    background: isSameDay(d.date, selected) ? '#ccc' : 'transparent'
+                                    background:
+                                        d.inCurrentMonth && d.selected
+                                            ? '#aaa'
+                                            : d.inCurrentMonth && d.inRange
+                                            ? '#ddd'
+                                            : 'transparent'
                                 }}
                                 key={`${i}-${j}`}
                                 onClick={() => {
-                                    d.inCurrentMonth && setSelected(d.date);
+                                    d.inCurrentMonth && props.onDayClick(d.date);
+                                }}
+                                onMouseOver={() => {
+                                    d.inCurrentMonth && props.onDayHover(d.date);
                                 }}
                             >
                                 {d.date.getDate()}

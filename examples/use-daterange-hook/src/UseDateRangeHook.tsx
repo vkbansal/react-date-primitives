@@ -7,7 +7,9 @@ import { useDateRange } from 'react-date-primitives';
  *
  * Use your favourite date library (eg: moment, date-fns, etc.) instead.
  */
-import { isSameDay } from 'react-date-primitives/esm/utils';
+import { addMonths } from 'react-date-primitives/esm/utils';
+
+import { Month } from './Month';
 
 const MONTH_NAMES = [
     'January',
@@ -28,67 +30,31 @@ function genMonthId(date: Date) {
     return `${date.getFullYear()}-${date.getMonth() + 1}`;
 }
 
-function genDayId(date: Date) {
-    return `${genMonthId(date)}-${date.getDate()}`;
-}
-
 export function UseDateRangeHook() {
-    const { months } = useDateRange();
+    const { handleDayClick, handleDayHover, processMonth } = useDateRange();
+    const [month, setMonth] = React.useState(new Date());
+
+    function handlePrevClick() {
+        setMonth(addMonths(month, -1));
+    }
+
+    function handleNextClick() {
+        setMonth(addMonths(month, 1));
+    }
 
     return (
-        <div>
-            {months.map(({ days, month }) => {
-                const monthName = MONTH_NAMES[month.getMonth()];
-
-                return (
-                    <table key={genMonthId(month)} style={{ textAlign: 'center' }}>
-                        <thead>
-                            <tr>
-                                <th>
-                                    <button onClick={handleMonthDecrement}>&lt;</button>
-                                </th>
-                                <th colSpan={5}>
-                                    {monthName} {month.getFullYear()}
-                                </th>
-                                <th>
-                                    <button onClick={handleMonthIncrement}>&gt;</button>
-                                </th>
-                            </tr>
-                            <tr>
-                                <th>Sun</th>
-                                <th>Mon</th>
-                                <th>Tue</th>
-                                <th>Wed</th>
-                                <th>Thu</th>
-                                <th>Fri</th>
-                                <th>Sat</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {days.map((week, i) => (
-                                <tr key={i}>
-                                    {week.map((d, j) => (
-                                        <td
-                                            style={{
-                                                opacity: d.inCurrentMonth ? 1 : 0.2,
-                                                background: isSameDay(d.date, selected)
-                                                    ? '#ccc'
-                                                    : 'transparent'
-                                            }}
-                                            key={`${i}-${j}`}
-                                            onClick={() => {
-                                                d.inCurrentMonth && setSelected(d.date);
-                                            }}
-                                        >
-                                            {d.date.getDate()}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                );
-            })}
+        <div style={{ display: 'flex' }}>
+            {[month, addMonths(month, 1)].map((month) => (
+                <Month
+                    key={genMonthId(month)}
+                    month={month}
+                    processMonth={processMonth}
+                    onDayClick={handleDayClick}
+                    onDayHover={handleDayHover}
+                    onNextClick={handleNextClick}
+                    onPrevClick={handlePrevClick}
+                />
+            ))}
         </div>
     );
 }
