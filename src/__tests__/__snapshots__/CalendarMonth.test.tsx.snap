@@ -48,8 +48,6 @@ exports[`<CalenderMonth /> tests dropdowns are updated when minDate, maxDate are
 
 exports[`<CalenderMonth /> tests dropdowns are updated when minDate, maxDate are given 2`] = `
 ----------
-1968 (--)
-----------
 1969 (--)
 ----------
 1970 (--)
@@ -157,6 +155,8 @@ exports[`<CalenderMonth /> tests dropdowns are updated when minDate, maxDate are
 2021 (--)
 ----------
 2022 (--)
+----------
+2023 (--)
 ----------
 `;
 
@@ -260,8 +260,6 @@ exports[`<CalenderMonth /> tests showDropdowns gives apt props 1`] = `
 
 exports[`<CalenderMonth /> tests showDropdowns gives apt props 2`] = `
 ----------
-1968 (--)
-----------
 1969 (--)
 ----------
 1970 (--)
@@ -369,5 +367,7 @@ exports[`<CalenderMonth /> tests showDropdowns gives apt props 2`] = `
 2021 (--)
 ----------
 2022 (--)
+----------
+2023 (--)
 ----------
 `;

@@ -14,7 +14,8 @@
         "noUnusedParameters": true,
         "noEmitOnError": false,
         "lib": ["es6", "dom"],
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "esModuleInterop": true
     },
     "exclude": ["node_modules", "**/*.test.tsx", "**/*.test.ts"]
 }

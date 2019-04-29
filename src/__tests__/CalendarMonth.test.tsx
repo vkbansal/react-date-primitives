@@ -2,7 +2,7 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { CalendarMonth, CalendarMonthRenderProps } from '../';
-import { addDays, addMonths } from '../components/utils';
+import { addDays, addMonths } from '../utils';
 
 describe('<CalenderMonth /> tests', () => {
     const month = new Date(Date.UTC(2017, 0 /* Jan */, 1, 0, 0, 0, 0));
@@ -77,14 +77,14 @@ describe('<CalenderMonth /> tests', () => {
         });
 
         args = render.mock.calls[1][0];
-        expect(args.monthsDropdown[1]).toMatchObject({
+        expect(args.monthsDropdown![1]).toMatchObject({
             disabled: true
         });
 
-        expect(args.monthsDropdown[11]).toMatchObject({
+        expect(args.monthsDropdown![11]).toMatchObject({
             disabled: true
         });
-        expect(args.yearsDropdown.length).toBe(1);
+        expect(args.yearsDropdown!.length).toBe(1);
 
         expect(args.monthsDropdown).toMatchSnapshot();
         expect(args.yearsDropdown).toMatchSnapshot();
