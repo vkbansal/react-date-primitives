@@ -44,8 +44,8 @@
   },
   "homepage": "https://github.com/vkbansal/react-date-primitives#readme",
   "peerDependencies": {
-    "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
   },
   "devDependencies": {
     "@types/enzyme": "~3.9.0",
@@ -59,8 +59,8 @@
     "enzyme-to-json": "~3.3.5",
     "jest": "~24.1.0",
     "prettier": "~1.16.4",
-    "react": "~16.8.3",
-    "react-dom": "~16.8.3",
+    "react": "~16.8.6",
+    "react-dom": "~16.8.6",
     "rimraf": "~2.6.3",
     "ts-jest": "~24.0.0",
     "ts-loader": "~5.3.3",
