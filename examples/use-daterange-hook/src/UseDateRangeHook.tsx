@@ -11,21 +11,6 @@ import { addMonths } from 'react-date-primitives/esm/utils';
 
 import { Month } from './Month';
 
-const MONTH_NAMES = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-];
-
 function genMonthId(date: Date) {
     return `${date.getFullYear()}-${date.getMonth() + 1}`;
 }
