@@ -5,8 +5,7 @@
         "examples/*"
     ],
     "scripts": {
-        "test": "cd src && yarn test && cd ..",
-        "build-docs": "node ./.scripts/build-docs.js"
+        "test": "cd packages/react-date-primitives && yarn test && cd ../.."
     },
     "resolutions": {
         "@types/react": "16.8.14",
