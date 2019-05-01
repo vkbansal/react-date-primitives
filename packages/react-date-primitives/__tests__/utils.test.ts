@@ -123,6 +123,10 @@ describe('utils test', () => {
     });
 
     test('getDaysOfMonth', () => {
-        expect(utils.getDaysOfMonth(month)).toMatchSnapshot();
+        const result = utils.getDaysOfMonth(month);
+        const days = result.map((week) =>
+            week.map((day) => ({ ...day, date: day.date.toDateString() }))
+        );
+        expect(days).toMatchSnapshot();
     });
 });
