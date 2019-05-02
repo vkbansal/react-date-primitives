@@ -129,4 +129,38 @@ describe('useDateRange hook tests', () => {
 
         expect(expected).toMatchSnapshot();
     });
+
+    test('setRange works', () => {
+        const date1 = new Date(2019, 0, 1, 0, 0, 0, 0);
+        const date2 = new Date(2019, 0, 9, 0, 0, 0, 0);
+        const { result } = renderHook(() => useDateRange());
+
+        act(() => {
+            result.current.setRange(date1, date2);
+        });
+
+        expect(isSameDay(result.current.startDate!, date1)).toBe(true);
+        expect(isSameDay(result.current.endDate!, date2)).toBe(true);
+
+        act(() => {
+            result.current.setRange(date2);
+        });
+
+        expect(isSameDay(result.current.startDate!, date2)).toBe(true);
+        expect(result.current.endDate).not.toBeDefined();
+
+        act(() => {
+            result.current.setRange(undefined, date1);
+        });
+
+        expect(result.current.startDate).not.toBeDefined();
+        expect(isSameDay(result.current.endDate!, date1)).toBe(true);
+
+        act(() => {
+            result.current.setRange();
+        });
+
+        expect(result.current.startDate).not.toBeDefined();
+        expect(result.current.endDate).not.toBeDefined();
+    });
 });

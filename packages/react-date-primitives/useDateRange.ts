@@ -15,6 +15,7 @@ export interface UseDateRange {
     startDate?: Date;
     endDate?: Date;
     processMonth(month: DayOfMonth[][]): DayOfRangeMonth[][];
+    setRange(start?: Date, end?: Date): void;
 }
 
 export function useDateRange(initialStartDate?: Date, initialEndDate?: Date): UseDateRange {
@@ -65,5 +66,10 @@ export function useDateRange(initialStartDate?: Date, initialEndDate?: Date): Us
         );
     }
 
-    return { handleDayClick, handleDayHover, startDate, endDate, processMonth };
+    function setRange(start?: Date, end?: Date) {
+        setStartDate(start);
+        setEndDate(end);
+    }
+
+    return { handleDayClick, handleDayHover, startDate, endDate, processMonth, setRange };
 }
