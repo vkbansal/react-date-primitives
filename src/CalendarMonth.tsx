@@ -151,7 +151,7 @@ export class CalendarMonth extends React.Component<CalendarMonthProps> {
         const { month, startDate, endDate, minDate, maxDate } = props;
         const currentMonth = getDatesofMonth(month);
 
-        const startDateDisabled = startDate && minDate && !isDayAfter(startDate, minDate);
+        const startDateDisabled = startDate && minDate && !(isSameDay(startDate, minDate) || isDayAfter(startDate, minDate));
 
         return currentMonth.map((week): Day[] =>
             week.map((day): Day => {
