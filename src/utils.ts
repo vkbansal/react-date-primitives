@@ -111,9 +111,15 @@ export function getDatesofMonth(month: Date): DateOfMonth[][] {
         return data;
     }
 
+    /*
+        Logic to see how many weeks we will have to render, this can be easily done by :
+	    Math.ceil of ((Get the first day in current month + total number of days in month) / (No. of days in week i.e. 7))
+    */
     const firstDayInCurrentMonth = firstDate.getDay();
+    const lastDate = endOfMonth(month);
+    const noOfWeeks = Math.ceil((firstDayInCurrentMonth + lastDate.getDate()) / 7);
 
-    const newdata: DateOfMonth[][] = Array.from({ length: 6 }, (_1, i): DateOfMonth[] => {
+    const newdata: DateOfMonth[][] = Array.from({ length: noOfWeeks }, (_1, i): DateOfMonth[] => {
         const week = Array.from({ length: 7 }, (_2, j): DateOfMonth => {
             const day = addDays(firstDate, i * 7 + j - firstDayInCurrentMonth);
 

@@ -122,7 +122,19 @@ describe('utils test', () => {
         expect(callback).toHaveBeenCalledWith(...args);
     });
 
-    test('getDatesofMonth', () => {
-        expect(utils.getDatesofMonth(month)).toMatchSnapshot();
+    describe('getDatesofMonth', () => {
+        it('matches snapshot', () => {
+            expect(utils.getDatesofMonth(month)).toMatchSnapshot();
+        });
+
+        it('returns correct number of week rows', () => {
+            expect(utils.getDatesofMonth(month).length).toBe(5);
+            // 1st May 2020 - With 6 week
+            let newDate = new Date(Date.UTC(2020, 4 /* May */, 1, 0, 0, 0, 0));
+            expect(utils.getDatesofMonth(newDate).length).toBe(6);
+            // 1st Feb 2009- With 4 week
+            newDate = new Date(Date.UTC(2009, 1 /* Feb */, 1, 0, 0, 0, 0));
+            expect(utils.getDatesofMonth(newDate).length).toBe(4);
+        })
     });
 });
