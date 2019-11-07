@@ -110,7 +110,7 @@ export class DateRangeControl extends React.Component<
             months: Array.from({ length: this.numOfMonths }, (_, i) =>
                 addMonths(startDate || thisMonth, i)
             ),
-            selectionActive: false
+            selectionActive: startDate && !endDate ? true : false
         };
     }
 
@@ -123,7 +123,7 @@ export class DateRangeControl extends React.Component<
                 startDate,
                 endDate,
                 months: Array.from({ length: this.numOfMonths }, (_, i) =>
-                    addMonths(startDate || state.months[0], i)
+                    addMonths(state.months[0], i)
                 )
             };
         });
