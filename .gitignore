@@ -2,4 +2,9 @@ node_modules/
 public/
 *.log
 .vscode/
+esm/
+esnext/
+lib/
+coverage/
+
 

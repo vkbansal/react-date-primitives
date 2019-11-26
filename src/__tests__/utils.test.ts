@@ -1,7 +1,12 @@
 import * as utils from '../utils';
+import DayOfMonthSerializer from './DayOfMonthSerializer';
+import DayOfRangeMonthSerializer from './DayOfRangeMonthSerializer';
+
+expect.addSnapshotSerializer(DayOfMonthSerializer);
+expect.addSnapshotSerializer(DayOfRangeMonthSerializer);
 
 describe('utils test', () => {
-    const month = new Date(Date.UTC(2017, 0 /* Jan */, 1, 0, 0, 0, 0));
+    const month = new Date(2020, 0 /* Jan */, 1, 0, 0, 0, 0);
 
     afterEach(() => {
         expect(month).toBe(month); // immutability check
@@ -122,11 +127,28 @@ describe('utils test', () => {
         expect(callback).toHaveBeenCalledWith(...args);
     });
 
-    test('getDaysOfMonth', () => {
-        const result = utils.getDaysOfMonth(month);
-        const days = result.map((week) =>
-            week.map((day) => ({ ...day, date: day.date.toDateString() }))
-        );
-        expect(days).toMatchSnapshot();
+    test('toISODateString', () => {
+        expect(utils.toISODateString(new Date(1989, 6 /* Jul */, 10))).toBe('1989-07-10');
+        expect(utils.toISODateString(new Date(1989, 1 /* Jul */, 11))).toBe('1989-02-11');
+    });
+
+    describe('getDaysOfMonth', () => {
+        test('weeks start with SUNDAY by default', () => {
+            const result = utils.getDaysOfMonth(month);
+            expect(result).toMatchSnapshot();
+        });
+
+        test.each(utils.WeekDays)(`weeks start with %s`, (dayOfWeek) => {
+            const result = utils.getDaysOfMonth(month, dayOfWeek);
+            expect(result).toMatchSnapshot();
+        });
+    });
+
+    describe('getDaysOfRangeMonth', () => {
+        test('works without startDate and endDate', () => {
+            const months = Array.from({ length: 12 }, (_, i) => utils.addMonths(month, i));
+            const result = utils.getDaysOfRangeMonth(months);
+            expect(result).toMatchSnapshot();
+        });
     });
 });

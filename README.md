@@ -1,6 +1,6 @@
 # React Date Primitives
 
-Primitives for creating Date-Picker and DateRange-Picker components in React. And It has zero dependencies!
+Primitives for creating Date-Picker and DateRange-Picker components in React with zero dependencies!
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
@@ -9,7 +9,7 @@ Primitives for creating Date-Picker and DateRange-Picker components in React. An
 
 This package is distributed via [npm](https://www.npmjs.com/).
 
-```
+```bash
 npm install --save react-date-primitives
 ```
 
