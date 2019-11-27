@@ -1,5 +1,6 @@
 {
-    "workspaces": [
-        "./*"
-    ]
+  "private": true,
+  "workspaces": [
+    "./*"
+  ]
 }

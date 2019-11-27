@@ -4,26 +4,19 @@
   "version": "0.1.0",
   "private": true,
   "main": "src/index.tsx",
-  "dependencies": {
-    "@types/react": "~16.8.14",
-    "@types/react-dom": "~16.8.4",
-    "react": "~16.8.6",
-    "react-date-primitives": "0.6.0",
-    "react-dom": "~16.8.6",
-    "react-scripts": "~3.0.0",
-    "tslint-vkbansal": "gist:c4922663993ada71f43352107f86c4fd",
-    "typescript": "~3.4.5"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "eject": "react-scripts eject"
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
   },
-  "keywords": [],
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "dependencies": {
+    "@types/react": "~16.9.13",
+    "@types/react-dom": "~16.9.4",
+    "react": "~16.12.0",
+    "react-date-primitives": "0.6.0",
+    "react-dom": "~16.12.0",
+    "typescript": "~3.7.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }

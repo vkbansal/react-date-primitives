@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { useCalendar } from 'react-date-primitives';
+import { useCalendar } from '@vkbansal/react-date-primitives';
 
 /**
- * These are internal modules to `react-date-primitives` and are used only for demo purposes only.
- * Please do not use in production. This might break in future without any notice.
- *
- * Use your favourite date library (eg: moment, date-fns, etc.) instead.
+ * Use your favourite date library (eg: moment, date-fns, etc).
  */
-import { addMonths, isSameDay } from 'react-date-primitives/esm/utils';
+import { addMonths, isSameDay } from 'date-fns/esm';
 
 const MONTH_NAMES = [
     'January',
@@ -29,21 +26,17 @@ export interface SimpleDatePickerState {
     day?: Date;
 }
 
-export function UseCalendarHooks() {
+export default function UseCalendarHooksExample(): React.ReactElement {
     const { days, setMonth, month } = useCalendar();
     const [selected, setSelected] = React.useState(new Date());
 
-    function handleMonthIncrement() {
+    function handleMonthIncrement(): void {
         setMonth(addMonths(month, 1));
     }
 
-    function handleMonthDecrement() {
+    function handleMonthDecrement(): void {
         setMonth(addMonths(month, -1));
     }
-
-    // handleDayClick = (day: DayOfMonth) => () => {
-    //     this.setState({ day: day.date });
-    // };
 
     const monthName = MONTH_NAMES[month.getMonth()];
 
@@ -81,7 +74,7 @@ export function UseCalendarHooks() {
                                     background: isSameDay(d.date, selected) ? '#ccc' : 'transparent'
                                 }}
                                 key={`${i}-${j}`}
-                                onClick={() => {
+                                onClick={(): void => {
                                     d.inCurrentMonth && setSelected(d.date);
                                 }}
                             >
