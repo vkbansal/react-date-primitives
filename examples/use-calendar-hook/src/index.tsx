@@ -3,4 +3,4 @@ import { render } from 'react-dom';
 
 import UseCalendarHooksExample from './UseCalendarHookExample';
 
-render(<UseCalendarHooksExample />, document.getElementById('main'));
+render(<UseCalendarHooksExample />, document.getElementById('root'));
