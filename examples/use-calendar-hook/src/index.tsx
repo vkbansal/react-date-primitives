@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 
-import { UseCalendarHooks } from './UseCalendarHook';
+import UseCalendarHooksExample from './UseCalendarHookExample';
 
-render(<UseCalendarHooks />, document.getElementById('root'));
+render(<UseCalendarHooksExample />, document.getElementById('main'));
