@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-import { DayOfRangeMonth, getDaysOfRangeMonth, isSameDay, isDayAfter, DayOfWeek } from './utils';
+import {
+    DayOfRangeMonth,
+    getDaysOfRangeMonth,
+    isSameDay,
+    isDayAfter,
+    DayOfWeek,
+    RangeMonths
+} from './utils';
 
 export { DayOfRangeMonth };
 
@@ -10,8 +17,7 @@ export interface UseDateRangeOptions {
     weekStartsOn?: DayOfWeek;
 }
 
-export interface DateRange {
-    readonly months: DayOfRangeMonth[][][];
+export interface DateRange extends RangeMonths {
     readonly startDate: Date | null;
     readonly endDate: Date | null;
     setMonths(months: Date[]): void;
@@ -19,15 +25,16 @@ export interface DateRange {
     setEndDate(date: Date): void;
 }
 
-export function useDateRange(months: Date[], options: UseDateRangeOptions = {}): DateRange {
-    const [currentMonths, setCurrentMonths] = useState<Date[]>(months);
+export function useDateRange(rangeMonths: Date[], options: UseDateRangeOptions = {}): DateRange {
+    const [currentMonths, setCurrentMonths] = useState<Date[]>(rangeMonths);
     const [startDate, setStartDate] = useState<Date | null>(options.rangeEndDate || null);
     const [endDate, setEndDate] = useState<Date | null>(options.rangeEndDate || null);
 
-    const rangeMonths = getDaysOfRangeMonth(currentMonths, startDate, endDate);
+    const { months, daysOfWeek } = getDaysOfRangeMonth(currentMonths, startDate, endDate);
 
     return {
-        months: rangeMonths,
+        months,
+        daysOfWeek,
         startDate,
         endDate,
         setMonths(months: Date[]): void {
