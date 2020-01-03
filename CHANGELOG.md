@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.2](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-01-03)
+
 ## [1.0.0-beta.1](https://github.com/vkbansal/react-date-primitives/compare/v0.7.1...v1.0.0-beta.1) (2020-01-03)
 
 
