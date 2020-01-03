@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-import { startOfMonth, getDaysOfMonth, DayOfMonth, DaysOfMonth, DayOfWeek } from './utils';
-
-export { DayOfMonth };
+import { startOfMonth, getDaysOfMonth, DaysOfMonth, DayOfWeek } from './utils';
 
 export interface Calendar extends DaysOfMonth {
     readonly month: Date;
