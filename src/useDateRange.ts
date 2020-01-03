@@ -1,15 +1,6 @@
 import { useState } from 'react';
 
-import {
-    DayOfRangeMonth,
-    getDaysOfRangeMonth,
-    isSameDay,
-    isDayAfter,
-    DayOfWeek,
-    RangeMonths
-} from './utils';
-
-export { DayOfRangeMonth };
+import { getDaysOfRangeMonth, isSameDay, isDayAfter, DayOfWeek, RangeMonths } from './utils';
 
 export interface UseDateRangeOptions {
     rangeStartDate?: Date;
