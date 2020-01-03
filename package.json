@@ -31,7 +31,7 @@
     "build:esnext": "rimraf ./esnext && tsc --project tsconfig.build.json --target es6 --module es6 --outDir ./esnext",
     "readme": "ts-node --compiler-options '{\"module\": \"commonjs\"}' tools/build-readme.ts",
     "prepublishOnly": "yarn run build",
-    "preversion": "yarn lint && yarn prettier && yarn test"
+    "preversion": "yarn lint && yarn fmtc && yarn test"
   },
   "files": [
     "esm",
