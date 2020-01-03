@@ -21,6 +21,10 @@ export const WeekDays: DayOfWeek[] = [
     DayOfWeek.SATURDAY
 ];
 
+type Mutable<T> = {
+    -readonly [P in keyof T]: T[P];
+};
+
 export interface DayOfMonth {
     readonly __type: typeof DayOfMonthSymbol;
     readonly date: Date;
@@ -36,11 +40,18 @@ export interface DayOfRangeMonth extends Omit<DayOfMonth, '__type'> {
     readonly isEnd: boolean;
 }
 
-export type DaysOfMonth = DayOfMonth[][];
-export type DaysOfRangeMonth = DayOfRangeMonth[][];
+export interface DaysOfMonth {
+    readonly days: DayOfMonth[][];
+    readonly daysOfWeek: DayOfWeek[];
+}
+
+export interface RangeMonths {
+    readonly months: DayOfRangeMonth[][][];
+    readonly daysOfWeek: DayOfWeek[];
+}
 
 const monthsCache = new Map<string, DaysOfMonth>();
-const rangeMonthsCache = new Map<string, DaysOfRangeMonth[]>();
+const rangeMonthsCache = new Map<string, RangeMonths>();
 
 export function addDays(date: Date, days: number): Date {
     return setDay(date, date.getDate() + days);
@@ -144,7 +155,7 @@ export function callIfExists<T extends unknown[], U = unknown>(
     }
 }
 
-export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): DayOfMonth[][] {
+export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): DaysOfMonth {
     const firstDate = startOfMonth(month);
     const dayOffset = WeekDays.findIndex((d) => d === weekStartsOn);
     const key = `${firstDate.getFullYear()}-${firstDate.getMonth()}-${weekStartsOn}`;
@@ -161,7 +172,7 @@ export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): Da
 
     const firstDayInCurrentMonth = firstDate.getDay();
 
-    const newdata: DaysOfMonth = Array.from({ length: 6 }, (_1, weekNum): DayOfMonth[] => {
+    const days: DaysOfMonth['days'] = Array.from({ length: 6 }, (_1, weekNum): DayOfMonth[] => {
         const week = Array.from(
             { length: 7 },
             (_2, dayInWeek): DayOfMonth => {
@@ -184,18 +195,20 @@ export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): Da
         return week;
     });
 
-    monthsCache.set(key, newdata);
+    const daysOfWeek = WeekDays.slice(dayOffset).concat(WeekDays.slice(0, dayOffset));
 
-    return newdata;
+    monthsCache.set(key, { days, daysOfWeek });
+
+    return { days, daysOfWeek };
 }
 
 export function getDaysOfRangeMonth(
-    months: Date[],
+    rangeMonths: Date[],
     startDate?: Date | null,
     endDate?: Date | null,
     weekStartsOn = DayOfWeek.SUNDAY
-): DaysOfRangeMonth[] {
-    let key = months
+): RangeMonths {
+    let key = rangeMonths
         .map((month): string => {
             if (!(month instanceof Date)) {
                 throw new TypeError('Given month is not an instance of Date');
@@ -213,36 +226,47 @@ export function getDaysOfRangeMonth(
         return rangeMonthsCache.get(key)!;
     }
 
-    const newdata = months.map((month): DayOfRangeMonth[][] => {
-        const days = getDaysOfMonth(month, weekStartsOn);
+    const months = rangeMonths.reduce<Mutable<RangeMonths>>(
+        (accumulator, currentMonth, i) => {
+            const { days, daysOfWeek } = getDaysOfMonth(currentMonth, weekStartsOn);
 
-        return days.map((week): DayOfRangeMonth[] =>
-            week.map(
-                (day): DayOfRangeMonth => {
-                    const isStart = Boolean(startDate && isSameDay(day.date, startDate));
-                    const isEnd = Boolean(endDate && isSameDay(day.date, endDate));
+            if (i === 0) {
+                accumulator.daysOfWeek = daysOfWeek.slice(0);
+            }
 
-                    return {
-                        ...day,
-                        __type: DayOfRangeMonthSymbol,
-                        inRange:
-                            isStart ||
-                            isEnd ||
-                            Boolean(
-                                startDate &&
-                                    isDayAfter(day.date, startDate) &&
-                                    endDate &&
-                                    isDayBefore(day.date, endDate)
-                            ),
-                        isStart,
-                        isEnd
-                    };
-                }
-            )
-        );
-    });
+            const month = days.map((week): DayOfRangeMonth[] =>
+                week.map(
+                    (day): DayOfRangeMonth => {
+                        const isStart = Boolean(startDate && isSameDay(day.date, startDate));
+                        const isEnd = Boolean(endDate && isSameDay(day.date, endDate));
 
-    rangeMonthsCache.set(key, newdata);
+                        return {
+                            ...day,
+                            __type: DayOfRangeMonthSymbol,
+                            inRange:
+                                isStart ||
+                                isEnd ||
+                                Boolean(
+                                    startDate &&
+                                        isDayAfter(day.date, startDate) &&
+                                        endDate &&
+                                        isDayBefore(day.date, endDate)
+                                ),
+                            isStart,
+                            isEnd
+                        };
+                    }
+                )
+            );
 
-    return newdata;
+            accumulator.months.push(month);
+
+            return accumulator;
+        },
+        { months: [], daysOfWeek: [] }
+    );
+
+    rangeMonthsCache.set(key, months);
+
+    return months as RangeMonths;
 }
