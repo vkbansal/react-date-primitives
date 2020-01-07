@@ -1,7 +1,9 @@
 import * as utils from '../utils';
 import DayOfMonthSerializer from './DayOfMonthSerializer';
 import DayOfRangeMonthSerializer from './DayOfRangeMonthSerializer';
+import DateSerializer from './DateSerializer';
 
+expect.addSnapshotSerializer(DateSerializer);
 expect.addSnapshotSerializer(DayOfMonthSerializer);
 expect.addSnapshotSerializer(DayOfRangeMonthSerializer);
 
