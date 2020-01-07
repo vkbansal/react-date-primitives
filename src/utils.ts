@@ -43,6 +43,7 @@ export interface DayOfRangeMonth extends Omit<DayOfMonth, '__type'> {
 export interface DaysOfMonth {
     readonly days: DayOfMonth[][];
     readonly daysOfWeek: DayOfWeek[];
+    readonly month: Date;
 }
 
 export interface RangeMonths {
@@ -197,9 +198,9 @@ export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): Da
 
     const daysOfWeek = WeekDays.slice(dayOffset).concat(WeekDays.slice(0, dayOffset));
 
-    monthsCache.set(key, { days, daysOfWeek });
+    monthsCache.set(key, { days, daysOfWeek, month: firstDate });
 
-    return { days, daysOfWeek };
+    return { days, daysOfWeek, month: firstDate };
 }
 
 export function getDaysOfRangeMonth(

@@ -19,6 +19,7 @@ Object {
     "WEDNESDAY",
     "THURSDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -41,6 +42,7 @@ Object {
     "SATURDAY",
     "SUNDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -63,6 +65,7 @@ Object {
     "THURSDAY",
     "FRIDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -85,6 +88,7 @@ Object {
     "FRIDAY",
     "SATURDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -107,6 +111,7 @@ Object {
     "FRIDAY",
     "SATURDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -129,6 +134,7 @@ Object {
     "TUESDAY",
     "WEDNESDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -151,6 +157,7 @@ Object {
     "SUNDAY",
     "MONDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
@@ -173,6 +180,7 @@ Object {
     "MONDAY",
     "TUESDAY",
   ],
+  "month": 2020-01-01,
 }
 `;
 
