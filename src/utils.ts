@@ -1,7 +1,7 @@
 export const DayOfMonthSymbol = Symbol('DayOfMonth');
 export const DayOfRangeMonthSymbol = Symbol('DayOfRangeMonth');
 
-export enum DayOfWeek {
+export enum Day {
     MONDAY = 'MONDAY',
     TUESDAY = 'TUESDAY',
     WEDNESDAY = 'WEDNESDAY',
@@ -11,48 +11,53 @@ export enum DayOfWeek {
     SUNDAY = 'SUNDAY'
 }
 
-export const WeekDays: DayOfWeek[] = [
-    DayOfWeek.SUNDAY,
-    DayOfWeek.MONDAY,
-    DayOfWeek.TUESDAY,
-    DayOfWeek.WEDNESDAY,
-    DayOfWeek.THURSDAY,
-    DayOfWeek.FRIDAY,
-    DayOfWeek.SATURDAY
+export const WeekDays: Day[] = [
+    Day.SUNDAY,
+    Day.MONDAY,
+    Day.TUESDAY,
+    Day.WEDNESDAY,
+    Day.THURSDAY,
+    Day.FRIDAY,
+    Day.SATURDAY
 ];
 
 type Mutable<T> = {
     -readonly [P in keyof T]: T[P];
 };
 
-export interface DayOfMonth {
+export interface IDayOfMonth {
     readonly __type: typeof DayOfMonthSymbol;
     readonly date: Date;
-    readonly dayName: DayOfWeek;
+    readonly dayName: Day;
     readonly inCurrentMonth: boolean;
     readonly ISODateString: string;
 }
 
-export interface DayOfRangeMonth extends Omit<DayOfMonth, '__type'> {
+export interface IDayOfRangeMonth extends Omit<IDayOfMonth, '__type'> {
     readonly __type: typeof DayOfRangeMonthSymbol;
     readonly inRange: boolean;
     readonly isStart: boolean;
     readonly isEnd: boolean;
 }
 
-export interface DaysOfMonth {
-    readonly days: DayOfMonth[][];
-    readonly daysOfWeek: DayOfWeek[];
+export interface IMonth {
+    readonly days: IDayOfMonth[][];
+    readonly daysOfWeek: Day[];
     readonly month: Date;
 }
 
-export interface RangeMonths {
-    readonly months: DayOfRangeMonth[][][];
-    readonly daysOfWeek: DayOfWeek[];
+export interface IRangeMonth {
+    readonly days: IDayOfRangeMonth[][];
+    readonly month: Date;
 }
 
-const monthsCache = new Map<string, DaysOfMonth>();
-const rangeMonthsCache = new Map<string, RangeMonths>();
+export interface IRangeMonths {
+    readonly months: IRangeMonth[];
+    readonly daysOfWeek: Day[];
+}
+
+const monthsCache = new Map<string, IMonth>();
+const rangeMonthsCache = new Map<string, IRangeMonths>();
 
 export function addDays(date: Date, days: number): Date {
     return setDay(date, date.getDate() + days);
@@ -156,7 +161,7 @@ export function callIfExists<T extends unknown[], U = unknown>(
     }
 }
 
-export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): DaysOfMonth {
+export function getDaysOfMonth(month: Date, weekStartsOn = Day.SUNDAY): IMonth {
     const firstDate = startOfMonth(month);
     const dayOffset = WeekDays.findIndex((d) => d === weekStartsOn);
     const key = `${firstDate.getFullYear()}-${firstDate.getMonth()}-${weekStartsOn}`;
@@ -173,10 +178,10 @@ export function getDaysOfMonth(month: Date, weekStartsOn = DayOfWeek.SUNDAY): Da
 
     const firstDayInCurrentMonth = firstDate.getDay();
 
-    const days: DaysOfMonth['days'] = Array.from({ length: 6 }, (_1, weekNum): DayOfMonth[] => {
+    const days: IMonth['days'] = Array.from({ length: 6 }, (_1, weekNum): IDayOfMonth[] => {
         const week = Array.from(
             { length: 7 },
-            (_2, dayInWeek): DayOfMonth => {
+            (_2, dayInWeek): IDayOfMonth => {
                 const daysElapsed = weekNum * 7;
                 const day = addDays(
                     firstDate,
@@ -207,8 +212,8 @@ export function getDaysOfRangeMonth(
     rangeMonths: Date[],
     startDate?: Date | null,
     endDate?: Date | null,
-    weekStartsOn = DayOfWeek.SUNDAY
-): RangeMonths {
+    weekStartsOn = Day.SUNDAY
+): IRangeMonths {
     let key = rangeMonths
         .map((month): string => {
             if (!(month instanceof Date)) {
@@ -227,7 +232,7 @@ export function getDaysOfRangeMonth(
         return rangeMonthsCache.get(key)!;
     }
 
-    const months = rangeMonths.reduce<Mutable<RangeMonths>>(
+    const months = rangeMonths.reduce<Mutable<IRangeMonths>>(
         (accumulator, currentMonth, i) => {
             const { days, daysOfWeek } = getDaysOfMonth(currentMonth, weekStartsOn);
 
@@ -235,9 +240,9 @@ export function getDaysOfRangeMonth(
                 accumulator.daysOfWeek = daysOfWeek.slice(0);
             }
 
-            const month = days.map((week): DayOfRangeMonth[] =>
+            const daysOfCurrentMonth = days.map((week): IDayOfRangeMonth[] =>
                 week.map(
-                    (day): DayOfRangeMonth => {
+                    (day): IDayOfRangeMonth => {
                         const isStart = Boolean(startDate && isSameDay(day.date, startDate));
                         const isEnd = Boolean(endDate && isSameDay(day.date, endDate));
 
@@ -260,7 +265,10 @@ export function getDaysOfRangeMonth(
                 )
             );
 
-            accumulator.months.push(month);
+            accumulator.months.push({
+                days: daysOfCurrentMonth,
+                month: startOfMonth(currentMonth)
+            });
 
             return accumulator;
         },
@@ -269,5 +277,5 @@ export function getDaysOfRangeMonth(
 
     rangeMonthsCache.set(key, months);
 
-    return months as RangeMonths;
+    return months as IRangeMonths;
 }

@@ -4,10 +4,10 @@ import { useDateRange } from '../useDateRange';
 import { isSameDay, addMonths } from '../utils';
 
 import DateSerializer from './DateSerializer';
-import DayOfRangeMonthSerializer from './DayOfRangeMonthSerializer';
+import RangeMonthsSerializer from './RangeMonthsSerializer';
 
 expect.addSnapshotSerializer(DateSerializer);
-expect.addSnapshotSerializer(DayOfRangeMonthSerializer);
+expect.addSnapshotSerializer(RangeMonthsSerializer);
 
 describe('useDateRange hook tests', () => {
     const month = new Date(2020, 0 /* Jan */, 1, 0, 0, 0, 0);
@@ -19,11 +19,11 @@ describe('useDateRange hook tests', () => {
         expect(result.current.startDate).toBeNull();
         expect(result.current.endDate).toBeNull();
         expect(Array.isArray(result.current.months)).toBe(true);
-        expect(result.current.months.every((month) => Array.isArray(month))).toBe(true);
+        expect(result.current.months.every((month) => Array.isArray(month.days))).toBe(true);
         expect(
-            result.current.months.every((month) => month.every((week) => Array.isArray(week)))
+            result.current.months.every((month) => month.days.every((week) => Array.isArray(week)))
         ).toBe(true);
-        expect(result.current.months[0][0][0]).toMatchSnapshot('Single Day');
+        expect(result.current.months[0].days[0][0]).toMatchSnapshot('Single Day');
         expect(typeof result.current.setStartDate).toBe('function');
         expect(typeof result.current.setEndDate).toBe('function');
         expect(typeof result.current.setMonths).toBe('function');
@@ -36,7 +36,7 @@ describe('useDateRange hook tests', () => {
 
         expect(result.current.startDate).toBeNull();
         expect(result.current.endDate).toBeNull();
-        expect(result.current.months).toMatchSnapshot('01. No Selection');
+        expect(result.current).toMatchSnapshot('01. No Selection');
 
         // set a startDate
         act(() => {
@@ -45,7 +45,7 @@ describe('useDateRange hook tests', () => {
         expect(isSameDay(result.current.startDate!, date1)).toBe(true);
         expect(result.current.endDate).toBeNull();
 
-        expect(result.current.months).toMatchSnapshot('02. Start date selected');
+        expect(result.current).toMatchSnapshot('02. Start date selected');
 
         // set an endDate > startDate
         act(() => {
@@ -54,7 +54,7 @@ describe('useDateRange hook tests', () => {
         expect(isSameDay(result.current.startDate!, date1)).toBe(true);
         expect(isSameDay(result.current.endDate!, date2)).toBe(true);
 
-        expect(result.current.months).toMatchSnapshot('03. Start & End dates selected');
+        expect(result.current).toMatchSnapshot('03. Start & End dates selected');
 
         // set a startDate
         act(() => {
@@ -63,7 +63,7 @@ describe('useDateRange hook tests', () => {
         expect(isSameDay(result.current.startDate!, date2)).toBe(true);
         expect(result.current.endDate).toBeNull();
 
-        expect(result.current.months).toMatchSnapshot('04. Start date selected again');
+        expect(result.current).toMatchSnapshot('04. Start date selected again');
 
         // set an endDate > startDate
         act(() => {
@@ -72,18 +72,18 @@ describe('useDateRange hook tests', () => {
         expect(isSameDay(result.current.startDate!, date2)).toBe(true);
         expect(result.current.endDate).toBeNull();
 
-        expect(result.current.months).toMatchSnapshot('05. Try selecting smaller end date again');
+        expect(result.current).toMatchSnapshot('05. Try selecting smaller end date again');
     });
 
     test('setMonths works', () => {
         const { result } = renderHook(() => useDateRange(months.slice(0, 3)));
 
-        expect(result.current.months).toMatchSnapshot();
+        expect(result.current).toMatchSnapshot();
 
         act(() => {
             result.current.setMonths(months.slice(3, 6));
         });
 
-        expect(result.current.months).toMatchSnapshot();
+        expect(result.current).toMatchSnapshot();
     });
 });
