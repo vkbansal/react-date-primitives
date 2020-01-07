@@ -1,22 +1,16 @@
-import { DayOfRangeMonth, DayOfRangeMonthSymbol } from '../utils';
+import { IRangeMonths, DayOfRangeMonthSymbol } from '../utils';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const serializer: jest.SnapshotSerializerPlugin = {
-    print(val: DayOfRangeMonth[][][]): string {
-        const dayNames = val[0]
-            .map((week) => week.map((day) => day.dayName.slice(0, 1).padStart(3, ' ')).join(' | '))
-            .join(' | ');
-        const days = val
+    print(val: IRangeMonths): string {
+        const dayNames = Array.from({ length: 6 }, () =>
+            val.daysOfWeek.map((day) => day.slice(0, 1).padStart(3, ' ')).join(' | ')
+        ).join(' | ');
+
+        const days = val.months
             .map((month) => {
-                const firstDay =
-                    month[0].find((day) => day.date.getUTCDate() === 1) ||
-                    month[1].find((day) => day.date.getUTCDate() === 1);
-
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const monthName = months[firstDay!.date.getMonth()];
-
-                const days = month
+                const days = month.days
                     .map(
                         (week) =>
                             week
@@ -39,19 +33,19 @@ const serializer: jest.SnapshotSerializerPlugin = {
                     )
                     .join(' | ');
 
-                return `${monthName} => ${days}`;
+                return `${months[month.month.getMonth()]} => ${days}`;
             })
             .join('\n');
 
         return `${' '.repeat(7)}${dayNames}\n${days}`;
     },
-    test(val): boolean {
+    test(val: IRangeMonths): val is IRangeMonths {
         return (
-            Array.isArray(val) &&
-            val.every(
+            Array.isArray(val.months) &&
+            val.months.every(
                 (month) =>
-                    Array.isArray(month) &&
-                    month.every(
+                    Array.isArray(month.days) &&
+                    month.days.every(
                         (week) =>
                             Array.isArray(week) &&
                             week.every((day) => day.__type === DayOfRangeMonthSymbol)

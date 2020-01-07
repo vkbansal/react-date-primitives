@@ -1,4 +1,4 @@
 /* istanbul ignore file */
-export { useCalendar, Calendar } from './useCalendar';
-export { useDateRange, DateRange, UseDateRangeOptions } from './useDateRange';
-export { DayOfWeek, DayOfMonth, DayOfRangeMonth } from './utils';
+export { useCalendar, ICalendar } from './useCalendar';
+export { useDateRange, IDateRange, IUseDateRangeOptions } from './useDateRange';
+export { Day, IDayOfMonth, IDayOfRangeMonth, IMonth, IRangeMonth, IRangeMonths } from './utils';

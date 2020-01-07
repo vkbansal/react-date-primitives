@@ -1,11 +1,12 @@
 import * as utils from '../utils';
-import DayOfMonthSerializer from './DayOfMonthSerializer';
-import DayOfRangeMonthSerializer from './DayOfRangeMonthSerializer';
+
+import MonthSerializer from './MonthSerializer';
+import RangeMonthsSerializer from './RangeMonthsSerializer';
 import DateSerializer from './DateSerializer';
 
 expect.addSnapshotSerializer(DateSerializer);
-expect.addSnapshotSerializer(DayOfMonthSerializer);
-expect.addSnapshotSerializer(DayOfRangeMonthSerializer);
+expect.addSnapshotSerializer(MonthSerializer);
+expect.addSnapshotSerializer(RangeMonthsSerializer);
 
 describe('utils test', () => {
     const month = new Date(2020, 0 /* Jan */, 1, 0, 0, 0, 0);
