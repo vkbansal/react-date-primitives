@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.4](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.3...v1.0.0-beta.4) (2020-01-07)
+
+
+### Features
+
+* allow functional style updates ([18a19fa](https://github.com/vkbansal/react-date-primitives/commit/18a19fa6d716a49e75c5e4b2be4929707f114ac5))
+* export month (as Date object) in DaysOfMonth ([99ceaea](https://github.com/vkbansal/react-date-primitives/commit/99ceaeaf8f931a65cc37493a8043b6363d752548))
+
 ## [1.0.0-beta.3](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.2...v1.0.0-beta.3) (2020-01-03)
 
 ## [1.0.0-beta.2](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.1...v1.0.0-beta.2) (2020-01-03)
