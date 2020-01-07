@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 
 import { startOfMonth, getDaysOfMonth, DaysOfMonth, DayOfWeek } from './utils';
 
 export interface Calendar extends DaysOfMonth {
     readonly month: Date;
-    setMonth(date: Date): void;
+    setMonth: Dispatch<SetStateAction<Date>>;
 }
 
 export function useCalendar(
@@ -17,9 +17,7 @@ export function useCalendar(
     return {
         days,
         daysOfWeek,
-        setMonth(date: Date): void {
-            setCurrentMonth(date);
-        },
+        setMonth: setCurrentMonth,
         month: currentMonth
     };
 }

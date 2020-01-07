@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, SetStateAction, Dispatch } from 'react';
 
 import { getDaysOfRangeMonth, isSameDay, isDayAfter, DayOfWeek, RangeMonths } from './utils';
 
@@ -11,9 +11,9 @@ export interface UseDateRangeOptions {
 export interface DateRange extends RangeMonths {
     readonly startDate: Date | null;
     readonly endDate: Date | null;
-    setMonths(months: Date[]): void;
-    setStartDate(date: Date): void;
-    setEndDate(date: Date): void;
+    setMonths: Dispatch<SetStateAction<Date[]>>;
+    setStartDate: Dispatch<SetStateAction<Date | null>>;
+    setEndDate: Dispatch<SetStateAction<Date | null>>;
 }
 
 export function useDateRange(rangeMonths: Date[], options: UseDateRangeOptions = {}): DateRange {
@@ -28,15 +28,19 @@ export function useDateRange(rangeMonths: Date[], options: UseDateRangeOptions =
         daysOfWeek,
         startDate,
         endDate,
-        setMonths(months: Date[]): void {
-            setCurrentMonths(months);
-        },
-        setStartDate(date: Date): void {
+        setMonths: setCurrentMonths,
+        setStartDate(date: SetStateAction<Date | null>): void {
             setStartDate(date);
             setEndDate(null);
         },
-        setEndDate(date: Date): void {
-            if (startDate && (isSameDay(date, startDate) || isDayAfter(date, startDate))) {
+        setEndDate(date: SetStateAction<Date | null>): void {
+            if (
+                startDate &&
+                date instanceof Date &&
+                (isSameDay(date, startDate) || isDayAfter(date, startDate))
+            ) {
+                setEndDate(date);
+            } else if (typeof date === 'function') {
                 setEndDate(date);
             }
         }
