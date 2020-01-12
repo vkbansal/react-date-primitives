@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0-beta.6](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2020-01-12)
+
+
+### Features
+
+* add  `setStartOfWeek` method ([8b31582](https://github.com/vkbansal/react-date-primitives/commit/8b31582117b3276dafccd2b9bf74e86748e4a58c))
+
 ## [1.0.0-beta.5](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.4...v1.0.0-beta.5) (2020-01-07)
 
 
