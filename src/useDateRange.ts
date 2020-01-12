@@ -14,14 +14,21 @@ export interface IDateRange extends IRangeMonths {
     setMonths: Dispatch<SetStateAction<Date[]>>;
     setStartDate: Dispatch<SetStateAction<Date | null>>;
     setEndDate: Dispatch<SetStateAction<Date | null>>;
+    setStartOfWeek: Dispatch<SetStateAction<Day>>;
 }
 
 export function useDateRange(rangeMonths: Date[], options: IUseDateRangeOptions = {}): IDateRange {
     const [currentMonths, setCurrentMonths] = useState<Date[]>(rangeMonths);
-    const [startDate, setStartDate] = useState<Date | null>(options.rangeEndDate || null);
-    const [endDate, setEndDate] = useState<Date | null>(options.rangeEndDate || null);
+    const [startOfWeek, setStartOfWeek] = useState(options?.weekStartsOn || Day.SUNDAY);
+    const [startDate, setStartDate] = useState<Date | null>(options?.rangeEndDate || null);
+    const [endDate, setEndDate] = useState<Date | null>(options?.rangeEndDate || null);
 
-    const { months, daysOfWeek } = getDaysOfRangeMonth(currentMonths, startDate, endDate);
+    const { months, daysOfWeek } = getDaysOfRangeMonth(
+        currentMonths,
+        startDate,
+        endDate,
+        startOfWeek
+    );
 
     return {
         months,
@@ -43,6 +50,7 @@ export function useDateRange(rangeMonths: Date[], options: IUseDateRangeOptions 
             } else if (typeof date === 'function') {
                 setEndDate(date);
             }
-        }
+        },
+        setStartOfWeek
     };
 }
