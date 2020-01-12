@@ -1,7 +1,7 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import { useCalendar } from '../useCalendar';
-import { isSameMonth } from '../utils';
+import { isSameMonth, Day } from '../utils';
 
 import MonthSerializer from './MonthSerializer';
 import RangeMonthsSerializer from './RangeMonthsSerializer';
@@ -31,5 +31,20 @@ describe('useCalendar hook tests', () => {
         });
         expect(result.current).toMatchSnapshot('Apr 2019');
         expect(isSameMonth(result.current.month, date2)).toBe(true);
+    });
+
+    test('setStartOfWeek', () => {
+        const date = new Date(2019, 0 /* Jan */, 1, 0, 0, 0, 0);
+        const { result } = renderHook(() => useCalendar(date));
+
+        expect(result.current.daysOfWeek[0]).toBe(Day.SUNDAY);
+        expect(result.current).toMatchSnapshot(Day.SUNDAY);
+
+        act(() => {
+            result.current.setStartOfWeek(Day.MONDAY);
+        });
+
+        expect(result.current.daysOfWeek[0]).toBe(Day.MONDAY);
+        expect(result.current).toMatchSnapshot(Day.MONDAY);
     });
 });
