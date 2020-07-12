@@ -1,12 +1,12 @@
-import { IMonth, DayOfMonthSymbol } from '../utils';
+import { Month, DayOfMonthSymbol } from '../utils';
 
 const serializer: jest.SnapshotSerializerPlugin = {
-    print(val: IMonth): string {
+    print(val: unknown): string {
         return (
             '\n| ' +
-            val.daysOfWeek.map((day) => day.padStart(10, ' ')).join(' | ') +
+            (val as Month).daysOfWeek.map((day) => day.padStart(10, ' ')).join(' | ') +
             ' |\n| ' +
-            val.days
+            (val as Month).days
                 .map((row) => {
                     return row.map((day) => day.ISODateString).join(' | ');
                 })
@@ -14,10 +14,10 @@ const serializer: jest.SnapshotSerializerPlugin = {
             ' |'
         );
     },
-    test(val: IMonth): val is IMonth {
+    test(val: unknown): val is Month {
         return (
-            Array.isArray(val.days) &&
-            val.days.every(
+            Array.isArray((val as Month).days) &&
+            (val as Month).days.every(
                 (week) =>
                     Array.isArray(week) && week.every((day) => day.__type === DayOfMonthSymbol)
             )

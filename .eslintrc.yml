@@ -39,9 +39,6 @@ rules:
       args: after-used
       ignoreRestSiblings: true
       argsIgnorePattern: ^_
-  '@typescript-eslint/interface-name-prefix':
-    - 2
-    - prefixWithI: always
 overrides:
   - files:
       - '**/*.test.ts'
