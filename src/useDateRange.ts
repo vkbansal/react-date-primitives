@@ -1,14 +1,14 @@
 import { useState, SetStateAction, Dispatch } from 'react';
 
-import { getDaysOfRangeMonth, isSameDay, isDayAfter, Day, IRangeMonths } from './utils';
+import { getDaysOfRangeMonth, isSameDay, isDayAfter, Day, RangeMonths } from './utils';
 
-export interface IUseDateRangeOptions {
+export interface UseDateRangeOptions {
     rangeStartDate?: Date;
     rangeEndDate?: Date;
     weekStartsOn?: Day;
 }
 
-export interface IDateRange extends IRangeMonths {
+export interface DateRange extends RangeMonths {
     readonly startDate: Date | null;
     readonly endDate: Date | null;
     setMonths: Dispatch<SetStateAction<Date[]>>;
@@ -17,7 +17,7 @@ export interface IDateRange extends IRangeMonths {
     setStartOfWeek: Dispatch<SetStateAction<Day>>;
 }
 
-export function useDateRange(rangeMonths: Date[], options: IUseDateRangeOptions = {}): IDateRange {
+export function useDateRange(rangeMonths: Date[], options: UseDateRangeOptions = {}): DateRange {
     const [currentMonths, setCurrentMonths] = useState<Date[]>(rangeMonths);
     const [startOfWeek, setStartOfWeek] = useState(options?.weekStartsOn || Day.SUNDAY);
     const [startDate, setStartDate] = useState<Date | null>(options?.rangeEndDate || null);

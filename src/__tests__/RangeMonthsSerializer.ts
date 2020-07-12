@@ -1,14 +1,16 @@
-import { IRangeMonths, DayOfRangeMonthSymbol } from '../utils';
+import { RangeMonths, DayOfRangeMonthSymbol } from '../utils';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const serializer: jest.SnapshotSerializerPlugin = {
-    print(val: IRangeMonths): string {
+    print(val: unknown): string {
         const dayNames = Array.from({ length: 6 }, () =>
-            val.daysOfWeek.map((day) => day.slice(0, 1).padStart(3, ' ')).join(' | ')
+            (val as RangeMonths).daysOfWeek
+                .map((day) => day.slice(0, 1).padStart(3, ' '))
+                .join(' | ')
         ).join(' | ');
 
-        const days = val.months
+        const days = (val as RangeMonths).months
             .map((month) => {
                 const days = month.days
                     .map(
@@ -16,10 +18,7 @@ const serializer: jest.SnapshotSerializerPlugin = {
                             week
                                 .map((day) => {
                                     if (day.inCurrentMonth) {
-                                        let str = day.date
-                                            .getDate()
-                                            .toString()
-                                            .padStart(2, '0');
+                                        let str = day.date.getDate().toString().padStart(2, '0');
 
                                         str = (day.inRange ? '*' : ' ') + str;
 
@@ -39,10 +38,10 @@ const serializer: jest.SnapshotSerializerPlugin = {
 
         return `${' '.repeat(7)}${dayNames}\n${days}`;
     },
-    test(val: IRangeMonths): val is IRangeMonths {
+    test(val: unknown): val is RangeMonths {
         return (
-            Array.isArray(val.months) &&
-            val.months.every(
+            Array.isArray((val as RangeMonths).months) &&
+            (val as RangeMonths).months.every(
                 (month) =>
                     Array.isArray(month.days) &&
                     month.days.every(

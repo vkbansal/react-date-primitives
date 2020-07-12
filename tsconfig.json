@@ -16,7 +16,8 @@
     "lib": ["dom", "es2017"],
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "importsNotUsedAsValues": "error"
   },
   "include": ["./src"],
   "exclude": ["__tests__", "node_modules"]
