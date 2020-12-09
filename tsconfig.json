@@ -1,22 +1,24 @@
 {
-    "compilerOptions": {
-        "alwaysStrict": true,
-        "baseUrl": "./",
-        "charset": "utf8",
-        "jsx": "react",
-        "strict": true,
-        "module": "es6",
-        "newLine": "LF",
-        "moduleResolution": "node",
-        "declaration": true,
-        "target": "es6",
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "noEmitOnError": false,
-        "lib": ["es6", "dom"],
-        "skipLibCheck": true,
-        "esModuleInterop": true,
-        "resolveJsonModule": true
-    },
-    "exclude": ["node_modules", "**/*.test.tsx", "**/*.test.ts"]
+  "compilerOptions": {
+    "alwaysStrict": true,
+    "baseUrl": "./",
+    "charset": "utf8",
+    "jsx": "react",
+    "strict": true,
+    "module": "es6",
+    "newLine": "LF",
+    "moduleResolution": "node",
+    "declaration": true,
+    "target": "es6",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noEmitOnError": false,
+    "lib": ["dom", "es2017"],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "importsNotUsedAsValues": "error"
+  },
+  "include": ["./src"],
+  "exclude": ["__tests__", "node_modules"]
 }

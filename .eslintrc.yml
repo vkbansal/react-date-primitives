@@ -1,0 +1,48 @@
+---
+parser: '@typescript-eslint/parser'
+parserOptions:
+  ecmaVersion: 2020
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+    impliedStrict: true
+  project: ./tsconfig.json
+plugins:
+  - react
+  - '@typescript-eslint/eslint-plugin'
+env:
+  browser: true
+  node: true
+  shared-node-browser: true
+  es6: true
+  jest: true
+extends:
+  - eslint:recommended
+  - plugin:react/recommended
+  - plugin:@typescript-eslint/recommended
+  - prettier
+settings:
+  react:
+    version: detect
+rules:
+  # built-in
+
+  #typescript
+  '@typescript-eslint/no-use-before-define': 0
+  '@typescript-eslint/explicit-function-return-type':
+    - 1
+    - allowExpressions: true
+  no-unused-vars: 0
+  '@typescript-eslint/no-unused-vars':
+    - 2
+    - vars: all
+      args: after-used
+      ignoreRestSiblings: true
+      argsIgnorePattern: ^_
+overrides:
+  - files:
+      - '**/*.test.ts'
+      - '**/*.test.tsx'
+    rules:
+      '@typescript-eslint/no-magic-numbers': 0
+      '@typescript-eslint/no-non-null-assertion': 0

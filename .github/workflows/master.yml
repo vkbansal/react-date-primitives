@@ -1,0 +1,36 @@
+name: master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  lint:
+    name: ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Lint Check
+        run: |
+          yarn
+          yarn lint
+  test:
+    name: Unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Test
+        run: |
+          yarn
+          yarn test
+  prettier:
+    name: Prettier
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Prettier Check
+        run: |
+          yarn
+          yarn fmtc
