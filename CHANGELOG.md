@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/vkbansal/react-date-primitives/compare/v0.7.1...v1.1.0) (2020-12-09)
+
+
+### Features
+
+* add  `setStartOfWeek` method ([62989a5](https://github.com/vkbansal/react-date-primitives/commit/62989a5c79d356f71ed679a76b6ead4ecc878fab))
+* add support for react 17 ([80d15f7](https://github.com/vkbansal/react-date-primitives/commit/80d15f792571664f6881c4e837a052912a5425ae))
+* allow functional style updates ([e9132d6](https://github.com/vkbansal/react-date-primitives/commit/e9132d6e20bf4efd6764eb2393bbaec849409da9))
+* export month (as Date object) in DaysOfMonth ([ad06a2d](https://github.com/vkbansal/react-date-primitives/commit/ad06a2d81259ad4fb8212d40ce98f4644341ba5f))
+* refactor interfaces ([4fb289b](https://github.com/vkbansal/react-date-primitives/commit/4fb289b1a8b3a19eb2288add3fb4bc1567693e38))
+* update API to return days of week in the hook ([5da5ea1](https://github.com/vkbansal/react-date-primitives/commit/5da5ea1bbee8b0c8114fdd576e1214bf1c98023b))
+
+
+### Bug Fixes
+
+* build config ([f94572f](https://github.com/vkbansal/react-date-primitives/commit/f94572f3116e9babbc4e28330f119717daaee20d))
+* preversion script ([53f37e4](https://github.com/vkbansal/react-date-primitives/commit/53f37e490484f0ccbd2d6ae5cfdeddc9c3af25a8))
+
 ## [1.0.0-beta.6](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2020-01-12)
 
 

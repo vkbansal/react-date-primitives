@@ -1,6 +1,6 @@
 {
   "name": "@vkbansal/react-date-primitives",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Primitives for building flexible date components with react",
   "keywords": [
     "date",
