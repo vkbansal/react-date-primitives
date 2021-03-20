@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## [1.1.0](https://github.com/vkbansal/react-date-primitives/compare/v0.7.1...v1.1.0) (2020-12-09)
+## [1.1.0](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0...v1.1.0) (2020-12-09)
 
 
 ### Features
@@ -19,6 +19,9 @@ All notable changes to this project will be documented in this file. See [standa
 
 * build config ([f94572f](https://github.com/vkbansal/react-date-primitives/commit/f94572f3116e9babbc4e28330f119717daaee20d))
 * preversion script ([53f37e4](https://github.com/vkbansal/react-date-primitives/commit/53f37e490484f0ccbd2d6ae5cfdeddc9c3af25a8))
+
+## [1.0.0](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.6...v1.0.0) (2020-01-12)
+
 
 ## [1.0.0-beta.6](https://github.com/vkbansal/react-date-primitives/compare/v1.0.0-beta.5...v1.0.0-beta.6) (2020-01-12)
 
