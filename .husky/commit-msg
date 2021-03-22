@@ -1,1 +1,1 @@
-node ./tools/lint-commit-message.js "$(cat $HUSKY_GIT_PARAMS)"
+node ./tools/lint-commit-message.js "$(cat $1)"
