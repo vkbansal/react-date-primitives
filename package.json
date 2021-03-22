@@ -1,6 +1,9 @@
 {
   "private": true,
   "version": "0.1.0",
+  "scripts": {
+    "postinstall": "husky install"
+  },
   "workspaces": [
     "packages/*"
   ],
@@ -23,11 +26,5 @@
       "prettier --check",
       "sh tools/typecheck-staged.sh"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "node ./tools/lint-commit-message.js \"$(cat $HUSKY_GIT_PARAMS)\""
-    }
   }
 }
