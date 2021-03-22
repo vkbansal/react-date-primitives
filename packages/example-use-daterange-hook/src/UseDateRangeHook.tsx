@@ -12,34 +12,34 @@ import { addMonths } from 'react-date-primitives/esm/utils';
 import { Month } from './Month';
 
 function genMonthId(date: Date) {
-    return `${date.getFullYear()}-${date.getMonth() + 1}`;
+  return `${date.getFullYear()}-${date.getMonth() + 1}`;
 }
 
 export function UseDateRangeHook() {
-    const { handleDayClick, handleDayHover, processMonth } = useDateRange();
-    const [month, setMonth] = React.useState(new Date());
+  const { handleDayClick, handleDayHover, processMonth } = useDateRange();
+  const [month, setMonth] = React.useState(new Date());
 
-    function handlePrevClick() {
-        setMonth(addMonths(month, -1));
-    }
+  function handlePrevClick() {
+    setMonth(addMonths(month, -1));
+  }
 
-    function handleNextClick() {
-        setMonth(addMonths(month, 1));
-    }
+  function handleNextClick() {
+    setMonth(addMonths(month, 1));
+  }
 
-    return (
-        <div style={{ display: 'flex' }}>
-            {[month, addMonths(month, 1)].map((month) => (
-                <Month
-                    key={genMonthId(month)}
-                    month={month}
-                    processMonth={processMonth}
-                    onDayClick={handleDayClick}
-                    onDayHover={handleDayHover}
-                    onNextClick={handleNextClick}
-                    onPrevClick={handlePrevClick}
-                />
-            ))}
-        </div>
-    );
+  return (
+    <div style={{ display: 'flex' }}>
+      {[month, addMonths(month, 1)].map((month) => (
+        <Month
+          key={genMonthId(month)}
+          month={month}
+          processMonth={processMonth}
+          onDayClick={handleDayClick}
+          onDayHover={handleDayHover}
+          onNextClick={handleNextClick}
+          onPrevClick={handlePrevClick}
+        />
+      ))}
+    </div>
+  );
 }
