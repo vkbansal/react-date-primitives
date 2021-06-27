@@ -65,7 +65,7 @@ function SimpleDatePicker() {
 
 [MIT](./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
 
-[npm-url]: https://npmjs.org/package/react-date-primitives
-[npm-image]: https://img.shields.io/npm/v/react-date-primitives.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@vkbansal/react-date-primitives
+[npm-image]: https://img.shields.io/npm/v/@vkbansal/react-date-primitives.svg?style=flat-square
 [travis-url]: https://travis-ci.org/vkbansal/react-date-primitives
 [travis-image]: https://img.shields.io/travis/vkbansal/react-date-primitives/master.svg?style=flat-square
