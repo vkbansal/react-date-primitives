@@ -4,10 +4,10 @@ import { render } from 'react-dom';
 /**
  * Use your favourite date library (eg: moment, date-fns, etc).
  */
-import { addMonths, isSameDay } from 'date-fns/esm';
+import { addMonths, isSameDay } from 'date-fns';
 import { useCalendar } from '@vkbansal/react-date-primitives';
 
-import css from './styles.module.css';
+import css from './styles.module.scss';
 
 const MONTH_NAMES = [
   'January',
@@ -40,7 +40,7 @@ function UseCalendarHooksExample(): React.ReactElement {
 
   return (
     <div className={css.main}>
-      <div>
+      <div className={css.header}>
         <div>
           <button onClick={handleMonthDecrement}>&lt;</button>
         </div>
@@ -51,7 +51,7 @@ function UseCalendarHooksExample(): React.ReactElement {
           <button onClick={handleMonthIncrement}>&gt;</button>
         </div>
       </div>
-      <div className={css.row}>
+      <div className={css.dayNames}>
         <div className={css.cell}>Sun</div>
         <div className={css.cell}>Mon</div>
         <div className={css.cell}>Tue</div>
@@ -63,10 +63,8 @@ function UseCalendarHooksExample(): React.ReactElement {
       <div className={`${css.month} ${css.row}`}>
         {days.map((day, i) => (
           <div
-            style={{
-              opacity: day.inCurrentMonth ? 1 : 0.2,
-              background: isSameDay(day.dateObj, selected) ? '#ccc' : 'transparent'
-            }}
+            data-active-month={day.inCurrentMonth}
+            data-selected={isSameDay(day.dateObj, selected)}
             className={css.cell}
             key={i}
             onClick={(): void => {

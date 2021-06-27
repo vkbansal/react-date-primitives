@@ -76,6 +76,14 @@ export function setDay(date: Date, day: number): Date {
 }
 
 export function setMonth(date: Date, month: number): Date {
+  if (typeof month !== 'number') {
+    throw new TypeError(`Expected month to be a number but got ${month}`);
+  }
+
+  if (month < 0 || month > 11) {
+    throw new RangeError(`Month must be number between 0 and 11, but got ${month}`);
+  }
+
   const newDate = new Date(date.getTime());
 
   newDate.setMonth(month);
@@ -84,6 +92,10 @@ export function setMonth(date: Date, month: number): Date {
 }
 
 export function setYear(date: Date, year: number): Date {
+  if (typeof year !== 'number') {
+    throw new TypeError(`Expected month to be a number but got ${year}`);
+  }
+
   const newDate = new Date(date.getTime());
 
   newDate.setFullYear(year);

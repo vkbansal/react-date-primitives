@@ -20,10 +20,7 @@ export interface Calendar extends Month {
   setYearOnly(year: number): void;
 }
 
-export function useCalendar(
-  /* istanbul ignore next */ month = new Date(),
-  weekStartsOn?: DayName
-): Calendar {
+export function useCalendar(month = new Date(), weekStartsOn?: DayName): Calendar {
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(month));
   const [startOfWeek, setStartOfWeek] = useState(weekStartsOn || DayName.SUNDAY);
   const { days, daysOfWeek } = getDaysOfMonth(currentMonth, startOfWeek);

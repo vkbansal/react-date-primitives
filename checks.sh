@@ -11,7 +11,7 @@ for f in packages/*; do
           echo "Running ESLint for $f"
           npx eslint --ext .ts --ext .tsx --config "$root/.eslintrc.yml" src
         elif [ "$check" == "prettier" ]; then
-          npx prettier --check "src/**/*.{ts,tsx}"
+          npx prettier --check "src/**/*.{ts,tsx,scss}"
         fi
         popd >> /dev/null
     fi

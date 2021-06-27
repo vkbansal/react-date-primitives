@@ -3,7 +3,6 @@
 Primitives for creating Date-Picker and DateRange-Picker components in React with zero dependencies!
 
 [![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
 
 ## Installation
 
@@ -13,7 +12,7 @@ This package is distributed via [npm](https://www.npmjs.com/).
 npm install --save react-date-primitives
 ```
 
-> This package also depends on `react`. Please make sure you have those installed as well.
+> This package also depends on `react`. Please make sure you have it installed as well.
 
 ## Usage
 
@@ -58,8 +57,8 @@ function SimpleDatePicker() {
 
 ## Live Examples
 
-- [`useCalendar` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/packages/example-use-calendar-hook)
-- [`useDateRange` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/packages/example-use-daterange-hook)
+- [`useCalendar` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/main/packages/example-use-calendar-hook)
+- [`useDateRange` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/main/packages/example-use-daterange-hook)
 
 ## License
 
@@ -67,5 +66,3 @@ function SimpleDatePicker() {
 
 [npm-url]: https://npmjs.org/package/@vkbansal/react-date-primitives
 [npm-image]: https://img.shields.io/npm/v/@vkbansal/react-date-primitives.svg?style=flat-square
-[travis-url]: https://travis-ci.org/vkbansal/react-date-primitives
-[travis-image]: https://img.shields.io/travis/vkbansal/react-date-primitives/master.svg?style=flat-square

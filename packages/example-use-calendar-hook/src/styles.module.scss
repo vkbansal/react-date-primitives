@@ -1,0 +1,68 @@
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1rem;
+}
+
+:root {
+  --cell-width: 2.5rem;
+}
+
+.main {
+  width: calc(7 * var(--cell-width));
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & button {
+    cursor: pointer;
+  }
+}
+
+.cell {
+  width: var(--cell-width);
+  height: var(--cell-width);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4rem;
+}
+
+.dayNames,
+.month {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.month {
+  & .cell {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+    }
+
+    &[data-active-month='true'][data-selected='true'] {
+      background-color: hsl(195deg, 100%, 50%);
+    }
+
+    &[data-active-month='false'] {
+      pointer-events: none;
+      opacity: 0.3;
+    }
+  }
+}
