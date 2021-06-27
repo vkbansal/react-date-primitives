@@ -1,4 +1,5 @@
-const path = require('path')
+/* eslint-disable */
+const path = require('path');
 
 /**
  * @type {import('vite').UserConfig}
@@ -22,6 +23,6 @@ const config = {
       }
     }
   }
-}
+};
 
-export default config
+export default config;
