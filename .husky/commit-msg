@@ -1,0 +1,1 @@
+node ./tools/lint-commit-message.js "$(cat $1)"

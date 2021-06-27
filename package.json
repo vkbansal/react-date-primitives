@@ -1,82 +1,24 @@
 {
-  "name": "@vkbansal/react-date-primitives",
-  "version": "1.1.0",
-  "description": "Primitives for building flexible date components with react",
-  "keywords": [
-    "date",
-    "date-range",
-    "date-picker",
-    "react",
-    "react-component"
-  ],
-  "main": "./lib/index.js",
-  "module": "./esm/index.js",
-  "esnext": "./esnext/index.js",
-  "typings": "./esm/index.d.ts",
-  "author": {
-    "name": "Vivek Kumar Bansal",
-    "email": "vkb0310@gmail.com",
-    "url": "https://vkbansal.me"
-  },
-  "license": "MIT",
+  "private": true,
+  "version": "0.1.0",
   "scripts": {
-    "release": "standard-version",
-    "lint": "eslint --ext .ts --ext .jsx src",
-    "test": "jest --no-cache src",
-    "fmtc": "prettier --check 'src/**/*.{ts,tsx}'",
-    "coverage": "jest --no-cache --coverage",
-    "build": "yarn run build:esm && yarn run build:cjs && yarn run build:esnext",
-    "build:esm": "rimraf ./esm && tsc --project tsconfig.build.json --target es5 --module es6 --outDir ./esm",
-    "build:cjs": "rimraf ./lib && tsc --project tsconfig.build.json --target es5 --module commonjs --outDir ./lib",
-    "build:esnext": "rimraf ./esnext && tsc --project tsconfig.build.json --target es6 --module es6 --outDir ./esnext",
-    "readme": "ts-node --compiler-options '{\"module\": \"commonjs\"}' tools/build-readme.ts",
-    "prepublishOnly": "yarn run build",
-    "preversion": "yarn lint && yarn fmtc && yarn test"
+    "postinstall": "husky install"
   },
-  "files": [
-    "esm",
-    "lib",
-    "esnext"
+  "workspaces": [
+    "packages/*"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vkbansal/react-date-primitives.git"
-  },
-  "bugs": {
-    "url": "https://github.com/vkbansal/react-date-primitives/issues"
-  },
-  "homepage": "https://github.com/vkbansal/react-date-primitives#readme",
-  "publishConfig": {
-    "access": "public"
-  },
-  "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0"
-  },
   "devDependencies": {
-    "@testing-library/react": "^11.2.2",
-    "@testing-library/react-hooks": "^3.7.0",
-    "@types/jest": "^26.0.18",
-    "@types/react": "^17.0.0",
-    "@types/react-dom": "~17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
     "eslint": "^7.15.0",
-    "eslint-config-prettier": "^7.0.0",
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react": "^7.21.5",
     "globby": "^11.0.1",
-    "husky": "^4.3.5",
-    "jest": "26.6.3",
+    "husky": "^5.1.3",
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
-    "react": "~17.0.1",
-    "react-dom": "~17.0.1",
-    "react-test-renderer": "^17.0.1",
     "rimraf": "~3.0.2",
-    "standard-version": "^9.0.0",
-    "ts-jest": "~26.4.4",
-    "ts-node": "^9.1.1",
-    "typescript": "~4.1.2"
+    "typescript": "^4.2.3"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -84,11 +26,5 @@
       "prettier --check",
       "sh tools/typecheck-staged.sh"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "node ./tools/lint-commit-message.js \"$(cat $HUSKY_GIT_PARAMS)\""
-    }
   }
 }

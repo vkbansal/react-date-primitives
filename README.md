@@ -18,54 +18,54 @@ npm install --save react-date-primitives
 ## Usage
 
 ```jsx
-import * as React from 'react';
-import { CalendarMonth } from 'react-date-primitives';
+import React from 'react';
+import { useCalendar } from '@vkbansal/react-date-primitives';
 
-class SimpleDatePicker extends React.Component {
-    render() {
-        return (
-            <table>
-                <CalendarMonth
-                    month={new Date()}
-                    render={({ days }) => (
-                        <tbody>
-                            {days.map((week, i) => (
-                                <tr key={i}>
-                                    {week.map((day, j) => (
-                                        <td key={`${i}-${j}`}>
-                                            {day.inCurrentMonth ? day.date.getDate() : ''}
-                                        </td>
-                                    ))}
-                                </tr>
-                            ))}
-                        </tbody>
-                    )}
-                />
-            </table>
-        );
-    }
+/**
+ * Use your favourite date library (eg: moment, date-fns, etc).
+ */
+import { isSameDay } from 'date-fns/esm';
+
+function SimpleDatePicker() {
+  const { days, month, setMonth } = useCalendar();
+  const [selected, setSelected] = React.useState(new Date());
+
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(7, 1fr)'
+      }}
+    >
+      {days.map((day, i) => (
+        <div
+          style={{
+            opacity: day.inCurrentMonth ? 1 : 0.2,
+            background: isSameDay(day.dateObj, selected) ? '#ccc' : 'transparent'
+          }}
+          key={i}
+          onClick={(): void => {
+            day.inCurrentMonth && setSelected(day.dateObj);
+          }}
+        >
+          {day.dateObj.getDate()}
+        </div>
+      ))}
+    </div>
+  );
 }
 ```
 
 ## Live Examples
 
--   [simple date-picker](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-datepicker)
--   [simple date-picker with dropdowns for month and year](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/datepicker-dropdowns)
--   [simple daterange-picker using `CalendarMonth`](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/simple-daterangepicker)
--   [styled date-picker](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/styled-datepicker)
--   [`useCalendar` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/use-calendar-hook)
--   [`useDateRange` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/examples/use-daterange-hook)
-
-## API
-
--   [`CalendarMonth`](docs/CalendarMonth.md)
--   [`DateRangeControl`](docs/DateRangeControl.md)
+- [`useCalendar` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/packages/example-use-calendar-hook)
+- [`useDateRange` hook](https://codesandbox.io/s/github/vkbansal/react-date-primitives/tree/master/packages/example-use-daterange-hook)
 
 ## License
 
 [MIT](./LICENSE.md). Copyright(c) [Vivek Kumar Bansal](http://vkbansal.me/)
 
-[npm-url]: https://npmjs.org/package/react-date-primitives
-[npm-image]: https://img.shields.io/npm/v/react-date-primitives.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/@vkbansal/react-date-primitives
+[npm-image]: https://img.shields.io/npm/v/@vkbansal/react-date-primitives.svg?style=flat-square
 [travis-url]: https://travis-ci.org/vkbansal/react-date-primitives
 [travis-image]: https://img.shields.io/travis/vkbansal/react-date-primitives/master.svg?style=flat-square

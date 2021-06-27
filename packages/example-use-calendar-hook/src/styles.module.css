@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --cell-width: 2.5rem;
+}
+
+.main {
+    width: calc(7 * var(--cell-width));
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.month {
+    display: grid;
+}
+
+.cell {
+    width: var(--cell-width);
+    height: var(--cell-width);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.4rem;
+}
+
+.month > .cell {
+    cursor: pointer;
+}
