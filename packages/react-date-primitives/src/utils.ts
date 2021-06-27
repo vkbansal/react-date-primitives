@@ -178,23 +178,20 @@ export function getDaysOfMonth(month: Date, weekStartsOn = DayName.SUNDAY): Mont
 
   const firstDayInCurrentMonth = firstDate.getDay();
 
-  const days: Month['days'] = Array.from(
-    { length: 6 * 7 },
-    (_1, i): DayOfMonth => {
-      const day = addDays(
-        firstDate,
-        i - firstDayInCurrentMonth - (dayOffset > firstDayInCurrentMonth ? 7 : 0) + dayOffset
-      );
+  const days: Month['days'] = Array.from({ length: 6 * 7 }, (_1, i): DayOfMonth => {
+    const day = addDays(
+      firstDate,
+      i - firstDayInCurrentMonth - (dayOffset > firstDayInCurrentMonth ? 7 : 0) + dayOffset
+    );
 
-      return {
-        __type: DayOfMonthSymbol,
-        dateObj: day,
-        dayName: DaysOfTheWeek[(i + dayOffset) % 7],
-        inCurrentMonth: isSameMonth(firstDate, day),
-        ISODateString: toISODateString(day)
-      };
-    }
-  );
+    return {
+      __type: DayOfMonthSymbol,
+      dateObj: day,
+      dayName: DaysOfTheWeek[(i + dayOffset) % 7],
+      inCurrentMonth: isSameMonth(firstDate, day),
+      ISODateString: toISODateString(day)
+    };
+  });
 
   const daysOfWeek = DaysOfTheWeek.slice(dayOffset).concat(DaysOfTheWeek.slice(0, dayOffset));
 
@@ -235,28 +232,26 @@ export function getDaysOfRangeMonth(
         accumulator.daysOfWeek = daysOfWeek.slice(0);
       }
 
-      const daysOfCurrentMonth = days.map(
-        (day): DayOfRangeMonth => {
-          const isStart = Boolean(startDate && isSameDay(day.dateObj, startDate));
-          const isEnd = Boolean(endDate && isSameDay(day.dateObj, endDate));
+      const daysOfCurrentMonth = days.map((day): DayOfRangeMonth => {
+        const isStart = Boolean(startDate && isSameDay(day.dateObj, startDate));
+        const isEnd = Boolean(endDate && isSameDay(day.dateObj, endDate));
 
-          return {
-            ...day,
-            __type: DayOfRangeMonthSymbol,
-            inRange:
-              isStart ||
-              isEnd ||
-              Boolean(
-                startDate &&
-                  isDayAfter(day.dateObj, startDate) &&
-                  endDate &&
-                  isDayBefore(day.dateObj, endDate)
-              ),
-            isStart,
-            isEnd
-          };
-        }
-      );
+        return {
+          ...day,
+          __type: DayOfRangeMonthSymbol,
+          inRange:
+            isStart ||
+            isEnd ||
+            Boolean(
+              startDate &&
+                isDayAfter(day.dateObj, startDate) &&
+                endDate &&
+                isDayBefore(day.dateObj, endDate)
+            ),
+          isStart,
+          isEnd
+        };
+      });
 
       accumulator.months.push({
         days: daysOfCurrentMonth,

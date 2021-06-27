@@ -6,7 +6,7 @@ parserOptions:
   ecmaFeatures:
     jsx: true
     impliedStrict: true
-  project: ./tsconfig.json
+  project: tsconfig-eslint.json
 plugins:
   - react
   - '@typescript-eslint/eslint-plugin'

@@ -1,24 +1,29 @@
 {
   "private": true,
   "version": "0.1.0",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=7.0.0"
+  },
   "scripts": {
+    "lint": "eslint --ext .ts --ext .jsx packages/react-date-primitives/src",
     "postinstall": "husky install"
   },
   "workspaces": [
     "packages/*"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.9.1",
-    "@typescript-eslint/parser": "^4.9.1",
-    "eslint": "^7.15.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-react": "^7.21.5",
-    "globby": "^11.0.1",
-    "husky": "^5.1.3",
-    "lint-staged": "^10.5.3",
-    "prettier": "^2.2.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.24.0",
+    "globby": "^11.0.4",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "prettier": "^2.3.2",
     "rimraf": "~3.0.2",
-    "typescript": "^4.2.3"
+    "typescript": "^4.3.4"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
