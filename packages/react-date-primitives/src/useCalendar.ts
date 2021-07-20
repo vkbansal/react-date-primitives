@@ -10,7 +10,7 @@ import {
   setYear
 } from './utils';
 
-export interface Calendar extends Month {
+export interface UseCalendarReturn extends Month {
   readonly month: Date;
   setMonth: Dispatch<SetStateAction<Date>>;
   setStartOfWeek: Dispatch<SetStateAction<DayName>>;
@@ -20,7 +20,7 @@ export interface Calendar extends Month {
   setYearOnly(year: number): void;
 }
 
-export function useCalendar(month = new Date(), weekStartsOn?: DayName): Calendar {
+export function useCalendar(month = new Date(), weekStartsOn?: DayName): UseCalendarReturn {
   const [currentMonth, setCurrentMonth] = useState(startOfMonth(month));
   const [startOfWeek, setStartOfWeek] = useState(weekStartsOn || DayName.SUNDAY);
   const { days, daysOfWeek } = getDaysOfMonth(currentMonth, startOfWeek);

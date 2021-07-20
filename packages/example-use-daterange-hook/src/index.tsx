@@ -5,15 +5,12 @@ import { render } from 'react-dom';
  * Use your favourite date library (eg: moment, date-fns, etc).
  */
 import { addMonths } from 'date-fns';
-import { useDateRange, RangeMonth } from '@vkbansal/react-date-primitives';
+import { useDateRange, RangeMonth, DateRange } from '@vkbansal/react-date-primitives';
 
 import css from './styles.module.scss';
 
 function UseDateRangeHookExample(): React.ReactElement {
-  const { months, setStartDate, setEndDate, startDate, endDate } = useDateRange([
-    new Date(),
-    addMonths(new Date(), 1)
-  ]);
+  const { months, range, setRange } = useDateRange([new Date(), addMonths(new Date(), 1)]);
   const [isSelectionActive, setSelectionActive] = React.useState(false);
 
   return (
@@ -23,17 +20,15 @@ function UseDateRangeHookExample(): React.ReactElement {
           <Month
             key={i}
             rangeMonth={rangeMonth}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
-            startDate={startDate}
-            endDate={endDate}
+            setRange={setRange}
+            range={range}
             isSelectionActive={isSelectionActive}
             setSelectionActive={setSelectionActive}
           />
         ))}
       </div>
       <div style={{ marginTop: '1rem' }}>
-        Selected Date: {startDate?.toLocaleDateString()} - {endDate?.toLocaleDateString()}
+        Selected Date: {range[0]?.toLocaleDateString()} - {range[1]?.toLocaleDateString()}
       </div>
     </React.Fragment>
   );
@@ -56,18 +51,16 @@ const MONTH_NAMES = [
 
 interface MonthProps {
   rangeMonth: RangeMonth;
-  setStartDate(date: Date): void;
-  setEndDate(date: Date): void;
-  startDate: Date | null;
-  endDate: Date | null;
+  setRange(range: DateRange): void;
+  range: DateRange;
   isSelectionActive: boolean;
   setSelectionActive(status: boolean): void;
 }
 
 function Month(props: MonthProps): React.ReactElement {
-  const { rangeMonth, setEndDate, setStartDate, startDate, isSelectionActive, setSelectionActive } =
-    props;
+  const { rangeMonth, range, setRange, isSelectionActive, setSelectionActive } = props;
   const { days, month } = rangeMonth;
+  const [startDate] = range;
   const monthName = MONTH_NAMES[month.getMonth()];
 
   return (
@@ -95,16 +88,16 @@ function Month(props: MonthProps): React.ReactElement {
             key={i}
             onClick={(): void => {
               if (startDate && isSelectionActive) {
-                setEndDate(day.dateObj);
+                setRange([startDate, day.dateObj]);
                 setSelectionActive(false);
               } else {
-                setStartDate(day.dateObj);
+                setRange([day.dateObj, null]);
                 setSelectionActive(true);
               }
             }}
             onMouseEnter={() => {
               if (startDate && isSelectionActive) {
-                setEndDate(day.dateObj);
+                setRange([startDate, day.dateObj]);
               }
             }}
           >

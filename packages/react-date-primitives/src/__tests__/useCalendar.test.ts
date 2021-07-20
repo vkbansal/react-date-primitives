@@ -14,17 +14,7 @@ describe('useCalendar hook tests', () => {
     const date = new Date(YEAR, 0 /* Jan */, 1, 0, 0, 0, 0);
     const { result } = renderHook(() => useCalendar(date));
 
-    expect(result.current).toMatchInlineSnapshot(`
-  |                Jan 2021                 |
-  |-----------------------------------------|
-  | SUN | MON | TUE | WED | THU | FRI | SAT |
-  |     |     |     |     |     |  01 |  02 |
-  |  03 |  04 |  05 |  06 |  07 |  08 |  09 |
-  |  10 |  11 |  12 |  13 |  14 |  15 |  16 |
-  |  17 |  18 |  19 |  20 |  21 |  22 |  23 |
-  |  24 |  25 |  26 |  27 |  28 |  29 |  30 |
-  |  31 |     |     |     |     |     |     |
-`);
+    expect(result.current).toMatchSnapshot();
     expect(isSameMonth(result.current.month, date)).toBe(true);
   });
 
@@ -34,32 +24,12 @@ describe('useCalendar hook tests', () => {
     const { result } = renderHook(() => useCalendar(date1));
 
     expect(isSameMonth(result.current.month, date1)).toBe(true);
-    expect(result.current).toMatchInlineSnapshot(`
-  |                Jan 2021                 |
-  |-----------------------------------------|
-  | SUN | MON | TUE | WED | THU | FRI | SAT |
-  |     |     |     |     |     |  01 |  02 |
-  |  03 |  04 |  05 |  06 |  07 |  08 |  09 |
-  |  10 |  11 |  12 |  13 |  14 |  15 |  16 |
-  |  17 |  18 |  19 |  20 |  21 |  22 |  23 |
-  |  24 |  25 |  26 |  27 |  28 |  29 |  30 |
-  |  31 |     |     |     |     |     |     |
-`);
+    expect(result.current).toMatchSnapshot();
 
     act(() => {
       result.current.setMonth(date2);
     });
-    expect(result.current).toMatchInlineSnapshot(`
-  |                Apr 2021                 |
-  |-----------------------------------------|
-  | SUN | MON | TUE | WED | THU | FRI | SAT |
-  |     |     |     |     |  01 |  02 |  03 |
-  |  04 |  05 |  06 |  07 |  08 |  09 |  10 |
-  |  11 |  12 |  13 |  14 |  15 |  16 |  17 |
-  |  18 |  19 |  20 |  21 |  22 |  23 |  24 |
-  |  25 |  26 |  27 |  28 |  29 |  30 |     |
-  |     |     |     |     |     |     |     |
-`);
+    expect(result.current).toMatchSnapshot();
     expect(isSameMonth(result.current.month, date2)).toBe(true);
   });
 
@@ -68,33 +38,13 @@ describe('useCalendar hook tests', () => {
     const { result } = renderHook(() => useCalendar(date));
 
     expect(result.current.daysOfWeek[0]).toBe(DayName.SUNDAY);
-    expect(result.current).toMatchInlineSnapshot(`
-  |                Jan 2021                 |
-  |-----------------------------------------|
-  | SUN | MON | TUE | WED | THU | FRI | SAT |
-  |     |     |     |     |     |  01 |  02 |
-  |  03 |  04 |  05 |  06 |  07 |  08 |  09 |
-  |  10 |  11 |  12 |  13 |  14 |  15 |  16 |
-  |  17 |  18 |  19 |  20 |  21 |  22 |  23 |
-  |  24 |  25 |  26 |  27 |  28 |  29 |  30 |
-  |  31 |     |     |     |     |     |     |
-`);
+    expect(result.current).toMatchSnapshot();
 
     act(() => {
       result.current.setStartOfWeek(DayName.MONDAY);
     });
 
     expect(result.current.daysOfWeek[0]).toBe(DayName.MONDAY);
-    expect(result.current).toMatchInlineSnapshot(`
-  |                Jan 2021                 |
-  |-----------------------------------------|
-  | MON | TUE | WED | THU | FRI | SAT | SUN |
-  |     |     |     |     |  01 |  02 |  03 |
-  |  04 |  05 |  06 |  07 |  08 |  09 |  10 |
-  |  11 |  12 |  13 |  14 |  15 |  16 |  17 |
-  |  18 |  19 |  20 |  21 |  22 |  23 |  24 |
-  |  25 |  26 |  27 |  28 |  29 |  30 |  31 |
-  |     |     |     |     |     |     |     |
-`);
+    expect(result.current).toMatchSnapshot();
   });
 });

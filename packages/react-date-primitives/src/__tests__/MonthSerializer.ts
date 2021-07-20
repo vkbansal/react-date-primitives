@@ -31,12 +31,12 @@ Handlebars.registerHelper('month', (val: DayOfMonth) =>
 );
 
 const monthTemplate = Handlebars.compile(`
-  |                {{monthName month}} {{year month}}                 |
-  |-----------------------------------------|
-  |{{#each daysOfWeek}} {{shortDay this}} |{{/each}}
-  {{#each chunked}}
-  |{{#each this}}  {{date this}} |{{/each}}
-  {{/each}}
+|                {{monthName month}} {{year month}}                 |
+|-----------------------------------------|
+|{{#each daysOfWeek}} {{shortDay this}} |{{/each}}
+{{#each chunked}}
+|{{#each this}}  {{date this}} |{{/each}}
+{{/each}}
 `);
 
 function chunk<T>(arr: T[], length: number): T[][] {

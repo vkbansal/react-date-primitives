@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useDateRange hook tests setRange works when endDate > startDate: 1. init 1`] = `
+|                Jan 2021                 |
+|-----------------------------------------|
+|
+|     |     |     |     |     |  01 |  02 |
+|  03 |  04 |  05 |  06 |  07 |  08 |  09 |
+|  10 |  11 |  12 |  13 |  14 |  15 |  16 |
+|  17 |  18 |  19 |  20 |  21 |  22 |  23 |
+|  24 |  25 |  26 |  27 |  28 |  29 |  30 |
+|  31 |     |     |     |     |     |     |
+`;
+
+exports[`useDateRange hook tests setRange works when endDate > startDate: 2. starDate is set 1`] = `
+|                Jan 2021                 |
+|-----------------------------------------|
+|
+|     |     |     |     |     |  ** |  02 |
+|  03 |  04 |  05 |  06 |  07 |  08 |  09 |
+|  10 |  11 |  12 |  13 |  14 |  15 |  16 |
+|  17 |  18 |  19 |  20 |  21 |  22 |  23 |
+|  24 |  25 |  26 |  27 |  28 |  29 |  30 |
+|  31 |     |     |     |     |     |     |
+`;
+
+exports[`useDateRange hook tests setRange works when endDate > startDate: 3. endDate is set 1`] = `
+|                Jan 2021                 |
+|-----------------------------------------|
+|
+|     |     |     |     |     |  ** |  ** |
+|  ** |  ** |  ** |  ** |  ** |  ** |  ** |
+|  10 |  11 |  12 |  13 |  14 |  15 |  16 |
+|  17 |  18 |  19 |  20 |  21 |  22 |  23 |
+|  24 |  25 |  26 |  27 |  28 |  29 |  30 |
+|  31 |     |     |     |     |     |     |
+`;
