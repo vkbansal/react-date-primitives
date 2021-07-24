@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 /**
  * Use your favourite date library (eg: moment, date-fns, etc).
  */
-import { addMonths, isSameDay } from 'date-fns';
+import { isSameDay } from 'date-fns';
 import { useCalendar } from '@vkbansal/react-date-primitives';
 
 import css from './styles.module.scss';
@@ -25,16 +25,8 @@ const MONTH_NAMES = [
 ];
 
 function UseCalendarHooksExample(): React.ReactElement {
-  const { days, setMonth, month } = useCalendar();
+  const { days, month, nextMonth, prevMonth } = useCalendar();
   const [selected, setSelected] = React.useState(new Date());
-
-  function handleMonthIncrement(): void {
-    setMonth(addMonths(month, 1));
-  }
-
-  function handleMonthDecrement(): void {
-    setMonth(addMonths(month, -1));
-  }
 
   const monthName = MONTH_NAMES[month.getMonth()];
 
@@ -42,13 +34,13 @@ function UseCalendarHooksExample(): React.ReactElement {
     <div className={css.main}>
       <div className={css.header}>
         <div>
-          <button onClick={handleMonthDecrement}>&lt;</button>
+          <button onClick={prevMonth}>&lt;</button>
         </div>
         <div>
           {monthName} {month.getFullYear()}
         </div>
         <div>
-          <button onClick={handleMonthIncrement}>&gt;</button>
+          <button onClick={nextMonth}>&gt;</button>
         </div>
       </div>
       <div className={css.dayNames}>

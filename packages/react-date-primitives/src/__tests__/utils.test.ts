@@ -43,6 +43,10 @@ describe('utils test', () => {
     expect(newDate.getMonth()).toBe(5);
     expect(newDate.getDate()).toBe(month.getDate());
     expect(newDate.getFullYear()).toBe(month.getFullYear());
+
+    newDate = utils.addMonths(month, 14);
+    expect(newDate.getMonth()).toBe(3);
+    expect(newDate.getFullYear()).toBe(YEAR + 1);
   });
 
   test('setYear', () => {

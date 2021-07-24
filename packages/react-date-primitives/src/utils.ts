@@ -64,7 +64,15 @@ export function addDays(date: Date, days: number): Date {
 }
 
 export function addMonths(date: Date, months: number): Date {
-  return setMonth(date, date.getMonth() + months);
+  const month = date.getMonth() + months;
+  const year = date.getFullYear() + Math.floor(month / 11);
+
+  const newDate = new Date(date.getTime());
+
+  newDate.setMonth(month % 11);
+  newDate.setFullYear(year);
+
+  return newDate;
 }
 
 export function setDay(date: Date, day: number): Date {
