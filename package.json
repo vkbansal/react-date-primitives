@@ -6,6 +6,7 @@
     "npm": ">=7.0.0"
   },
   "scripts": {
+    "bump-version": "node ./tools/bump-version.js",
     "lint": "eslint --ext .ts --ext .jsx packages/react-date-primitives/src",
     "postinstall": "husky install"
   },

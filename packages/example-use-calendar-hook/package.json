@@ -8,7 +8,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@vkbansal/react-date-primitives": "3.0.0",
+    "@vkbansal/react-date-primitives": "3.1.0",
     "date-fns": "~2.22.1",
     "react": "~17.0.2",
     "react-dom": "~17.0.2"
