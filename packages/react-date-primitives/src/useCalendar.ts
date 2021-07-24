@@ -1,4 +1,4 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import { useState, Dispatch, SetStateAction, useCallback } from 'react';
 
 import {
   startOfMonth,
@@ -25,23 +25,31 @@ export function useCalendar(month = new Date(), weekStartsOn?: DayName): UseCale
   const [startOfWeek, setStartOfWeek] = useState(weekStartsOn || DayName.SUNDAY);
   const { days, daysOfWeek } = getDaysOfMonth(currentMonth, startOfWeek);
 
+  const nextMonth = useCallback(() => {
+    setCurrentMonth((month) => startOfMonth(addMonths(month, 1)));
+  }, []);
+
+  const prevMonth = useCallback(() => {
+    setCurrentMonth((month) => startOfMonth(addMonths(month, -1)));
+  }, []);
+
+  const setMonthOnly = useCallback((m: number) => {
+    setCurrentMonth((month) => startOfMonth(setMonth(month, m)));
+  }, []);
+
+  const setYearOnly = useCallback((year: number) => {
+    setCurrentMonth((month) => startOfMonth(setYear(month, year)));
+  }, []);
+
   return {
     days,
     daysOfWeek,
     setMonth: setCurrentMonth,
     month: currentMonth,
     setStartOfWeek,
-    nextMonth() {
-      setCurrentMonth((month) => startOfMonth(addMonths(month, 1)));
-    },
-    prevMonth() {
-      setCurrentMonth((month) => startOfMonth(addMonths(month, -1)));
-    },
-    setMonthOnly(m: number) {
-      setCurrentMonth((month) => startOfMonth(setMonth(month, m)));
-    },
-    setYearOnly(year: number) {
-      setCurrentMonth((month) => startOfMonth(setYear(month, year)));
-    }
+    nextMonth,
+    prevMonth,
+    setMonthOnly,
+    setYearOnly
   };
 }
