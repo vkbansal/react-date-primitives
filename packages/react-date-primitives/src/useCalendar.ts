@@ -1,4 +1,5 @@
-import { useState, Dispatch, SetStateAction, useCallback } from 'react';
+import { useState, useCallback } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 import {
   startOfMonth,
