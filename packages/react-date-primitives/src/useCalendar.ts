@@ -1,15 +1,8 @@
 import { useState, useCallback } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 
-import {
-  startOfMonth,
-  getDaysOfMonth,
-  Month,
-  DayName,
-  addMonths,
-  setMonth,
-  setYear
-} from './utils';
+import type { Month } from './utils';
+import { startOfMonth, getDaysOfMonth, DayName, addMonths, setMonth, setYear } from './utils';
 
 export interface UseCalendarReturn extends Month {
   readonly month: Date;

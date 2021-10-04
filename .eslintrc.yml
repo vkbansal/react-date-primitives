@@ -39,6 +39,9 @@ rules:
       args: after-used
       ignoreRestSiblings: true
       argsIgnorePattern: ^_
+  '@typescript-eslint/consistent-type-imports':
+    - 2
+    - prefer: type-imports
 overrides:
   - files:
       - '**/*.test.ts'

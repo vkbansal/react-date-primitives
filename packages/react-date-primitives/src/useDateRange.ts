@@ -1,7 +1,8 @@
 import { useState, useCallback } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 
-import { getDaysOfRangeMonth, isDayBefore, DayName, RangeMonths } from './utils';
+import type { RangeMonths } from './utils';
+import { getDaysOfRangeMonth, isDayBefore, DayName } from './utils';
 
 export type DateRange = [Date | null, Date | null];
 
