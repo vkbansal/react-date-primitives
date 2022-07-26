@@ -129,7 +129,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Type Check
-        run: pnpm -r run typecheck
+        run: |
+          cd packages/react-date-primitives
+          pnpm run build
+          cd ../..
+          pnpm -r run typecheck
   versions:
     name: Versions Check
     runs-on: ubuntu-latest
