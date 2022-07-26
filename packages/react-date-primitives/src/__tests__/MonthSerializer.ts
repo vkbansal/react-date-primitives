@@ -1,5 +1,5 @@
 import Handlebars from 'handlebars';
-import { Month, DayOfMonth, DayOfRangeMonth } from '../utils';
+import type { Month, DayOfMonth, DayOfRangeMonth } from '../utils';
 
 export const monthNames = [
   'Jan',

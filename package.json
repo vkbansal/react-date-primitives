@@ -1,30 +1,29 @@
 {
   "private": true,
   "version": "0.1.0",
+  "type": "module",
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=7.0.0"
+    "node": ">=16.0.0",
+    "pnpm": ">=7.5.0"
   },
   "scripts": {
     "bump-version": "node ./tools/bump-version.js",
-    "lint": "eslint --ext .ts --ext .jsx packages/react-date-primitives/src",
+    "lint": "eslint --ext .ts --ext .tsx packages/*/src",
+    "fmtc": "prettier --check 'packages/*/src/**/*.{ts,tsx}'",
     "postinstall": "husky install"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "@typescript-eslint/parser": "^4.32.0",
-    "eslint": "^7.32.0",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-react": "^7.26.1",
-    "globby": "^12.0.2",
-    "husky": "^7.0.2",
-    "lint-staged": "^11.2.0",
+    "globby": "^13.1.2",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.4.1",
     "rimraf": "~3.0.2",
-    "typescript": "^4.4.3"
+    "typescript": "^4.7.4"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

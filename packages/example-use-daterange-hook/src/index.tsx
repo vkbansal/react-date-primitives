@@ -5,7 +5,8 @@ import { render } from 'react-dom';
  * Use your favourite date library (eg: moment, date-fns, etc).
  */
 import { addMonths } from 'date-fns';
-import { useDateRange, RangeMonth, DateRange } from '@vkbansal/react-date-primitives';
+import type { RangeMonth, DateRange } from '@vkbansal/react-date-primitives';
+import { useDateRange } from '@vkbansal/react-date-primitives';
 
 import css from './styles.module.scss';
 

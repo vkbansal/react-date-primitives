@@ -1,13 +1,10 @@
 /* eslint-disable */
-const path = require('path');
+import { defineConfig } from 'vite';
 
-/**
- * @type {import('vite').UserConfig}
- */
-const config = {
+export default defineConfig({
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src'),
+      entry: './src',
       name: 'ReactDatePrimitives'
     },
     rollupOptions: {
@@ -23,6 +20,4 @@ const config = {
       }
     }
   }
-};
-
-export default config;
+});
