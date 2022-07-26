@@ -1,2 +1,4 @@
 tools/
 dist/
+*.cjs
+vite.config.ts
