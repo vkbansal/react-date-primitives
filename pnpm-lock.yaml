@@ -30,7 +30,7 @@ importers:
     specifiers:
       '@types/react': ~18.0.15
       '@types/react-dom': ~18.0.6
-      '@vkbansal/react-date-primitives': 3.1.0
+      '@vkbansal/react-date-primitives': 4.0.0-beta.1
       date-fns: ~2.29.1
       react: ~18.2.0
       react-dom: ~18.2.0
