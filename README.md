@@ -3,6 +3,7 @@
 Primitives for creating Date-Picker and DateRange-Picker components in React with zero dependencies!
 
 [![NPM version][npm-image]][npm-url]
+[![main][gha-image]][gha-url]
 
 ## Installation
 
@@ -66,3 +67,5 @@ function SimpleDatePicker() {
 
 [npm-url]: https://npmjs.org/package/@vkbansal/react-date-primitives
 [npm-image]: https://img.shields.io/npm/v/@vkbansal/react-date-primitives.svg?style=flat-square
+[gha-url]: https://github.com/vkbansal/react-date-primitives/actions/workflows/main.yml
+[gha-image]: https://github.com/vkbansal/react-date-primitives/actions/workflows/main.yml/badge.svg
