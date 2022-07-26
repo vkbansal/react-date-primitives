@@ -7,31 +7,126 @@ jobs:
   lint:
     name: ESLint
     runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Lint Check
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7.6.0'
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
         run: |
-          yarn
-          ./checks.sh lint
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
+      - name: Lint Check
+        run: pnpm run lint
   test:
     name: Unit tests
     runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7.6.0'
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
       - name: Test
         run: |
-          yarn
           cd packages/react-date-primitives
-          yarn test
+          pnpm test
   prettier:
     name: Prettier
     runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Prettier Check
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7.6.0'
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
         run: |
-          yarn
-          ./checks.sh prettier
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
+      - name: Prettier Check
+        run: pnpm fmtc
+  typecheck:
+    name: ESLint
+    runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7.6.0'
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
+      - name: Type Check
+        run: pnpm -r run typecheck
