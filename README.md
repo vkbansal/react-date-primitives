@@ -68,4 +68,4 @@ function SimpleDatePicker() {
 [npm-url]: https://npmjs.org/package/@vkbansal/react-date-primitives
 [npm-image]: https://img.shields.io/npm/v/@vkbansal/react-date-primitives.svg?style=flat-square
 [gha-url]: https://github.com/vkbansal/react-date-primitives/actions/workflows/main.yml
-[gha-image]: https://github.com/vkbansal/react-date-primitives/actions/workflows/main.yml/badge.svg
+[gha-image]: https://img.shields.io/github/workflow/status/vkbansal/react-date-primitives/main?style=flat-square
