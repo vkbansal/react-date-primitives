@@ -10,7 +10,7 @@ jobs:
     #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -41,7 +41,7 @@ jobs:
     #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -74,7 +74,7 @@ jobs:
     #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -100,12 +100,12 @@ jobs:
       - name: Prettier Check
         run: pnpm fmtc
   typecheck:
-    name: ESLint
+    name: Type Check
     runs-on: ubuntu-latest
     #if: !contains(github.event.pull_request.title , '[skip ci]')
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -130,3 +130,34 @@ jobs:
         run: pnpm install
       - name: Type Check
         run: pnpm -r run typecheck
+  versions:
+    name: Versions Check
+    runs-on: ubuntu-latest
+    #if: !contains(github.event.pull_request.title , '[skip ci]')
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: '7.6.0'
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
+      - name: Type Check
+        run: node ./tools/bump-version.js --check

@@ -1,3 +1,5 @@
 pnpm run lint
 pnpm run fmtc
 pnpm run -r typecheck
+
+node ./tools/bump-version.js --check
